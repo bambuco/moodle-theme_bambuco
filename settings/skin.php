@@ -34,7 +34,13 @@ if ($ADMIN->fulltree) {
     $skins = [];
 
     $path = $CFG->dirroot . '/theme/bambuco/skin/bootswatch/dist/';
-    $files = array_diff(scandir($path), ['..', '.']);
+    $filesinpath = scandir($path);
+
+    if(!is_array($filesinpath)) {
+        $filesinpath = [];
+    }
+
+    $files = array_diff($filesinpath, ['..', '.']);
 
     foreach ($files as $file) {
 
