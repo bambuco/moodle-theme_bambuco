@@ -54,6 +54,19 @@ if ($ADMIN->fulltree) {
     $choices['default.scss'] = 'default.scss';
     $choices['plain.scss'] = 'plain.scss';
 
+    $path = $CFG->dirroot . '/theme/bambuco/scss/preset/';
+    $filesinpath = scandir($path);
+
+    if(!is_array($filesinpath)) {
+        $filesinpath = [];
+    }
+
+    $localpresets = array_diff($filesinpath, ['..', '.']);
+
+    foreach ($localpresets as $preset) {
+        $choices[$preset] = $preset;
+    }
+
     $setting = new admin_setting_configthemepreset($name, $title, $description, $default, $choices, 'bambuco');
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
@@ -103,9 +116,11 @@ if ($ADMIN->fulltree) {
         'Kenia' => 'Kenia',
         'Lato' => 'Lato',
         'Lobster' => 'Lobster',
+        'Mitr' => 'Mitr',
         'Montserrat' => 'Montserrat',
         'Noto Sans Symbols 2' => 'Noto Sans Symbols 2' . $lblicons,
         'Nunito' => 'Nunito',
+        'Onest' => 'Onest',
         'Open Sans' => 'Open Sans',
         'Oswald' => 'Oswald',
         'Pacifico' => 'Pacifico' . $lblhandwriting,

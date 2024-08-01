@@ -109,8 +109,15 @@ function theme_bambuco_get_main_scss_content($theme) {
     } else if ($filename && ($presetfile = $fs->get_file($context->id, 'theme_boost', 'preset', 0, '/', $filename))) {
         $scss .= $presetfile->get_content();
     } else {
-        // Safety fallback - maybe new installs etc.
-        $scss .= file_get_contents($CFG->dirroot . '/theme/boost/scss/preset/default.scss');
+
+        $localpath = $CFG->dirroot . '/theme/bambuco/scss/preset/' . $filename;
+
+        if (file_exists($localpath)) {
+            $scss .= file_get_contents($localpath);
+        } else {
+            // Safety fallback - maybe new installs etc.
+            $scss .= file_get_contents($CFG->dirroot . '/theme/boost/scss/preset/default.scss');
+        }
     }
 
     $scss .= file_get_contents($CFG->dirroot . '/theme/bambuco/scss/subtheme/default/include.scss');
