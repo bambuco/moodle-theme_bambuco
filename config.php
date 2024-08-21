@@ -26,7 +26,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $THEME->name = 'bambuco';
 $THEME->sheets = [];
-$THEME->editor_sheets = [];
+$THEME->editor_sheets = ['tinyeditor'];
 $THEME->editor_scss = ['editor'];
 $THEME->usefallback = false;
 $THEME->scss = function($theme) {
