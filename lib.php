@@ -57,8 +57,9 @@ function theme_bambuco_get_extra_scss($theme) {
     }
 
     // Always return the background image with the scss when we have it.
-    // Don't include the $theme->settings->scss because it is included by the parent theme.
-    return $content;
+    // We need include the $theme->settings->scss because it is included by the parent theme in a bad moment.
+    // We need to include it when other styles are already loaded.
+    return !empty($theme->settings->scss) ? "{$theme->settings->scss}  \n  {$content}" : $content;
 }
 
 /**
@@ -210,4 +211,42 @@ function theme_bambuco_before_standard_html_head() {
     }
 
     return implode("\n", $headers);
+}
+
+/**
+ * Post processes CSS.
+ *
+ * This method post processes all of the CSS before it is served for this theme.
+ *
+ * @param string $css The CSS to process.
+ * @return string The processed CSS.
+ */
+function theme_bambuco_css_postprocess($css) {
+    if (strpos($css, '/**EDITOR-STYLES**/') !== false) {
+        $theme = theme_config::load('bambuco');
+
+        $themescss = '';
+        if (!empty($theme->settings->scsspre) || !empty($theme->settings->scss)) {
+            $themescss = $theme->settings->scsspre . ' ' . $theme->settings->scss;
+            $compiler = new core_scss();
+            $compiler->append_raw_scss($themescss);
+
+            try {
+                // Compile!
+                $themescss = $compiler->to_css();
+
+            } catch (\Exception $e) {
+                $themescss = '';
+                debugging('Error while compiling SCSS: ' . $e->getMessage(), DEBUG_DEVELOPER);
+            }
+
+            // Try to save memory.
+            $compiler = null;
+            unset($compiler);
+
+        }
+
+        $css = str_replace('/**EDITOR-STYLES**/', $themescss, $css);
+    }
+    return $css;
 }
