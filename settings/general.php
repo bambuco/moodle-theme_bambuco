@@ -132,7 +132,7 @@ if ($ADMIN->fulltree) {
     $name = 'theme_bambuco/fontfamily';
     $title = get_string('fontfamily', 'theme_bambuco');
     $description = get_string('fontfamily_desc', 'theme_bambuco');
-    $setting = new admin_setting_configselect($name, $title, $description, '', [''] + $fonts);
+    $setting = new admin_setting_configselect($name, $title, $description, '', ['' => ''] + $fonts);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 

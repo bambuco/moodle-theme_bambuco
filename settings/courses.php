@@ -158,7 +158,7 @@ if ($ADMIN->fulltree) {
     $name = 'theme_bambuco/coursewidthfield';
     $title = new lang_string('coursewidthfield', 'theme_bambuco');
     $description = new lang_string('coursewidthfield_desc', 'theme_bambuco');
-    $setting = new admin_setting_configselect($name, $title, $description, '', $fields);
+    $setting = new admin_setting_configselect($name, $title, $description, 0, $fields);
     $page->add($setting);
 
 }
