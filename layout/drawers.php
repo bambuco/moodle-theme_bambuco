@@ -77,7 +77,7 @@ if (!$courseindex) {
 $config = get_config('theme_bambuco');
 
 if ($config->coursesheader != 'none') {
-    $inpage = \theme_bambuco\utils::use_custom_header();
+    $inpage = \theme_bambuco\local\utils::use_custom_header();
 
     if ($inpage) {
         $extraclasses[] = 'courseheader-custom';
@@ -150,7 +150,7 @@ $templatecontext = [
     'overflow' => $overflow,
     'headercontent' => $headercontent,
     'addblockbutton' => $addblockbutton,
-    'coursefooter' => \theme_bambuco\utils::get_coursefooter($PAGE->course),
+    'coursefooter' => \theme_bambuco\local\utils::get_coursefooter($PAGE->course),
     'courseheaderintop' => $config->coursesheaderposition == 'top',
     'courseheaderincontent' => $config->coursesheaderposition == 'content',
 ];
