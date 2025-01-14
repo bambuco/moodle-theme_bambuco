@@ -90,6 +90,28 @@ function theme_bambuco_pluginfile($course, $cm, $context, $filearea, $args, $for
 }
 
 /**
+ * Get the current user preferences that are available
+ *
+ * @return array[]
+ */
+function theme_bambuco_user_preferences(): array {
+    return [
+        'drawer-open-block' => [
+            'type' => PARAM_BOOL,
+            'null' => NULL_NOT_ALLOWED,
+            'default' => false,
+            'permissioncallback' => [core_user::class, 'is_current_user'],
+        ],
+        'drawer-open-index' => [
+            'type' => PARAM_BOOL,
+            'null' => NULL_NOT_ALLOWED,
+            'default' => true,
+            'permissioncallback' => [core_user::class, 'is_current_user'],
+        ],
+    ];
+}
+
+/**
  * Returns the main SCSS content.
  *
  * @param theme_config $theme The theme config object.
@@ -128,6 +150,39 @@ function theme_bambuco_get_precompiled_css() {
     global $CFG;
 
     return file_get_contents($CFG->dirroot . '/theme/boost/style/moodle.css');
+}
+
+/**
+ * Get SCSS to prepend.
+ *
+ * @param theme_config $theme The theme config object.
+ * @return string
+ */
+function theme_bambuco_get_pre_scss($theme) {
+
+    $scss = '';
+    $configurable = [
+        // Config key => [variableName, ...].
+        'brandcolor' => ['primary'],
+    ];
+
+    // Prepend variables first.
+    foreach ($configurable as $configkey => $targets) {
+        $value = isset($theme->settings->{$configkey}) ? $theme->settings->{$configkey} : null;
+        if (empty($value)) {
+            continue;
+        }
+        array_map(function($target) use (&$scss, $value) {
+            $scss .= '$' . $target . ': ' . $value . ";\n";
+        }, (array) $targets);
+    }
+
+    // Prepend pre-scss.
+    if (!empty($theme->settings->scsspre)) {
+        $scss .= $theme->settings->scsspre;
+    }
+
+    return $scss;
 }
 
 /**

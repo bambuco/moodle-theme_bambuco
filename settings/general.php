@@ -24,7 +24,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$page = new admin_settingpage('theme_bambuco_general', get_string('generalsettings', 'theme_bambuco'));
+$page = new admin_settingpage('themesettingbambuco', get_string('generalsettings', 'theme_bambuco'));
 
 if ($ADMIN->fulltree) {
 
