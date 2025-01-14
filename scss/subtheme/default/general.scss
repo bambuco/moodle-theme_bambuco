@@ -130,3 +130,9 @@
         border-bottom: 1px solid #eee;
     }
 }
+
+.darkmode-toggle {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}

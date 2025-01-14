@@ -95,20 +95,17 @@ function theme_bambuco_pluginfile($course, $cm, $context, $filearea, $args, $for
  * @return array[]
  */
 function theme_bambuco_user_preferences(): array {
-    return [
-        'drawer-open-block' => [
-            'type' => PARAM_BOOL,
-            'null' => NULL_NOT_ALLOWED,
-            'default' => false,
-            'permissioncallback' => [core_user::class, 'is_current_user'],
-        ],
-        'drawer-open-index' => [
-            'type' => PARAM_BOOL,
-            'null' => NULL_NOT_ALLOWED,
-            'default' => true,
-            'permissioncallback' => [core_user::class, 'is_current_user'],
-        ],
+    $userpreferences = theme_boost_user_preferences();
+
+    $userpreferences['theme_bambuco-mode'] = [
+        'type' => PARAM_TEXT,
+        'null' => NULL_NOT_ALLOWED,
+        'default' => 'light',
+        'choices' => ['light', 'dark'],
+        'permissioncallback' => [core_user::class, 'is_current_user'],
     ];
+
+    return $userpreferences;
 }
 
 /**

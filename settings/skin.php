@@ -56,9 +56,16 @@ if ($ADMIN->fulltree) {
 
     if (!empty($skins)) {
         $skins = ['' => get_string('none')] + $skins;
-        // Raw SCSS to include before the content.
+
+        // Skin to customize the appearance.
         $setting = new admin_setting_configselect('theme_bambuco/skin',
             get_string('skin', 'theme_bambuco'), get_string('skin_desc', 'theme_bambuco'), '', $skins);
+        $setting->set_updatedcallback('theme_reset_all_caches');
+        $page->add($setting);
+
+        // Skin to customize the dark mode appearance.
+        $setting = new admin_setting_configselect('theme_bambuco/skindark',
+            get_string('skindark', 'theme_bambuco'), get_string('skindark_desc', 'theme_bambuco'), '', $skins);
         $setting->set_updatedcallback('theme_reset_all_caches');
         $page->add($setting);
     } else {

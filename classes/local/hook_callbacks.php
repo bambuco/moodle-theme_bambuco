@@ -39,7 +39,48 @@ class hook_callbacks {
             return;
         }
 
-        $skin = get_config('theme_bambuco', 'skin');
+        $thememode = \theme_bambuco\local\utils::get_theme_mode();
+
+        $skinlight = get_config('theme_bambuco', 'skin');
+        $skindark = get_config('theme_bambuco', 'skindark');
+
+        $skin = $thememode == 'dark' ? $skindark : $skinlight;
+
+        $includeskins = [];
+
+        if (!empty($skinlight)) {
+            $includeskins[] = [
+                'mode' => 'light',
+                'url' => $CFG->wwwroot . '/theme/bambuco/skin/bootswatch/dist/' . $skinlight . '/bootstrap.min.css',
+            ];
+
+            $fixpath = $CFG->dirroot . '/theme/bambuco/skin/fixes/bootswatch/' . $skinlight . '/styles.css';
+            if (file_exists($fixpath)) {
+                $includeskins[] = [
+                    'mode' => 'light',
+                    'url' => $CFG->wwwroot . '/theme/bambuco/skin/fixes/bootswatch/' . $skinlight . '/styles.css',
+                ];
+            }
+        }
+
+        if (!empty($skindark)) {
+            $includeskins[] = [
+                'mode' => 'dark',
+                'url' => $CFG->wwwroot . '/theme/bambuco/skin/bootswatch/dist/' . $skindark . '/bootstrap.min.css',
+            ];
+
+            $fixpath = $CFG->dirroot . '/theme/bambuco/skin/fixes/bootswatch/' . $skindark . '/styles.css';
+            if (file_exists($fixpath)) {
+                $includeskins[] = [
+                    'mode' => 'dark',
+                    'url' => $CFG->wwwroot . '/theme/bambuco/skin/fixes/bootswatch/' . $skindark . '/styles.css',
+                ];
+            }
+        }
+
+        if (!empty($includeskins)) {
+            $PAGE->requires->js_call_amd('theme_bambuco/darkmode', 'setThemeMode', [$includeskins]);
+        }
 
         if (!empty($skin)) {
             $PAGE->requires->css('/theme/bambuco/skin/bootswatch/dist/' . $skin . '/bootstrap.min.css');

@@ -231,6 +231,11 @@ class core_renderer extends \theme_boost\output\core_renderer {
             $additionalclasses = explode(' ', $additionalclasses);
         }
 
+        $thememode = \theme_bambuco\local\utils::get_theme_mode();
+        if (!empty($thememode)) {
+            $additionalclasses[] = $thememode . 'mode';
+        }
+
         $bodyattributes = ' id="'. $this->body_id() . '"';
         $coursewidthfield = get_config('theme_bambuco', 'coursewidthfield');
 

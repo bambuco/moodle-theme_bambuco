@@ -38,6 +38,8 @@ if (isloggedin()) {
     $blockdraweropen = false;
 }
 
+$thememode = \theme_bambuco\local\utils::get_theme_mode();
+
 if (defined('BEHAT_SITE_RUNNING') && get_user_preferences('behat_keep_drawer_closed') != 1) {
     $blockdraweropen = true;
 }
@@ -153,6 +155,7 @@ $templatecontext = [
     'coursefooter' => \theme_bambuco\local\utils::get_coursefooter($PAGE->course),
     'courseheaderintop' => $config->coursesheaderposition == 'top',
     'courseheaderincontent' => $config->coursesheaderposition == 'content',
+    'isdarkmode' => !empty($thememode) && $thememode == 'dark',
 ];
 
 echo $OUTPUT->render_from_template('theme_bambuco/drawers', $templatecontext);
