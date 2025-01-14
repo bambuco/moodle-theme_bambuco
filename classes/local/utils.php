@@ -212,4 +212,16 @@ class utils {
 
         return $mode;
     }
+
+    /**
+     * Check if the dark mode is enabled.
+     *
+     * @return bool
+     */
+    public static function mode_enabled(): bool {
+
+        $skindark = get_config('theme_bambuco', 'skindark');
+
+        return !empty($skindark);
+    }
 }

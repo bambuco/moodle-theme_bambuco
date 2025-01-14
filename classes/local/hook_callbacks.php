@@ -40,11 +40,12 @@ class hook_callbacks {
         }
 
         $thememode = \theme_bambuco\local\utils::get_theme_mode();
+        $modenabled = \theme_bambuco\local\utils::mode_enabled();
 
         $skinlight = get_config('theme_bambuco', 'skin');
         $skindark = get_config('theme_bambuco', 'skindark');
 
-        $skin = $thememode == 'dark' ? $skindark : $skinlight;
+        $skin = $modenabled && $thememode == 'dark' ? $skindark : $skinlight;
 
         $includeskins = [];
 
@@ -63,23 +64,25 @@ class hook_callbacks {
             }
         }
 
-        if (!empty($skindark)) {
-            $includeskins[] = [
-                'mode' => 'dark',
-                'url' => $CFG->wwwroot . '/theme/bambuco/skin/bootswatch/dist/' . $skindark . '/bootstrap.min.css',
-            ];
-
-            $fixpath = $CFG->dirroot . '/theme/bambuco/skin/fixes/bootswatch/' . $skindark . '/styles.css';
-            if (file_exists($fixpath)) {
+        if ($modenabled) {
+            if (!empty($skindark)) {
                 $includeskins[] = [
                     'mode' => 'dark',
-                    'url' => $CFG->wwwroot . '/theme/bambuco/skin/fixes/bootswatch/' . $skindark . '/styles.css',
+                    'url' => $CFG->wwwroot . '/theme/bambuco/skin/bootswatch/dist/' . $skindark . '/bootstrap.min.css',
                 ];
-            }
-        }
 
-        if (!empty($includeskins)) {
-            $PAGE->requires->js_call_amd('theme_bambuco/darkmode', 'setThemeMode', [$includeskins]);
+                $fixpath = $CFG->dirroot . '/theme/bambuco/skin/fixes/bootswatch/' . $skindark . '/styles.css';
+                if (file_exists($fixpath)) {
+                    $includeskins[] = [
+                        'mode' => 'dark',
+                        'url' => $CFG->wwwroot . '/theme/bambuco/skin/fixes/bootswatch/' . $skindark . '/styles.css',
+                    ];
+                }
+            }
+
+            if (!empty($includeskins)) {
+                $PAGE->requires->js_call_amd('theme_bambuco/darkmode', 'setThemeMode', [$includeskins]);
+            }
         }
 
         if (!empty($skin)) {

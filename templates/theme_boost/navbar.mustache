@@ -83,6 +83,7 @@
         </ul>
 
         <div id="usernavigation" class="navbar-nav ms-auto">
+            {{#darkenabled}}
             <span class="darkmode-toggle">
                 <span>{{#str}}darkmode, theme_bambuco{{/str}}</span>
                 {{< core/toggle }}
@@ -98,6 +99,7 @@
                     {{$labelclasses}}sr-only{{/labelclasses}}
                 {{/ core/toggle }}
             </span>
+            {{/darkenabled}}
 
             {{# output.search_box }}
                 {{{ output.search_box }}}

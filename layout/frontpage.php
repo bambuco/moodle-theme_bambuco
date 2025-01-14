@@ -126,6 +126,7 @@ $templatecontext = [
     'headercontent' => $headercontent,
     'addblockbutton' => $addblockbutton,
     'isdarkmode' => !empty($thememode) && $thememode == 'dark',
+    'darkenabled' => \theme_bambuco\local\utils::mode_enabled(),
 ];
 
 echo $OUTPUT->render_from_template('theme_bambuco/frontpage', $templatecontext);

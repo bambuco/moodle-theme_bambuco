@@ -156,6 +156,7 @@ $templatecontext = [
     'courseheaderintop' => $config->coursesheaderposition == 'top',
     'courseheaderincontent' => $config->coursesheaderposition == 'content',
     'isdarkmode' => !empty($thememode) && $thememode == 'dark',
+    'darkenabled' => \theme_bambuco\local\utils::mode_enabled(),
 ];
 
 echo $OUTPUT->render_from_template('theme_bambuco/drawers', $templatecontext);

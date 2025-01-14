@@ -231,9 +231,13 @@ class core_renderer extends \theme_boost\output\core_renderer {
             $additionalclasses = explode(' ', $additionalclasses);
         }
 
-        $thememode = \theme_bambuco\local\utils::get_theme_mode();
-        if (!empty($thememode)) {
-            $additionalclasses[] = $thememode . 'mode';
+        $modenabled = \theme_bambuco\local\utils::mode_enabled();
+
+        if ($modenabled) {
+            $thememode = \theme_bambuco\local\utils::get_theme_mode();
+            if (!empty($thememode)) {
+                $additionalclasses[] = $thememode . 'mode';
+            }
         }
 
         $bodyattributes = ' id="'. $this->body_id() . '"';
