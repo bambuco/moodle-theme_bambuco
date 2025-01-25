@@ -129,6 +129,8 @@ $string['skin'] = 'Skin';
 $string['skin_desc'] = 'Pick a skin to change the look of the theme.
 The current skins are based on <a href="https://bootswatch.com/" target="_blanck">Bootswatch</a> project.
 Check the <a href="https://bootswatch.com/" target="_blanck">Bootswatch page</a> for examples and more information.';
+$string['skindark'] = 'Dark mode skin';
+$string['skindark_desc'] = 'Pick a skin to change the look of the theme in dark mode.';
 $string['skins_none'] = 'No skins are available.';
 $string['skinsettings'] = 'Skin settings';
 $string['unaddableblocks'] = 'Unneeded blocks';
@@ -140,3 +142,5 @@ $string['privacy:drawerindexclosed'] = 'The current preference for the index dra
 $string['privacy:drawerindexopen'] = 'The current preference for the index drawer is open.';
 $string['privacy:drawerblockclosed'] = 'The current preference for the block drawer is closed.';
 $string['privacy:drawerblockopen'] = 'The current preference for the block drawer is open.';
+$string['darkmode'] = 'Dark mode';
+$string['darkmodesrlabel'] = 'Enable/diable dark mode';

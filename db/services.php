@@ -15,33 +15,21 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Theme BambuCo.
+ * External functions and service definitions.
  *
  * @package    theme_bambuco
- * @copyright  2023 David Herney - cirano. https://bambuco.co
+ * @copyright  2025 David Herney @ BambuCo
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-// This line protects the file from being accessed by a URL directly.
 defined('MOODLE_INTERNAL') || die();
 
-// This is the component name of the plugin - it always starts with 'theme_'
-// for themes and should be the same as the name of the folder.
-$plugin->component = 'theme_bambuco';
-
-// This is the version of the plugin.
-$plugin->version = 2025011001.01;
-
-// This is the named version.
-$plugin->release = '4.5.01';
-
-// This is a stable release.
-$plugin->maturity = MATURITY_BETA;
-
-// This is the version of Moodle this plugin requires.
-$plugin->requires = 2024100701;
-
-// This is a list of plugins, this plugin depends on (and their versions).
-$plugin->dependencies = [
-    'theme_boost' => 2024100700
+$functions = [
+    'theme_bambuco_set_mode' => [
+        'classname' => '\theme_bambuco\external\set_mode',
+        'description' => 'Set the current theme mode: dark or light.',
+        'type' => 'write',
+        'ajax' => true,
+        'loginrequired' => false,
+    ],
 ];

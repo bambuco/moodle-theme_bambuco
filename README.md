@@ -18,7 +18,8 @@ Package tested in: moodle 4.5+.
 
 ## IN VERSION ##
 2025011001:
-- Compatibility with Moodle 4.5+
+- Compatibility with Moodle 4.5+.
+- Dark mode.
 
 2024053002:
 - Include core recaptcha requirement in auth.

@@ -1,0 +1,30 @@
+body {
+    &.lightmode {
+        .navbar.fixed-top {
+            background-color: var(--light);
+        }
+    }
+
+    &.darkmode {
+        .primary-navigation .navigation .nav-link {
+            color: var(--light);
+
+            &:hover {
+                color: var(--dark);
+            }
+        }
+
+        #usernavigation .nav-link {
+            color: var(--light);
+
+            &:hover {
+                color: var(--dark);
+            }
+        }
+
+        .navbar.fixed-top {
+            background-color: var(--dark);
+            color: var(--light);
+        }
+    }
+}

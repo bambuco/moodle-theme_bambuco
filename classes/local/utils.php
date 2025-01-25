@@ -26,13 +26,20 @@ namespace theme_bambuco\local;
 class utils {
 
     /**
+     * Available theme modes.
+     *
+     * @var array
+     */
+    const AVAILABLE_MODES = ['light', 'dark'];
+
+    /**
      * Wrap text in two spans.
      *
      * @param string $text
      * @param bool $removeextra Remove content between parentheses.
      * @return string
      */
-    public static function wrap_text(string $text, bool $removeextra = false) : string {
+    public static function wrap_text(string $text, bool $removeextra = false): string {
 
         // Only apply to headings that don't already have HTML tags.
         if (strip_tags($text) == $text) {
@@ -60,7 +67,7 @@ class utils {
      * @param \stdClass $course Course object.
      * @return string Image url.
      */
-    public static function get_courseimage($course) : string {
+    public static function get_courseimage($course): string {
         global $CFG, $OUTPUT, $PAGE;
 
         $config = get_config('theme_bambuco');
@@ -111,7 +118,7 @@ class utils {
      *
      * @return bool
      */
-    public static function use_custom_header() : bool {
+    public static function use_custom_header(): bool {
         global $PAGE;
 
         $config = get_config('theme_bambuco');
@@ -139,7 +146,7 @@ class utils {
      * @param \stdClass $course Course object.
      * @return \stdClass Object: {content} or {src, name} properties.
      */
-    public static function get_coursefooter($course) : ?object {
+    public static function get_coursefooter($course): ?object {
         global $DB;
 
         $config = get_config('theme_bambuco');
@@ -179,5 +186,42 @@ class utils {
         }
 
         return $coursefooter;
+    }
+
+    /**
+     * Get the theme mode.
+     *
+     * @return string
+     */
+    public static function get_theme_mode(): string {
+        global $SESSION;
+
+        $mode = get_user_preferences('theme_bambuco-mode', null);
+
+        if (!$mode) {
+            if (property_exists($SESSION, 'theme_bambuco_mode')) {
+                $mode = $SESSION->theme_bambuco_mode;
+            } else {
+                return '';
+            }
+        }
+
+        if (!in_array($mode, self::AVAILABLE_MODES)) {
+            $mode = 'light';
+        }
+
+        return $mode;
+    }
+
+    /**
+     * Check if the dark mode is enabled.
+     *
+     * @return bool
+     */
+    public static function mode_enabled(): bool {
+
+        $skindark = get_config('theme_bambuco', 'skindark');
+
+        return !empty($skindark);
     }
 }
