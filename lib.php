@@ -90,6 +90,28 @@ function theme_bambuco_pluginfile($course, $cm, $context, $filearea, $args, $for
 }
 
 /**
+ * Get the current user preferences that are available
+ *
+ * @return array[]
+ */
+function theme_bambuco_user_preferences(): array {
+    return [
+        'drawer-open-block' => [
+            'type' => PARAM_BOOL,
+            'null' => NULL_NOT_ALLOWED,
+            'default' => false,
+            'permissioncallback' => [core_user::class, 'is_current_user'],
+        ],
+        'drawer-open-index' => [
+            'type' => PARAM_BOOL,
+            'null' => NULL_NOT_ALLOWED,
+            'default' => true,
+            'permissioncallback' => [core_user::class, 'is_current_user'],
+        ],
+    ];
+}
+
+/**
  * Returns the main SCSS content.
  *
  * @param theme_config $theme The theme config object.
@@ -131,86 +153,36 @@ function theme_bambuco_get_precompiled_css() {
 }
 
 /**
- * Moodle native lib/navigationlib.php calls this hook allowing us to override UI.
- */
-function theme_bambuco_before_http_headers() {
-    global $PAGE, $CFG;
-
-    if ($PAGE->theme->name != 'bambuco') {
-        return;
-    }
-
-    $skin = get_config('theme_bambuco', 'skin');
-
-    if (!empty($skin)) {
-        $PAGE->requires->css('/theme/bambuco/skin/bootswatch/dist/' . $skin . '/bootstrap.min.css');
-        $PAGE->requires->css('/theme/bambuco/skin/fixes/bootswatch.css');
-
-        $fixpath = $CFG->dirroot . '/theme/bambuco/skin/fixes/bootswatch/' . $skin . '/styles.css';
-        if (file_exists($fixpath)) {
-            $PAGE->requires->css('/theme/bambuco/skin/fixes/bootswatch/' . $skin . '/styles.css');
-        }
-    }
-
-}
-
-/**
- * Include extra fonts.
+ * Get SCSS to prepend.
  *
- * @return string The HTML Meta to insert before the head.
+ * @param theme_config $theme The theme config object.
+ * @return string
  */
-function theme_bambuco_before_standard_html_head() {
-    global $PAGE;
+function theme_bambuco_get_pre_scss($theme) {
 
-    if ($PAGE->theme->name != 'bambuco') {
-        return;
-    }
+    $scss = '';
+    $configurable = [
+        // Config key => [variableName, ...].
+        'brandcolor' => ['primary'],
+    ];
 
-    $config = get_config('theme_bambuco');
-
-    // Included fonts.
-    $font = $PAGE->theme->settings->fontfamily;
-    $otherfontfamily = $PAGE->theme->settings->otherfontfamily;
-
-    if (empty($font) && empty($otherfontfamily)) {
-        return;
-    }
-
-    $headers = [];
-    $headers[] = '<link rel="preconnect" href="https://fonts.googleapis.com">';
-    $headers[] = '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>';
-
-    $includefonts = [];
-    if (!empty($font)) {
-        $includefonts[] = $font;
-    }
-
-    if (!empty($otherfontfamily)) {
-        $otherfontfamily = explode(',', $otherfontfamily);
-    } else {
-        $otherfontfamily = [];
-    }
-
-    $includefonts = array_merge($includefonts, $otherfontfamily);
-
-    foreach ($includefonts as $font) {
-        $font = str_replace(' ', '+', $font);
-        $headers[] = '<link href="https://fonts.googleapis.com/css2?family='
-                            . $font
-                            . ':wght@400;500;600;700&display=swap" rel="stylesheet">';
-    }
-
-    // Course header.
-    if (!in_array($config->coursesheader, ['none', 'default'])) {
-
-        $inpage = \theme_bambuco\utils::use_custom_header();
-        if ($inpage) {
-            $coursebanner = \theme_bambuco\utils::get_courseimage($PAGE->course);
-            $headers[] = '<style>#page-header { background-image: url("' . $coursebanner . '"); }</style>';
+    // Prepend variables first.
+    foreach ($configurable as $configkey => $targets) {
+        $value = isset($theme->settings->{$configkey}) ? $theme->settings->{$configkey} : null;
+        if (empty($value)) {
+            continue;
         }
+        array_map(function($target) use (&$scss, $value) {
+            $scss .= '$' . $target . ': ' . $value . ";\n";
+        }, (array) $targets);
     }
 
-    return implode("\n", $headers);
+    // Prepend pre-scss.
+    if (!empty($theme->settings->scsspre)) {
+        $scss .= $theme->settings->scsspre;
+    }
+
+    return $scss;
 }
 
 /**

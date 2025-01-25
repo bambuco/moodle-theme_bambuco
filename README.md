@@ -1,6 +1,6 @@
 # THEME BambuCo #
 
-Package tested in: moodle 4.3+.
+Package tested in: moodle 4.5+.
 
 ## QUICK INSTALL ##
 
@@ -8,6 +8,8 @@ Package tested in: moodle 4.3+.
 2. For skins feature, go to bambuco/skin and add the project https://github.com/thomaspark/bootswatch or execute into bootswatch folder:
 ```
     $> git submodule update --init
+    $> cd skin/bootswatch
+    $> git checkout v5
 ```
 
 ## ABOUT ##
@@ -15,6 +17,9 @@ Package tested in: moodle 4.3+.
 - **GIT:** https://github.com/bambuco/moodle-theme_bambuco
 
 ## IN VERSION ##
+2025011001:
+- Compatibility with Moodle 4.5+
+
 2024053002:
 - Include core recaptcha requirement in auth.
 - Include custom styles in the tiny editor body.

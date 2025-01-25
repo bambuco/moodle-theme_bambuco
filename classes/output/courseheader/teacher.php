@@ -72,7 +72,7 @@ class teacher implements renderable, templatable {
                 foreach ($instructors as $key => $instructor) {
                     $teacher = new \stdClass();
                     $teacher->name = $instructor['username'];
-                    $teacher->improvedname = \theme_bambuco\utils::wrap_text($instructor['username']);
+                    $teacher->improvedname = \theme_bambuco\local\utils::wrap_text($instructor['username']);
 
                     $teacherdata = $DB->get_record('user', ['id' => $key]);
                     $teacher->image = $output->user_picture($teacherdata, [

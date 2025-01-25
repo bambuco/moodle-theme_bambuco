@@ -81,7 +81,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
         $html = parent::render_context_header($contextheader);
 
-        $inpage = \theme_bambuco\utils::use_custom_header();
+        $inpage = \theme_bambuco\local\utils::use_custom_header();
 
         if ($inpage) {
 
@@ -184,7 +184,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
     public function heading($text, $level = 2, $classes = null, $id = null) {
         global $CFG;
         $removeextrainwrap = isset($CFG->theme_bambuco_removeextrainwrap) ? $CFG->theme_bambuco_removeextrainwrap : false;
-        $text = \theme_bambuco\utils::wrap_text($text, $removeextrainwrap);
+        $text = \theme_bambuco\local\utils::wrap_text($text, $removeextrainwrap);
         return parent::heading($text, $level, $classes, $id);
     }
 
