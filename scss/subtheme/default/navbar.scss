@@ -1,5 +1,5 @@
 body {
-    &.lightmode {
+    &:not(.darkmode) {
         .navbar.fixed-top {
             background-color: var(--light);
         }
