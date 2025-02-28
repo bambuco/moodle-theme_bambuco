@@ -65,7 +65,7 @@ class set_mode extends external_api {
     public static function execute(string $mode): bool {
         global $PAGE, $CFG, $SESSION;
 
-        if (!isloggedin() && empty($CFG->guestloginbutton) && empty($CFG->autologinguests)) {
+        if (!isloggedin() && !empty($CFG->forcelogin)) {
             require_login(null, true);
         }
 

@@ -236,6 +236,10 @@ body:not(.darkmode) {
                 .dropdown-toggle:after {
                     color: $primary;
                 }
+
+                .usertext {
+                    color: $primary;
+                }
             }
 
             .popover-region-container {
@@ -245,3 +249,7 @@ body:not(.darkmode) {
     }
 }
 // End of custom Navbar
+
+.form-autocomplete-selection [data-active-selection="true"] {
+    color: $white!important;
+}
