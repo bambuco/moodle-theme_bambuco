@@ -121,11 +121,14 @@ function theme_bambuco_get_main_scss_content($theme) {
     $filename = !empty($theme->settings->preset) ? $theme->settings->preset : null;
     $fs = get_file_storage();
 
+    $custompresents = ['abaco.scss'];
     $context = context_system::instance();
     if ($filename == 'default.scss') {
         $scss .= file_get_contents($CFG->dirroot . '/theme/boost/scss/preset/default.scss');
     } else if ($filename == 'plain.scss') {
         $scss .= file_get_contents($CFG->dirroot . '/theme/boost/scss/preset/plain.scss');
+    } else if (in_array($filename, $custompresents)) {
+        $scss .= file_get_contents($CFG->dirroot . '/theme/bambuco/scss/preset/' . $filename);
     } else if ($filename && ($presetfile = $fs->get_file($context->id, 'theme_boost', 'preset', 0, '/', $filename))) {
         $scss .= $presetfile->get_content();
     } else {

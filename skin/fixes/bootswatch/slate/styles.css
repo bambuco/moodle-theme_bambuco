@@ -63,6 +63,12 @@
     color: #fff;
 }
 
+.generaltable thead .sticky-column,
+.generaltable tbody tr:nth-of-type(2n) {
+    background-color: var(--gray);
+    color: #fff;
+}
+
 .navbar-brand {
     color: #5bc0de;
 }
