@@ -17,6 +17,9 @@ Package tested in: moodle 4.5+.
 - **GIT:** https://github.com/bambuco/moodle-theme_bambuco
 
 ## IN VERSION ##
+2025011002:
+- New local presets
+
 2025011001:
 - Compatibility with Moodle 4.5+.
 - Dark mode.
