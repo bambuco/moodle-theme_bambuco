@@ -1,3 +1,7 @@
+.table {
+    --bs-table-color: #fff;
+}
+
 #page.drawers .main-inner {
     background-color: rgba(255, 255, 255, 0.2);
 }
@@ -71,4 +75,10 @@
 
 .navbar-brand {
     color: #5bc0de;
+}
+
+#page-admin-plugins #plugins-control-panel .notes .requiredby,
+#page-admin-plugins #plugins-control-panel .version .versionnumber,
+#page-admin-plugins #plugins-control-panel .pluginname .componentname {
+    color: var(--light);
 }
