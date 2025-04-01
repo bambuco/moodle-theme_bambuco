@@ -26,11 +26,19 @@ defined('MOODLE_INTERNAL') || die();
 
 $callbacks = [
     [
+        'hook' => \core\hook\after_config::class,
+        'callback' => [\theme_bambuco\local\hook_callbacks::class, 'after_config'],
+    ],
+    [
         'hook' => \core\hook\output\before_http_headers::class,
         'callback' => [\theme_bambuco\local\hook_callbacks::class, 'before_http_headers'],
     ],
     [
         'hook' => \core\hook\output\before_standard_head_html_generation::class,
         'callback' => [\theme_bambuco\local\hook_callbacks::class, 'before_standard_head_html_generation'],
+    ],
+    [
+        'hook' => \core_course\hook\after_course_updated::class,
+        'callback' => [\theme_bambuco\local\hook_callbacks::class, 'after_course_updated'],
     ],
 ];

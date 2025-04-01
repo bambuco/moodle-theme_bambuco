@@ -24,10 +24,27 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+$bbst = optional_param('bbst', -1, PARAM_INT);
+if ($bbst >= 0) {
+    theme_bambuco\local\utils::set_settingup_subtheme($bbst);
+}
+
+$subtheme = theme_bambuco\local\utils::settingup_subtheme();
+
 $settings = new admin_category('theme_bambuco', get_string('configtitle', 'theme_bambuco'));
 
 include(dirname(__FILE__) . '/settings/general.php');
 include(dirname(__FILE__) . '/settings/advanced.php');
 include(dirname(__FILE__) . '/settings/skin.php');
-include(dirname(__FILE__) . '/settings/login.php');
-include(dirname(__FILE__) . '/settings/courses.php');
+
+// Not for subthemes.
+if (!$subtheme) {
+    include(dirname(__FILE__) . '/settings/login.php');
+    include(dirname(__FILE__) . '/settings/courses.php');
+    include(dirname(__FILE__) . '/settings/multitheme.php');
+}
+
+// Manage the subthemes.
+$externalpage = new admin_externalpage('theme_bambuco_subthemes', new lang_string('subthemes', 'theme_bambuco'),
+new moodle_url("/theme/bambuco/subthemes.php"), 'moodle/site:config');
+$settings->add('theme_bambuco', $externalpage);

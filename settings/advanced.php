@@ -22,6 +22,8 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use theme_bambuco\local\utils;
+
 defined('MOODLE_INTERNAL') || die();
 
 // Advanced settings.
@@ -29,17 +31,24 @@ $page = new admin_settingpage('theme_bambuco_advanced', get_string('advancedsett
 
 if ($ADMIN->fulltree) {
 
-    // Raw SCSS to include before the content.
-    $setting = new admin_setting_scsscode('theme_bambuco/scsspre',
-        get_string('rawscsspre', 'theme_bambuco'), get_string('rawscsspre_desc', 'theme_bambuco'), '', PARAM_RAW);
-    $setting->set_updatedcallback('theme_reset_all_caches');
-    $page->add($setting);
+    $subtheme = utils::settingup_subtheme();
+    $subthemekey = empty($subtheme) ? '' : '_' . $subtheme->id;
 
-    // Raw SCSS to include after the content.
-    $setting = new admin_setting_scsscode('theme_bambuco/scss', get_string('rawscss', 'theme_bambuco'),
-        get_string('rawscss_desc', 'theme_bambuco'), '', PARAM_RAW);
-    $setting->set_updatedcallback('theme_reset_all_caches');
-    $page->add($setting);
+    if (utils::iscustomizable_subtheme('scsspre', $subtheme)) {
+        // Raw SCSS to include before the content.
+        $setting = new admin_setting_scsscode('theme_bambuco/scsspre' . $subthemekey,
+            get_string('scsspre', 'theme_bambuco'), get_string('scsspre_desc', 'theme_bambuco'), '', PARAM_RAW);
+        $setting->set_updatedcallback('theme_reset_all_caches');
+        $page->add($setting);
+    }
+
+    if (utils::iscustomizable_subtheme('scss', $subtheme)) {
+        // Raw SCSS to include after the content.
+        $setting = new admin_setting_scsscode('theme_bambuco/scss' . $subthemekey, get_string('scss', 'theme_bambuco'),
+            get_string('scss_desc', 'theme_bambuco'), '', PARAM_RAW);
+        $setting->set_updatedcallback('theme_reset_all_caches');
+        $page->add($setting);
+    }
 }
 
 $settings->add('theme_bambuco', $page);

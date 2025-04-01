@@ -16,6 +16,8 @@
 
 namespace theme_bambuco\local;
 
+use \theme_bambuco\local\utils;
+
 /**
  * Allows plugins to add any elements to the html.
  *
@@ -33,17 +35,50 @@ class hook_callbacks {
     public static function before_http_headers(
         \core\hook\output\before_http_headers $hook,
     ): void {
-        global $PAGE, $CFG;
+        global $PAGE, $CFG, $COURSE, $SESSION;
 
         if ($PAGE->theme->name != 'bambuco') {
             return;
         }
 
-        $thememode = \theme_bambuco\local\utils::get_theme_mode();
-        $modenabled = \theme_bambuco\local\utils::mode_enabled();
+        $config = get_config('theme_bambuco');
+        // Check for subtheme in course.
+        if (isset($SESSION->theme_bambuco_subthemecourse[$COURSE->id])) {
+            if ($SESSION->theme_bambuco_subthemecourse[$COURSE->id] !== false) {
+                utils::set_subtheme($SESSION->theme_bambuco_subthemecourse[$COURSE->id]);
+            }
+        } else if ($COURSE->id != SITEID && !empty($config->multithemecoursefield)) {
 
-        $skinlight = get_config('theme_bambuco', 'skin');
-        $skindark = get_config('theme_bambuco', 'skindark');
+            // Load custom course fields.
+            $handler = \core_customfield\handler::get_handler('core_course', 'course');
+            $datas = $handler->get_instance_data($COURSE->id, true);
+
+            if (isset($datas[$config->multithemecoursefield])) {
+                $field = $datas[$config->multithemecoursefield];
+            } else {
+                $field = null;
+            }
+
+            if ($field) {
+                $fieldvalue = $field->export_value();
+
+                $subtheme = !empty($fieldvalue) ? utils::get_subthemebyidnumber($fieldvalue) : null;
+                if ($subtheme) {
+                    $SESSION->theme_bambuco_subthemecourse[$COURSE->id] = $subtheme;
+                    utils::set_subtheme($subtheme);
+                } else {
+                    $SESSION->theme_bambuco_subthemecourse[$COURSE->id] = false;
+                }
+            }
+        }
+
+        $thememode = utils::get_theme_mode();
+        $modenabled = utils::mode_enabled();
+
+        $skinkey = utils::subthemekey('skin');
+        $skindarkkey = utils::subthemekey('skindark');
+        $skinlight = get_config('theme_bambuco', $skinkey);
+        $skindark = get_config('theme_bambuco', $skindarkkey);
 
         $skin = $modenabled && $thememode == 'dark' ? $skindark : $skinlight;
 
@@ -115,8 +150,10 @@ class hook_callbacks {
         $config = get_config('theme_bambuco');
 
         // Included fonts.
-        $font = $PAGE->theme->settings->fontfamily;
-        $otherfontfamily = $PAGE->theme->settings->otherfontfamily;
+        $fontkey = utils::subthemekey('fontfamily');
+        $font = $config->$fontkey;
+
+        $otherfontfamily = $config->otherfontfamily;
 
         if (empty($font) && empty($otherfontfamily)) {
             return;
@@ -149,9 +186,9 @@ class hook_callbacks {
         // Course header.
         if (!in_array($config->coursesheader, ['none', 'default'])) {
 
-            $inpage = \theme_bambuco\local\utils::use_custom_header();
+            $inpage = utils::use_custom_header();
             if ($inpage) {
-                $coursebanner = \theme_bambuco\local\utils::get_courseimage($PAGE->course);
+                $coursebanner = utils::get_courseimage($PAGE->course);
                 $headers[] = '<style>#page-header { background-image: url("' . $coursebanner . '"); }</style>';
             }
         }
@@ -161,4 +198,102 @@ class hook_callbacks {
         }
     }
 
+    /**
+     * Listener for the after_config hook.
+     *
+     * @param after_config $hook
+     */
+    public static function after_config(\core\hook\after_config $hook): void {
+        global $CFG, $SESSION, $USER, $DB, $PAGE;
+
+        if (during_initial_install() || isset($CFG->upgraderunning)) {
+            // Do nothing during installation or upgrade.
+            return;
+        }
+
+        if ($CFG->theme != 'bambuco') {
+            return;
+        }
+
+        $config = get_config('theme_bambuco');
+
+        if (empty($config->multitheme)) {
+            return;
+        }
+
+        // Initialize the session variable for courses subthemes.
+        if (!property_exists($SESSION, 'theme_bambuco_subthemecourse')) {
+            $SESSION->theme_bambuco_subthemecourse = [
+                SITEID => false,
+            ];
+        }
+
+        $subtheme = null;
+        if (defined('NO_MOODLE_COOKIES') && NO_MOODLE_COOKIES) {
+            $bbcost = optional_param('bbcost', 0, PARAM_INT);
+            if (!empty($bbcost)) {
+                $subtheme = utils::get_subtheme($bbcost, false);
+                utils::set_subtheme($subtheme);
+                return;
+            }
+        }
+
+        // Not used for guest users.
+        // User id is 0 in some AJAX call.
+        // It shouldn't happen because NO_MOODLE_COOKIES is already validated, but it is validated here
+        // to prevent it from failing if there is a special case.
+        if (!isloggedin() || isguestuser() || !$USER || empty($USER->id)) {
+            return;
+        }
+
+        if (property_exists($SESSION, 'theme_bambuco_subtheme')) {
+            if ($SESSION->theme_bambuco_subtheme === false) {
+                return;
+            }
+
+            utils::set_subtheme($SESSION->theme_bambuco_subtheme);
+            $subtheme = utils::current_subtheme();
+
+            if ($PAGE->pagetype == 'site-index' && !empty($subtheme->homeurl)) {
+                redirect($subtheme->fullhomeurl);
+            }
+
+            return;
+        }
+
+        // Check for not logged in.
+        if (!empty($config->multithemeuserfield)) {
+
+            $field = $DB->get_record('user_info_data', ['fieldid' => $config->multithemeuserfield, 'userid' => $USER->id]);
+            if ($field) {
+                $subtheme = utils::get_subthemebyidnumber($field->data);
+                if ($subtheme) {
+                    $SESSION->theme_bambuco_subtheme = $subtheme;
+                    utils::set_subtheme($subtheme);
+                    return;
+                }
+            }
+
+        }
+
+        $SESSION->theme_bambuco_subtheme = false;
+        utils::set_subtheme(null);
+
+    }
+
+    /**
+     * Listener for the after_course_updated hook.
+     *
+     * @param \core_course\hook\after_course_updated $hook
+     */
+    public static function after_course_updated(
+        \core_course\hook\after_course_updated $hook,
+    ): void {
+        global $SESSION;
+
+        // Clean up the session variable subcourse for the updated course.
+        if (isset($SESSION->theme_bambuco_subthemecourse[$hook->course->id])) {
+            unset($SESSION->theme_bambuco_subthemecourse[$hook->course->id]);
+        }
+    }
 }

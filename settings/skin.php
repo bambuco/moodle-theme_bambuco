@@ -22,6 +22,8 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use theme_bambuco\local\utils;
+
 defined('MOODLE_INTERNAL') || die();
 
 // Advanced settings.
@@ -55,19 +57,26 @@ if ($ADMIN->fulltree) {
     }
 
     if (!empty($skins)) {
+        $subtheme = utils::settingup_subtheme();
+        $subthemekey = empty($subtheme) ? '' : '_' . $subtheme->id;
+
         $skins = ['' => get_string('none')] + $skins;
 
-        // Skin to customize the appearance.
-        $setting = new admin_setting_configselect('theme_bambuco/skin',
-            get_string('skin', 'theme_bambuco'), get_string('skin_desc', 'theme_bambuco'), '', $skins);
-        $setting->set_updatedcallback('theme_reset_all_caches');
-        $page->add($setting);
+        if (utils::iscustomizable_subtheme('skin', $subtheme)) {
+            // Skin to customize the appearance.
+            $setting = new admin_setting_configselect('theme_bambuco/skin' . $subthemekey,
+                get_string('skin', 'theme_bambuco'), get_string('skin_desc', 'theme_bambuco'), '', $skins);
+            $setting->set_updatedcallback('theme_reset_all_caches');
+            $page->add($setting);
+        }
 
-        // Skin to customize the dark mode appearance.
-        $setting = new admin_setting_configselect('theme_bambuco/skindark',
-            get_string('skindark', 'theme_bambuco'), get_string('skindark_desc', 'theme_bambuco'), '', $skins);
-        $setting->set_updatedcallback('theme_reset_all_caches');
-        $page->add($setting);
+        if (utils::iscustomizable_subtheme('skindark', $subtheme)) {
+            // Skin to customize the dark mode appearance.
+            $setting = new admin_setting_configselect('theme_bambuco/skindark' . $subthemekey,
+                get_string('skindark', 'theme_bambuco'), get_string('skindark_desc', 'theme_bambuco'), '', $skins);
+            $setting->set_updatedcallback('theme_reset_all_caches');
+            $page->add($setting);
+        }
     } else {
         $page->add(new admin_setting_heading('theme_bambuco_skin',
             get_string('skins_none', 'theme_bambuco'), ''));
