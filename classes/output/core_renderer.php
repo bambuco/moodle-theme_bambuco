@@ -28,6 +28,7 @@ require $CFG->dirroot . '/theme/bambuco/thirdparty/altcha/vendor/autoload.php';
 
 use AltchaOrg\Altcha\ChallengeOptions;
 use AltchaOrg\Altcha\Altcha;
+use AltchaOrg\Altcha\BaseChallengeOptions;
 
 /**
  * Core renderers.
@@ -75,7 +76,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
             // Create a new challenge.
             $options = new ChallengeOptions(
-                maxNumber: 50000, // The maximum random number.
+                maxNumber: BaseChallengeOptions::DEFAULT_MAX_NUMBER, // The maximum random number.
                 expires: (new \DateTimeImmutable())->add(new \DateInterval('PT10S')),
             );
 
@@ -93,7 +94,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
             $challenge = $altcha->createChallenge($options);
             $context->altchawidget = (object)[
                 'name' => 'bbcoaltcha',
-                'maxnumber' => 100000,
+                'maxnumber' => BaseChallengeOptions::DEFAULT_MAX_NUMBER,
                 'challengejson' => json_encode($challenge),
                 'strings' => json_encode($strings),
             ];
