@@ -28,6 +28,13 @@ $page = new admin_settingpage('theme_bambuco_login', new lang_string('loginsetti
 
 if ($ADMIN->fulltree) {
 
+    // Include ALTCHA in login.
+    $name = 'theme_bambuco/usealtcha';
+    $title = new lang_string('usealtcha', 'theme_bambuco');
+    $description = new lang_string('usealtcha_desc', 'theme_bambuco');
+    $setting = new admin_setting_configcheckbox($name, $title, $description, '0');
+    $page->add($setting);
+
     // Include signup link in usermenu bar.
     $name = 'theme_bambuco/signuplink';
     $title = new lang_string('signuplink', 'theme_bambuco');

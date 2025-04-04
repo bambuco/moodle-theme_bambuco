@@ -18,6 +18,7 @@ Package tested in: moodle 4.3+.
 2024053002:
 - Include core recaptcha requirement in auth.
 - Include custom styles in the tiny editor body.
+- Use ALTCHA in login.
 
 2024053001:
 - Compatibility with Moodle 4.3+

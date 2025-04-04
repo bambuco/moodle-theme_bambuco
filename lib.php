@@ -24,6 +24,11 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+require $CFG->dirroot . '/theme/bambuco/thirdparty/altcha/vendor/autoload.php';
+
+use AltchaOrg\Altcha\ChallengeOptions;
+use AltchaOrg\Altcha\Altcha;
+
 /**
  * Inject additional SCSS.
  *
@@ -249,4 +254,40 @@ function theme_bambuco_css_postprocess($css) {
         $css = str_replace('/**EDITOR-STYLES**/', $themescss, $css);
     }
     return $css;
+}
+
+function theme_bambuco_after_config() {
+    global $CFG, $SESSION, $PAGE;
+
+    if ($CFG->theme != 'bambuco' || $PAGE->pagetype != 'login-index') {
+        return;
+    }
+
+    $config = get_config('theme_bambuco');
+
+    if (!empty($config->usealtcha)) {
+        $logintoken = optional_param('logintoken', '', PARAM_TEXT);
+
+        // If empty it is not a login request.
+        if (empty($logintoken)) {
+            return;
+        }
+
+        $bbcoaltcha = optional_param('bbcoaltcha', '', PARAM_TEXT);
+        $payload = !empty($bbcoaltcha) ? (array)@json_decode(base64_decode($bbcoaltcha)) : '';
+
+        $altcha = new Altcha($SESSION->bambuco_altcha_key);
+
+        $ok = $altcha->verifySolution($payload, true);
+
+        if (!$ok) {
+            redirect(
+                    new moodle_url('/login/index.php'),
+                    get_string('altcha_error', 'theme_bambuco'),
+                    null,
+                    \core\output\notification::NOTIFY_ERROR
+            );
+        }
+    }
+
 }

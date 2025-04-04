@@ -24,6 +24,11 @@
 
 namespace theme_bambuco\output;
 
+require $CFG->dirroot . '/theme/bambuco/thirdparty/altcha/vendor/autoload.php';
+
+use AltchaOrg\Altcha\ChallengeOptions;
+use AltchaOrg\Altcha\Altcha;
+
 /**
  * Core renderers.
  *
@@ -40,7 +45,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
      * @return string
      */
     public function render_login(\core_auth\output\login $form) {
-        global $SITE;
+        global $SITE, $SESSION;
 
         $context = $form->export_for_template($this);
 
@@ -57,6 +62,41 @@ class core_renderer extends \theme_boost\output\core_renderer {
         if ($context->hasidentityproviders) {
             $layout = get_config('theme_bambuco', 'loginformlayout');
             $context->toexternal = ($layout == 'toexternal');
+        }
+
+        $usealtcha = get_config('theme_bambuco', 'usealtcha');
+        if ($usealtcha) {
+
+            if (!isset($SESSION->bambuco_altcha_key)) {
+                $SESSION->bambuco_altcha_key = openssl_random_pseudo_bytes(32);
+            }
+
+            $altcha = new Altcha($SESSION->bambuco_altcha_key);
+
+            // Create a new challenge.
+            $options = new ChallengeOptions(
+                maxNumber: 50000, // The maximum random number.
+                expires: (new \DateTimeImmutable())->add(new \DateInterval('PT10S')),
+            );
+
+            $strings = [
+                'ariaLinkLabel' => get_string('altcha_arialinklabel', 'theme_bambuco'),
+                'error' => get_string('altcha_error', 'theme_bambuco'),
+                'expired' => get_string('altcha_expired', 'theme_bambuco'),
+                'footer' => get_string('altcha_footer', 'theme_bambuco'),
+                'label' => get_string('altcha_label', 'theme_bambuco'),
+                'verified' => get_string('altcha_verified', 'theme_bambuco'),
+                'verifying' => get_string('altcha_verifying', 'theme_bambuco'),
+                'waitAlert' => get_string('altcha_waitalert', 'theme_bambuco'),
+            ];
+
+            $challenge = $altcha->createChallenge($options);
+            $context->altchawidget = (object)[
+                'name' => 'bbcoaltcha',
+                'maxnumber' => 100000,
+                'challengejson' => json_encode($challenge),
+                'strings' => json_encode($strings),
+            ];
         }
 
         return $this->render_from_template('core/loginform', $context);
