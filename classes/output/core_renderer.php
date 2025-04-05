@@ -76,8 +76,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
             // Create a new challenge.
             $options = new ChallengeOptions(
-                maxNumber: BaseChallengeOptions::DEFAULT_MAX_NUMBER, // The maximum random number.
-                expires: (new \DateTimeImmutable())->add(new \DateInterval('PT10S')),
+                maxNumber: 200000, // The maximum random number.
+                expires: (new \DateTimeImmutable())->add(new \DateInterval('PT30S')),
             );
 
             $strings = [
@@ -94,7 +94,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
             $challenge = $altcha->createChallenge($options);
             $context->altchawidget = (object)[
                 'name' => 'bbcoaltcha',
-                'maxnumber' => BaseChallengeOptions::DEFAULT_MAX_NUMBER,
+                'maxnumber' => 200000,
                 'challengejson' => json_encode($challenge),
                 'strings' => json_encode($strings),
             ];
