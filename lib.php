@@ -283,7 +283,7 @@ function theme_bambuco_after_config() {
         if (!$ok) {
             redirect(
                     new moodle_url('/login/index.php'),
-                    get_string('altcha_error', 'theme_bambuco'),
+                    get_string('altcha_expired', 'theme_bambuco'),
                     null,
                     \core\output\notification::NOTIFY_ERROR
             );

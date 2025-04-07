@@ -72,12 +72,13 @@ class core_renderer extends \theme_boost\output\core_renderer {
                 $SESSION->bambuco_altcha_key = openssl_random_pseudo_bytes(32);
             }
 
+            $config = get_config('theme_bambuco');
             $altcha = new Altcha($SESSION->bambuco_altcha_key);
 
             // Create a new challenge.
             $options = new ChallengeOptions(
-                maxNumber: 200000, // The maximum random number.
-                expires: (new \DateTimeImmutable())->add(new \DateInterval('PT30S')),
+                maxNumber: (int)$config->altchalevel, // The maximum random number.
+                expires: (new \DateTimeImmutable())->add(new \DateInterval('PT' . $config->altchavalidtime)),
             );
 
             $strings = [
@@ -94,7 +95,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
             $challenge = $altcha->createChallenge($options);
             $context->altchawidget = (object)[
                 'name' => 'bbcoaltcha',
-                'maxnumber' => 200000,
+                'maxnumber' => (int)$config->altchalevel,
                 'challengejson' => json_encode($challenge),
                 'strings' => json_encode($strings),
             ];
