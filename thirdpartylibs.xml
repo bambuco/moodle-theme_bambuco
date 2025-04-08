@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<libraries>
+  <library>
+    <location>skin/bootswatch</location>
+    <name>Bootswatch</name>
+    <description>Free themes for Bootstrap.</description>
+    <version>4.6.2</version>
+    <license>MIT</license>
+    <repository>https://github.com/thomaspark/bootswatch</repository>
+    <copyrights>
+      <copyright>2014-2023 Thomas Park</copyright>
+    </copyrights>
+    <customised/>
+  </library>
+  <library>
+    <location>thirdparty/altcha/altcha.min.js</location>
+    <name>Altcha widget - https://altcha.org/</name>
+    <description>ALTCHA provides cutting-edge spam and abuse protection for websites and apps.</description>
+    <version>1.1</version>
+    <license>(MIT)</license>
+    <repository>https://github.com/altcha-org/altcha</repository>
+    <copyrights>
+      <copyright>2023 Daniel Regeci</copyright>
+    </copyrights>
+  </library>
+  <library>
+    <location>thirdparty/altcha</location>
+    <name>ALTCHA PHP Library</name>
+    <description>The ALTCHA PHP Library is a lightweight, zero-dependency library designed for creating and
+                  verifying ALTCHA challenges, specifically tailored for PHP applications.</description>
+    <version>1.1.2</version>
+    <license>(MIT)</license>
+    <repository>https://github.com/altcha-org/altcha-lib-php.git</repository>
+    <copyrights>
+      <copyright>2023 Daniel Regeci</copyright>
+    </copyrights>
+  </library>
+</libraries>

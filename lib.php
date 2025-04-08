@@ -24,11 +24,6 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-require $CFG->dirroot . '/theme/bambuco/thirdparty/altcha/vendor/autoload.php';
-
-use AltchaOrg\Altcha\ChallengeOptions;
-use AltchaOrg\Altcha\Altcha;
-
 /**
  * Inject additional SCSS.
  *
@@ -266,6 +261,8 @@ function theme_bambuco_after_config() {
     $config = get_config('theme_bambuco');
 
     if (!empty($config->usealtcha)) {
+        require_once($CFG->dirroot . '/theme/bambuco/thirdparty/altcha/vendor/autoload.php');
+
         $logintoken = optional_param('logintoken', '', PARAM_TEXT);
 
         // If empty it is not a login request.
@@ -276,7 +273,7 @@ function theme_bambuco_after_config() {
         $bbcoaltcha = optional_param('bbcoaltcha', '', PARAM_TEXT);
         $payload = !empty($bbcoaltcha) ? (array)@json_decode(base64_decode($bbcoaltcha)) : '';
 
-        $altcha = new Altcha($SESSION->bambuco_altcha_key);
+        $altcha = new \AltchaOrg\Altcha\Altcha($SESSION->bambuco_altcha_key);
 
         $ok = $altcha->verifySolution($payload, true);
 

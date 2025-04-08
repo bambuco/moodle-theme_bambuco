@@ -28,38 +28,40 @@ $page = new admin_settingpage('theme_bambuco_login', new lang_string('loginsetti
 
 if ($ADMIN->fulltree) {
 
-    // Include ALTCHA in login.
-    $name = 'theme_bambuco/usealtcha';
-    $title = new lang_string('usealtcha', 'theme_bambuco');
-    $description = new lang_string('usealtcha_desc', 'theme_bambuco');
-    $setting = new admin_setting_configcheckbox($name, $title, $description, '0');
-    $page->add($setting);
+    if (PHP_VERSION_ID > 80100) {
+        // Include ALTCHA in login.
+        $name = 'theme_bambuco/usealtcha';
+        $title = new lang_string('usealtcha', 'theme_bambuco');
+        $description = new lang_string('usealtcha_desc', 'theme_bambuco');
+        $setting = new admin_setting_configcheckbox($name, $title, $description, '0');
+        $page->add($setting);
 
-    $name = 'theme_bambuco/altchalevel';
-    $title = new lang_string('altchalevel', 'theme_bambuco');
-    $description = new lang_string('altchalevel_desc', 'theme_bambuco');
-    $options = [
-        '100000' => new lang_string('altchalevel_1', 'theme_bambuco'),
-        '200000' => new lang_string('altchalevel_2', 'theme_bambuco'),
-        '500000' => new lang_string('altchalevel_5', 'theme_bambuco'),
-        '1000000' => new lang_string('altchalevel_10', 'theme_bambuco'),
-    ];
-    $setting = new admin_setting_configselect($name, $title, $description, '200000', $options);
-    $page->add($setting);
+        $name = 'theme_bambuco/altchalevel';
+        $title = new lang_string('altchalevel', 'theme_bambuco');
+        $description = new lang_string('altchalevel_desc', 'theme_bambuco');
+        $options = [
+            '100000' => new lang_string('altchalevel_1', 'theme_bambuco'),
+            '200000' => new lang_string('altchalevel_2', 'theme_bambuco'),
+            '500000' => new lang_string('altchalevel_5', 'theme_bambuco'),
+            '1000000' => new lang_string('altchalevel_10', 'theme_bambuco'),
+        ];
+        $setting = new admin_setting_configselect($name, $title, $description, '200000', $options);
+        $page->add($setting);
 
-    $name = 'theme_bambuco/altchavalidtime';
-    $title = new lang_string('altchavalidtime', 'theme_bambuco');
-    $description = new lang_string('altchavalidtime_desc', 'theme_bambuco');
-    $options = [
-        '10S' => new lang_string('altchavalidtime_10s', 'theme_bambuco'),
-        '20S' => new lang_string('altchavalidtime_20s', 'theme_bambuco'),
-        '40S' => new lang_string('altchavalidtime_40s', 'theme_bambuco'),
-        '1M' => new lang_string('altchavalidtime_1m', 'theme_bambuco'),
-        '2M' => new lang_string('altchavalidtime_2m', 'theme_bambuco'),
-        '5M' => new lang_string('altchavalidtime_5m', 'theme_bambuco'),
-    ];
-    $setting = new admin_setting_configselect($name, $title, $description, '20S', $options);
-    $page->add($setting);
+        $name = 'theme_bambuco/altchavalidtime';
+        $title = new lang_string('altchavalidtime', 'theme_bambuco');
+        $description = new lang_string('altchavalidtime_desc', 'theme_bambuco');
+        $options = [
+            '10S' => new lang_string('altchavalidtime_10s', 'theme_bambuco'),
+            '20S' => new lang_string('altchavalidtime_20s', 'theme_bambuco'),
+            '40S' => new lang_string('altchavalidtime_40s', 'theme_bambuco'),
+            '1M' => new lang_string('altchavalidtime_1m', 'theme_bambuco'),
+            '2M' => new lang_string('altchavalidtime_2m', 'theme_bambuco'),
+            '5M' => new lang_string('altchavalidtime_5m', 'theme_bambuco'),
+        ];
+        $setting = new admin_setting_configselect($name, $title, $description, '20S', $options);
+        $page->add($setting);
+    }
 
     // Include signup link in usermenu bar.
     $name = 'theme_bambuco/signuplink';

@@ -24,12 +24,6 @@
 
 namespace theme_bambuco\output;
 
-require $CFG->dirroot . '/theme/bambuco/thirdparty/altcha/vendor/autoload.php';
-
-use AltchaOrg\Altcha\ChallengeOptions;
-use AltchaOrg\Altcha\Altcha;
-use AltchaOrg\Altcha\BaseChallengeOptions;
-
 /**
  * Core renderers.
  *
@@ -46,7 +40,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
      * @return string
      */
     public function render_login(\core_auth\output\login $form) {
-        global $SITE, $SESSION;
+        global $SITE, $SESSION, $CFG;
 
         $context = $form->export_for_template($this);
 
@@ -67,16 +61,17 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
         $usealtcha = get_config('theme_bambuco', 'usealtcha');
         if ($usealtcha) {
+            require_once($CFG->dirroot . '/theme/bambuco/thirdparty/altcha/vendor/autoload.php');
 
             if (!isset($SESSION->bambuco_altcha_key)) {
                 $SESSION->bambuco_altcha_key = openssl_random_pseudo_bytes(32);
             }
 
             $config = get_config('theme_bambuco');
-            $altcha = new Altcha($SESSION->bambuco_altcha_key);
+            $altcha = new \AltchaOrg\Altcha\Altcha($SESSION->bambuco_altcha_key);
 
             // Create a new challenge.
-            $options = new ChallengeOptions(
+            $options = new \AltchaOrg\Altcha\ChallengeOptions(
                 maxNumber: (int)$config->altchalevel, // The maximum random number.
                 expires: (new \DateTimeImmutable())->add(new \DateInterval('PT' . $config->altchavalidtime)),
             );
