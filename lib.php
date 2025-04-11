@@ -265,17 +265,26 @@ function theme_bambuco_css_postprocess($css) {
  *
  * @param array $urls The URLs to alter.
  */
-function theme_bambuco_alter_css_urls($urls) {
+function theme_bambuco_alter_css_urls(&$urls) {
+    global $CFG;
 
     $subtheme = utils::current_subtheme();
     if (empty($subtheme)) {
         return;
     }
 
-    foreach ($urls as $url) {
+    foreach ($urls as $key => $url) {
         if ($url->param('type') == 'scss') {
             $url->param('bbcost', $subtheme->id);
             $url->param('subtype', 'subtheme_' . $subtheme->id);
+        } else if (empty($CFG->themedesignermode) && strpos($url->get_path(), '/theme/styles.php/bambuco/') !== false) {
+            $url = (string)$url;
+            unset($urls[$key]);
+            $url = str_replace('/theme/styles.php/bambuco/', '/theme/bambuco/bbcostyles.php/', $url);
+            $url .= '/' . $subtheme->id;
+            $url = new moodle_url($url);
+            $urls[$key] = $url;
         }
+
     }
 }

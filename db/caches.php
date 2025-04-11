@@ -15,33 +15,25 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Theme BambuCo.
+ * Cache definitions for BambuCo
+ *
+ * Documentation: {@link https://docs.moodle.org/dev/Cache_API}
  *
  * @package    theme_bambuco
- * @copyright  2023 David Herney - cirano. https://bambuco.co
+ * @category   cache
+ * @copyright  2025 David Herney @ BambuCo
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-// This line protects the file from being accessed by a URL directly.
 defined('MOODLE_INTERNAL') || die();
 
-// This is the component name of the plugin - it always starts with 'theme_'
-// for themes and should be the same as the name of the folder.
-$plugin->component = 'theme_bambuco';
+$definitions = [
 
-// This is the version of the plugin.
-$plugin->version = 2025011002.08;
-
-// This is the named version.
-$plugin->release = '4.5.02';
-
-// This is a stable release.
-$plugin->maturity = MATURITY_BETA;
-
-// This is the version of Moodle this plugin requires.
-$plugin->requires = 2024100701;
-
-// This is a list of plugins, this plugin depends on (and their versions).
-$plugin->dependencies = [
-    'theme_boost' => 2024100700
+    // Caches processed CSS.
+    'postprocessedcss' => [
+        'mode' => cache_store::MODE_APPLICATION,
+        'simplekeys' => true,
+        'simpledata' => true,
+        'staticacceleration' => false,
+    ],
 ];
