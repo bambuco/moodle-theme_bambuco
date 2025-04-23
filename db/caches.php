@@ -15,30 +15,25 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Hook callbacks
+ * Cache definitions for BambuCo
+ *
+ * Documentation: {@link https://docs.moodle.org/dev/Cache_API}
  *
  * @package    theme_bambuco
- * @copyright  2024 David Herney @ BambuCo
+ * @category   cache
+ * @copyright  2025 David Herney @ BambuCo
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$callbacks = [
-    [
-        'hook' => \core\hook\after_config::class,
-        'callback' => [\theme_bambuco\local\hook_callbacks::class, 'after_config'],
-    ],
-    [
-        'hook' => \core\hook\output\before_http_headers::class,
-        'callback' => [\theme_bambuco\local\hook_callbacks::class, 'before_http_headers'],
-    ],
-    [
-        'hook' => \core\hook\output\before_standard_head_html_generation::class,
-        'callback' => [\theme_bambuco\local\hook_callbacks::class, 'before_standard_head_html_generation'],
-    ],
-    [
-        'hook' => \core_course\hook\after_course_updated::class,
-        'callback' => [\theme_bambuco\local\hook_callbacks::class, 'after_course_updated'],
+$definitions = [
+
+    // Caches processed CSS.
+    'postprocessedcss' => [
+        'mode' => cache_store::MODE_APPLICATION,
+        'simplekeys' => true,
+        'simpledata' => true,
+        'staticacceleration' => false,
     ],
 ];

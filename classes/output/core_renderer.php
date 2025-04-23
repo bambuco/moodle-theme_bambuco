@@ -24,6 +24,8 @@
 
 namespace theme_bambuco\output;
 
+use core\output\html_writer;
+
 /**
  * Core renderers.
  *
@@ -75,11 +77,24 @@ class core_renderer extends \theme_boost\output\core_renderer {
             return parent::render_context_header($contextheader);
         }
 
+        $html = parent::render_context_header($contextheader);
+
+        if (strpos($this->page->pagetype, 'admin-setting-theme_bambuco') === 0) {
+            $subtheme = \theme_bambuco\local\utils::settingup_subtheme();
+
+            if ($subtheme) {
+                $subthemealert = get_string('editingsubtheme', 'theme_bambuco', $subtheme->name);
+                $subthemealert .= ' ';
+                $url = new \moodle_url('/admin/settings.php', ['section' => 'theme_bambuco_general', 'bbst' => 0]);
+                $subthemealert .= html_writer::link($url, get_string('defaultsubtheme', 'theme_bambuco'), ['class' => '']);
+
+                $html .= html_writer::tag('div', $subthemealert, ['class' => 'alert alert-warning']);
+            }
+        }
+
         // Course header customization.
         $config = get_config('theme_bambuco');
         $inpage = false;
-
-        $html = parent::render_context_header($contextheader);
 
         $inpage = \theme_bambuco\local\utils::use_custom_header();
 

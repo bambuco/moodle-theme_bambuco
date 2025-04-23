@@ -22,67 +22,84 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use theme_bambuco\local\utils;
+
 defined('MOODLE_INTERNAL') || die();
 
-$page = new admin_settingpage('themesettingbambuco', get_string('generalsettings', 'theme_bambuco'));
+$page = new admin_settingpage('theme_bambuco_general', get_string('generalsettings', 'theme_bambuco'));
 
 if ($ADMIN->fulltree) {
 
-    // Unaddable blocks.
-    // Blocks to be excluded when this theme is enabled in the "Add a block" list: Administration, Navigation, Courses and
-    // Section links.
-    $default = 'navigation,settings,course_list,section_links';
-    $setting = new admin_setting_configtext('theme_bambuco/unaddableblocks',
-        get_string('unaddableblocks', 'theme_bambuco'), get_string('unaddableblocks_desc', 'theme_bambuco'), $default, PARAM_TEXT);
-    $page->add($setting);
+    $subtheme = utils::settingup_subtheme();
+    $subthemekey = empty($subtheme) ? '' : '_' . $subtheme->id;
 
-    // Preset.
-    $name = 'theme_bambuco/preset';
-    $title = get_string('preset', 'theme_bambuco');
-    $description = get_string('preset_desc', 'theme_bambuco');
-    $default = 'default.scss';
-
-    $context = context_system::instance();
-    $fs = get_file_storage();
-    $files = $fs->get_area_files($context->id, 'theme_bambuco', 'preset', 0, 'itemid, filepath, filename', false);
-
-    $choices = [];
-    foreach ($files as $file) {
-        $choices[$file->get_filename()] = $file->get_filename();
+    if (utils::iscustomizable_subtheme('unaddableblocks', $subtheme)) {
+        // Unaddable blocks.
+        // Blocks to be excluded when this theme is enabled in the "Add a block" list: Administration, Navigation, Courses and
+        // Section links.
+        $default = 'navigation,settings,course_list,section_links';
+        $setting = new admin_setting_configtext('theme_bambuco/unaddableblocks' . $subthemekey,
+            get_string('unaddableblocks', 'theme_bambuco'), get_string('unaddableblocks_desc', 'theme_bambuco'),
+            $default, PARAM_TEXT);
+        $page->add($setting);
     }
-    // These are the built in presets.
-    $choices['default.scss'] = 'default.scss';
-    $choices['plain.scss'] = 'plain.scss';
-    $choices['abaco.scss'] = 'Ábaco';
 
-    $setting = new admin_setting_configthemepreset($name, $title, $description, $default, $choices, 'bambuco');
-    $setting->set_updatedcallback('theme_reset_all_caches');
-    $page->add($setting);
+    if (utils::iscustomizable_subtheme('preset', $subtheme)) {
+        // Preset.
+        $name = 'theme_bambuco/preset' . $subthemekey;
+        $title = get_string('preset', 'theme_bambuco');
+        $description = get_string('preset_desc', 'theme_bambuco');
+        $default = 'default.scss';
 
-    // Preset files setting.
-    $name = 'theme_bambuco/presetfiles';
-    $title = get_string('presetfiles','theme_bambuco');
-    $description = get_string('presetfiles_desc', 'theme_bambuco');
+        $context = context_system::instance();
+        $fs = get_file_storage();
+        $files = $fs->get_area_files($context->id, 'theme_bambuco', 'preset', 0, 'itemid, filepath, filename', false);
 
-    $setting = new admin_setting_configstoredfile($name, $title, $description, 'preset', 0,
-        array('maxfiles' => 20, 'accepted_types' => array('.scss')));
-    $page->add($setting);
+        $choices = [];
+        foreach ($files as $file) {
+            $choices[$file->get_filename()] = $file->get_filename();
+        }
+        // These are the built in presets.
+        $choices['default.scss'] = 'default.scss';
+        $choices['plain.scss'] = 'plain.scss';
+        $choices['abaco.scss'] = 'Ábaco';
 
-    // Background image setting.
-    $name = 'theme_bambuco/backgroundimage';
-    $title = get_string('backgroundimage', 'theme_bambuco');
-    $description = get_string('backgroundimage_desc', 'theme_bambuco');
-    $setting = new admin_setting_configstoredfile($name, $title, $description, 'backgroundimage');
-    $setting->set_updatedcallback('theme_reset_all_caches');
-    $page->add($setting);
+        $setting = new admin_setting_configthemepreset($name, $title, $description, $default, $choices, 'bambuco');
+        $setting->set_updatedcallback('theme_reset_all_caches');
+        $page->add($setting);
+    }
 
-    // We use an empty default value because the default colour should come from the preset.
-    $name = 'theme_bambuco/brandcolor';
-    $title = get_string('brandcolor', 'theme_bambuco');
-    $description = get_string('brandcolor_desc', 'theme_bambuco');
-    $setting = new admin_setting_configcolourpicker($name, $title, $description, '');
-    $setting->set_updatedcallback('theme_reset_all_caches');
-    $page->add($setting);
+    if (utils::iscustomizable_subtheme('presetfiles', $subtheme)) {
+        // Preset files setting.
+        // Never changed for subthemes.
+        $name = 'theme_bambuco/presetfiles';
+        $title = get_string('presetfiles','theme_bambuco');
+        $description = get_string('presetfiles_desc', 'theme_bambuco');
+
+        $setting = new admin_setting_configstoredfile($name, $title, $description, 'preset', 0,
+            array('maxfiles' => 20, 'accepted_types' => array('.scss')));
+        $page->add($setting);
+    }
+
+    if (utils::iscustomizable_subtheme('backgroundimage', $subtheme)) {
+        // Background image setting.
+        $name = 'theme_bambuco/backgroundimage' . $subthemekey;
+        $title = get_string('backgroundimage', 'theme_bambuco');
+        $description = get_string('backgroundimage_desc', 'theme_bambuco');
+        $setting = new admin_setting_configstoredfile($name, $title, $description, 'backgroundimage' . $subthemekey);
+        $setting->set_updatedcallback('theme_reset_all_caches');
+        $page->add($setting);
+    }
+
+    if (utils::iscustomizable_subtheme('brandcolor', $subtheme)) {
+        // We use an empty default value because the default colour should come from the preset.
+        $name = 'theme_bambuco/brandcolor' . $subthemekey;
+        $title = get_string('brandcolor', 'theme_bambuco');
+        $description = get_string('brandcolor_desc', 'theme_bambuco');
+        $setting = new admin_setting_configcolourpicker($name, $title, $description, '');
+        $setting->set_updatedcallback('theme_reset_all_caches');
+        $page->add($setting);
+    }
 
     $lblhandwriting = get_string('fontfamily_handwriting', 'theme_bambuco');
     $lblicons = get_string('fontfamily_icons', 'theme_bambuco');
@@ -131,21 +148,25 @@ if ($ADMIN->fulltree) {
         'Zeyada' => 'Zeyada' . $lblhandwriting,
     ];
 
-    // Font family to apply to the site.
-    $name = 'theme_bambuco/fontfamily';
-    $title = get_string('fontfamily', 'theme_bambuco');
-    $description = get_string('fontfamily_desc', 'theme_bambuco');
-    $setting = new admin_setting_configselect($name, $title, $description, '', ['' => ''] + $fonts);
-    $setting->set_updatedcallback('theme_reset_all_caches');
-    $page->add($setting);
+    if (utils::iscustomizable_subtheme('fontfamily', $subtheme)) {
+        // Font family to apply to the site.
+        $name = 'theme_bambuco/fontfamily' . $subthemekey;
+        $title = get_string('fontfamily', 'theme_bambuco');
+        $description = get_string('fontfamily_desc', 'theme_bambuco');
+        $setting = new admin_setting_configselect($name, $title, $description, '', ['' => ''] + $fonts);
+        $setting->set_updatedcallback('theme_reset_all_caches');
+        $page->add($setting);
+    }
 
-    // Other fonts to include.
-    $name = 'theme_bambuco/otherfontfamily';
-    $title = get_string('otherfontfamily', 'theme_bambuco');
-    $description = get_string('otherfontfamily_desc', 'theme_bambuco');
-    $setting = new admin_setting_configmultiselect($name, $title, $description, [], $fonts);
-    $setting->set_updatedcallback('theme_reset_all_caches');
-    $page->add($setting);
+    if (utils::iscustomizable_subtheme('otherfontfamily', $subtheme)) {
+        // Other fonts to include.
+        $name = 'theme_bambuco/otherfontfamily' . $subthemekey;
+        $title = get_string('otherfontfamily', 'theme_bambuco');
+        $description = get_string('otherfontfamily_desc', 'theme_bambuco');
+        $setting = new admin_setting_configmultiselect($name, $title, $description, [], $fonts);
+        $setting->set_updatedcallback('theme_reset_all_caches');
+        $page->add($setting);
+    }
 
 }
 $settings->add('theme_bambuco', $page);

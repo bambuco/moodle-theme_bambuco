@@ -16,6 +16,9 @@
 
 namespace theme_bambuco\local;
 
+use quizaccess_seb\property_list;
+
+require_once($CFG->libdir . '/form/selectwithlink.php');
 /**
  * Some util functions.
  *
@@ -31,6 +34,44 @@ class utils {
      * @var array
      */
     const AVAILABLE_MODES = ['light', 'dark'];
+
+    /**
+     * Settings that the subtheme can override.
+     *
+     * @var array
+     */
+    const SUBTHEME_SETTINGS = [
+        'preset',
+        'backgroundimage',
+        'brandcolor',
+        'fontfamily',
+        'scsspre',
+        'scss',
+        'skin',
+        'skindark',
+    ];
+
+    /**
+     * Inherit the maint theme setting.
+     */
+    const SUBTHEME_INHERIT = 0;
+
+    /**
+     * Overwrite the maint theme setting.
+     */
+    const SUBTHEME_OVERWRITE = 1;
+
+    /**
+     * Join the subtheme and theme setting.
+     */
+    const SUBTHEME_JOIN = 2;
+
+    /**
+     * Current subtheme.
+     *
+     * @var object|null
+     */
+    static $subtheme = null;
 
     /**
      * Wrap text in two spans.
@@ -223,5 +264,203 @@ class utils {
         $skindark = get_config('theme_bambuco', 'skindark');
 
         return !empty($skindark);
+    }
+
+    /**
+     * Get the subthemes.
+     *
+     * @return array
+     */
+    public static function get_subthemes(): array {
+        global $DB;
+
+        $subthemes = $DB->get_records('theme_bambuco_subthemes', null, 'name ASC');
+
+        foreach ($subthemes as $subtheme) {
+            $subtheme->fullhomeurl = strpos($subtheme->homeurl, '/') === 0 ? new \moodle_url($subtheme->homeurl) :
+                                                                            $subtheme->homeurl;
+            $subtheme->customsettings = @json_decode($subtheme->customsettings);
+        }
+
+        return $subthemes;
+    }
+
+    /**
+     * Get the subtheme.
+     *
+     * @param int $id Subtheme id.
+     * @param bool $required Whether it is required to exist or null is returned if it does not exist.
+     * @return object
+     */
+    public static function get_subtheme(int $id, bool $required = true): ?object {
+        global $DB;
+
+        $exist = $required ? MUST_EXIST : IGNORE_MISSING;
+        $subtheme = $DB->get_record('theme_bambuco_subthemes', ['id' => $id], '*', $exist);
+
+        $subtheme->fullhomeurl = strpos($subtheme->homeurl, '/') === 0 ? new \moodle_url($subtheme->homeurl) : $subtheme->homeurl;
+        $subtheme->customsettings = @json_decode($subtheme->customsettings);
+
+        return $subtheme;
+    }
+
+    /**
+     * Get the subtheme by id number.
+     *
+     * @param string $idnumber Subtheme idnumber.
+     * @return object
+     */
+    public static function get_subthemebyidnumber(string $id): ?object {
+        global $DB;
+
+        $subtheme = $DB->get_record('theme_bambuco_subthemes', ['idnumber' => $id]);
+
+        if (!$subtheme) {
+            return null;
+        }
+
+        $subtheme->fullhomeurl = strpos($subtheme->homeurl, '/') === 0 ? new \moodle_url($subtheme->homeurl) : $subtheme->homeurl;
+        $subtheme->customsettings = @json_decode($subtheme->customsettings);
+
+        return $subtheme;
+    }
+
+    /**
+     * Get the current subtheme.
+     *
+     * @return object|null|bool
+     */
+    public static function current_subtheme(): ?object {
+        return self::$subtheme;
+    }
+
+    /**
+     * Set the current subtheme.
+     *
+     * @param string $subtheme Subtheme id.
+     * @return void
+     */
+    public static function set_subtheme($subtheme) {
+        self::$subtheme = $subtheme;
+    }
+
+    /**
+     * Set the setting up subtheme in the session.
+     *
+     * @param string $id Current setting up subtheme.
+     * @return void
+     */
+    public static function set_settingup_subtheme(?int $id): void {
+        global $SESSION;
+
+        if (!empty($id)) {
+            $SESSION->theme_bambuco_settingupsubtheme = self::get_subtheme($id);
+        } else {
+            unset($SESSION->theme_bambuco_settingupsubtheme);
+        }
+    }
+
+    /**
+     * Get the setting up subtheme from the session.
+     *
+     * @return object|null
+     */
+    public static function settingup_subtheme(): ?object {
+        global $SESSION;
+
+        if (!property_exists($SESSION, 'theme_bambuco_settingupsubtheme')) {
+            return null;
+        }
+
+        return $SESSION->theme_bambuco_settingupsubtheme;
+    }
+
+    /**
+     * Check if the property is customizable in the subtheme.
+     *
+     * @param string $key Property name.
+     * @param object|null $subtheme Subtheme object.
+     * @return bool
+     */
+    public static function iscustomizable_subtheme(string $key, ?object $subtheme): bool {
+
+        static $settings = [];
+
+        if (isset($settings[$key])) {
+            return $settings[$key];
+        }
+
+        if (empty($subtheme)) {
+            //  All parameters are customizable for the default theme.
+            $settings[$key] = true;
+            return true;
+        }
+
+        if (empty($subtheme->customsettings) || !in_array($key, self::SUBTHEME_SETTINGS)) {
+            $settings[$key] = false;
+            return false;
+        }
+
+        if (!property_exists($subtheme->customsettings, $key)) {
+            $settings[$key] = false;
+            return false;
+        }
+
+        $value = $subtheme->customsettings->$key;
+        if ($value == self::SUBTHEME_INHERIT) {
+            $settings[$key] = false;
+            return false;
+        }
+
+        $settings[$key] = true;
+        return true;
+    }
+
+    /**
+     * Get the setting key according the current subtheme.
+     *
+     * @param string $key Setting key.
+     * @return string
+     */
+    public static function subthemekey(string $key): string {
+
+        $subtheme = self::current_subtheme();
+
+        if ($subtheme) {
+            $custom = self::iscustomizable_subtheme($key, $subtheme);
+            if ($custom) {
+                return $key . '_' . $subtheme->id;
+            }
+        }
+
+        return $key;
+    }
+
+    /**
+     * Get the setting keys according the current subtheme.
+     * Used when both the main and subtheme parameters can be used (join mode).
+     *
+     * @param string $key Setting key.
+     * @return array
+     */
+    public static function subthemekeys(string $key): array {
+
+        $subtheme = self::current_subtheme();
+        $keys = [$key];
+
+        if ($subtheme) {
+            $custom = self::iscustomizable_subtheme($key, $subtheme);
+
+            if ($custom) {
+                if ($subtheme->customsettings->$key == self::SUBTHEME_OVERWRITE) {
+                    return [$key . '_' . $subtheme->id];
+                }
+
+                // Join mode.
+                $keys[] = $key . '_' . $subtheme->id;
+            }
+        }
+
+        return $keys;
     }
 }

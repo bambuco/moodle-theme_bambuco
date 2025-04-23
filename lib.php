@@ -22,6 +22,8 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use theme_bambuco\local\utils;
+
 defined('MOODLE_INTERNAL') || die();
 
 /**
@@ -33,7 +35,8 @@ defined('MOODLE_INTERNAL') || die();
 function theme_bambuco_get_extra_scss($theme) {
 
     $content = '';
-    $imageurl = $theme->setting_file_url('backgroundimage', 'backgroundimage');
+    $keybgimage = utils::subthemekey('backgroundimage');
+    $imageurl = $theme->setting_file_url($keybgimage, $keybgimage);
 
     // Sets the background image, and its settings.
     if (!empty($imageurl)) {
@@ -51,7 +54,8 @@ function theme_bambuco_get_extra_scss($theme) {
         $content .= ' }';
     }
 
-    $font = property_exists($theme->settings, 'fontfamily') ? $theme->settings->fontfamily : '';
+    $fontfamilykey = utils::subthemekey('fontfamily');
+    $font = !empty($theme->settings->$fontfamilykey) ? $theme->settings->$fontfamilykey : '';
     if (!empty($font)) {
         $content .= ' body { font-family: "' . $font . '"; } ';
     }
@@ -59,7 +63,16 @@ function theme_bambuco_get_extra_scss($theme) {
     // Always return the background image with the scss when we have it.
     // We need include the $theme->settings->scss because it is included by the parent theme in a bad moment.
     // We need to include it when other styles are already loaded.
-    return !empty($theme->settings->scss) ? "{$theme->settings->scss}  \n  {$content}" : $content;
+    $scsskey = utils::subthemekeys('scss');
+
+    $contentscss = '';
+    foreach ($scsskey as $key) {
+        if (isset($theme->settings->$key)) {
+            $contentscss .= $theme->settings->$key . "\n";
+        }
+    }
+
+    return $contentscss . $content;
 }
 
 /**
@@ -74,9 +87,13 @@ function theme_bambuco_get_extra_scss($theme) {
  * @param array $options
  * @return bool
  */
-function theme_bambuco_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = array()) {
+function theme_bambuco_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = []) {
     if ($context->contextlevel == CONTEXT_SYSTEM
-            && (in_array($filearea, ['logo', 'backgroundimage', 'loginbackgroundimage', 'courseheaderimagefile']))) {
+            && (
+                in_array($filearea, ['logo', 'backgroundimage', 'loginbackgroundimage', 'courseheaderimagefile']) ||
+                strpos($filearea, 'backgroundimage_') === 0 // Subtheme bgimage.
+            )
+        ) {
 
         $theme = theme_config::load('bambuco');
         // By default, theme files must be cache-able by both browsers and proxies.
@@ -118,7 +135,8 @@ function theme_bambuco_get_main_scss_content($theme) {
     global $CFG;
 
     $scss = '';
-    $filename = !empty($theme->settings->preset) ? $theme->settings->preset : null;
+    $preset = utils::subthemekey('preset');
+    $filename = $theme->settings->$preset;
     $fs = get_file_storage();
 
     $custompresents = ['abaco.scss'];
@@ -163,7 +181,7 @@ function theme_bambuco_get_pre_scss($theme) {
     $scss = '';
     $configurable = [
         // Config key => [variableName, ...].
-        'brandcolor' => ['primary'],
+        utils::subthemekey('brandcolor') => ['primary'],
     ];
 
     // Prepend variables first.
@@ -178,8 +196,11 @@ function theme_bambuco_get_pre_scss($theme) {
     }
 
     // Prepend pre-scss.
-    if (!empty($theme->settings->scsspre)) {
-        $scss .= $theme->settings->scsspre;
+    $scssprekey = utils::subthemekeys('scsspre');
+    foreach ($scssprekey as $key) {
+        if (isset($theme->settings->$key)) {
+            $scss .= $theme->settings->$key . "\n";
+        }
     }
 
     return $scss;
@@ -198,8 +219,24 @@ function theme_bambuco_css_postprocess($css) {
         $theme = theme_config::load('bambuco');
 
         $themescss = '';
-        if (!empty($theme->settings->scsspre) || !empty($theme->settings->scss)) {
-            $themescss = $theme->settings->scsspre . ' ' . $theme->settings->scss;
+        $scssprekey = utils::subthemekeys('scsspre');
+        $scsspre = '';
+        foreach ($scssprekey as $key) {
+            if (isset($theme->settings->$key)) {
+                $scsspre .= $theme->settings->$key . ' ';
+            }
+        }
+
+        $scsskey = utils::subthemekeys('scss');
+        $scss = '';
+        foreach ($scsskey as $key) {
+            if (isset($theme->settings->$key)) {
+                $scss .= $theme->settings->$key . ' ';
+            }
+        }
+
+        if (!empty($scss) || !empty($scss)) {
+            $themescss = $scsspre . ' ' . $scss;
             $compiler = new core_scss();
             $compiler->append_raw_scss($themescss);
 
@@ -221,4 +258,33 @@ function theme_bambuco_css_postprocess($css) {
         $css = str_replace('/**EDITOR-STYLES**/', $themescss, $css);
     }
     return $css;
+}
+
+/**
+ * Alter CSS URLs.
+ *
+ * @param array $urls The URLs to alter.
+ */
+function theme_bambuco_alter_css_urls(&$urls) {
+    global $CFG;
+
+    $subtheme = utils::current_subtheme();
+    if (empty($subtheme)) {
+        return;
+    }
+
+    foreach ($urls as $key => $url) {
+        if ($url->param('type') == 'scss') {
+            $url->param('bbcost', $subtheme->id);
+            $url->param('subtype', 'subtheme_' . $subtheme->id);
+        } else if (empty($CFG->themedesignermode) && strpos($url->get_path(), '/theme/styles.php/bambuco/') !== false) {
+            $url = (string)$url;
+            unset($urls[$key]);
+            $url = str_replace('/theme/styles.php/bambuco/', '/theme/bambuco/bbcostyles.php/', $url);
+            $url .= '/' . $subtheme->id;
+            $url = new moodle_url($url);
+            $urls[$key] = $url;
+        }
+
+    }
 }

@@ -1,0 +1,61 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template theme_bambuco/local/subthemes
+
+    Example context (json):
+    {
+    }
+}}
+<div class="container-fluid">
+    <div class="row">
+        {{#subthemes}}
+		    <div class="col-md-3">
+                <div class="card bg-default">
+                    <h5 class="card-header">
+                        {{name}}
+                    </h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">{{idnumber}}</li>
+                        <li class="list-group-item">
+                            {{#pix}} i/link {{/pix}}
+                            {{#homeurl}}<a href="{{fullhomeurl}}">{{fullhomeurl}}</a>{{/homeurl}}
+                        </li>
+                    </ul>
+                    <div class="card-footer">
+                        <div class="btn-group" role="group">
+                            <a href="{{{baseurl}}}/admin/category.php?category=theme_bambuco&bbst={{id}}" class="btn btn-info" type="button">
+                                {{#pix}} i/grading {{/pix}} {{#str}} customizesubtheme, theme_bambuco {{/str}}
+                            </a>
+                            <a href="{{{baseurl}}}/theme/bambuco/subtheme_edit.php?id={{id}}" class="btn btn-secondary" type="button">
+                                {{#pix}} i/edit {{/pix}} {{#str}} edit {{/str}}
+                            </a>
+                            <a href="{{{baseurl}}}/theme/bambuco/subthemes.php?delete={{id}}&sesskey={{sesskey}}" class="btn btn-danger" type="button">
+                                {{#pix}} i/delete {{/pix}} {{#str}} delete {{/str}}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {{/subthemes}}
+    </div>
+</div>
+<div class="btn-box">
+    <a href="{{{baseurl}}}/theme/bambuco/subtheme_edit.php" class="btn btn-primary btn-lg" type="button">
+        {{#pix}} t/add {{/pix}} {{#str}} add {{/str}}
+    </a>
+</div>
