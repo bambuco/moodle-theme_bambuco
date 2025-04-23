@@ -70,13 +70,6 @@ if ($ADMIN->fulltree) {
             $page->add($setting);
         }
 
-        if (utils::iscustomizable_subtheme('skindark', $subtheme)) {
-            // Skin to customize the dark mode appearance.
-            $setting = new admin_setting_configselect('theme_bambuco/skindark' . $subthemekey,
-                get_string('skindark', 'theme_bambuco'), get_string('skindark_desc', 'theme_bambuco'), '', $skins);
-            $setting->set_updatedcallback('theme_reset_all_caches');
-            $page->add($setting);
-        }
     } else {
         $page->add(new admin_setting_heading('theme_bambuco_skin',
             get_string('skins_none', 'theme_bambuco'), ''));

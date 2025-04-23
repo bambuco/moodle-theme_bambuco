@@ -188,63 +188,61 @@ h1, h2, h3, h4 {
 // End of custom login page
 
 // Custom Navbar
-body:not(.darkmode) {
-    #page-wrapper {
-        .navbar {
-            background-color: $secondary;
-            color: $primary;
+#page-wrapper {
+    .navbar {
+        background-color: $secondary;
+        color: $primary;
 
-            .primary-navigation {
-                .nav-link {
-                    color: $primary;
-                    position: relative;
+        .primary-navigation {
+            .nav-link {
+                color: $primary;
+                position: relative;
 
-                    &.active:focus,
-                    &.active:hover,
-                    &:hover {
-                        color: $white;
-                        background-color: rgba($white, 0.1);
-                    }
+                &.active:focus,
+                &.active:hover,
+                &:hover {
+                    color: $white;
+                    background-color: rgba($white, 0.1);
+                }
 
-                    &:before {
-                        content: "";
-                        position: absolute;
-                        left: 0;
-                        width: 2px;
-                        background-color: #403f41;
-                        top: 20%;
-                        bottom: 20%;
-                    }
+                &:before {
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    width: 2px;
+                    background-color: #403f41;
+                    top: 20%;
+                    bottom: 20%;
+                }
+            }
+        }
+
+        #usernavigation {
+            //flex-direction: row-reverse;
+
+            .nav-link {
+                color: $primary;
+                position: relative;
+
+                &.active:focus,
+                &.active:hover,
+                &:hover {
+                    color: $white;
+                    background-color: rgba($white, 0.1);
                 }
             }
 
-            #usernavigation {
-                //flex-direction: row-reverse;
-
-                .nav-link {
-                    color: $primary;
-                    position: relative;
-
-                    &.active:focus,
-                    &.active:hover,
-                    &:hover {
-                        color: $white;
-                        background-color: rgba($white, 0.1);
-                    }
-                }
-
-                .dropdown-toggle:after {
-                    color: $primary;
-                }
-
-                .usertext {
-                    color: $primary;
-                }
+            .dropdown-toggle:after {
+                color: $primary;
             }
 
-            .popover-region-container {
-                top: $navbar-height - 32px;
+            .usertext {
+                color: $primary;
             }
+        }
+
+        .popover-region-container {
+            top: $navbar-height - 32px;
         }
     }
 }

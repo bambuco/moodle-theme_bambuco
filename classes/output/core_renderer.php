@@ -42,7 +42,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
      * @return string
      */
     public function render_login(\core_auth\output\login $form) {
-        global $SITE;
+        global $SITE, $SESSION, $CFG;
 
         $context = $form->export_for_template($this);
 
@@ -59,6 +59,43 @@ class core_renderer extends \theme_boost\output\core_renderer {
         if ($context->hasidentityproviders) {
             $layout = get_config('theme_bambuco', 'loginformlayout');
             $context->toexternal = ($layout == 'toexternal');
+        }
+
+        $usealtcha = get_config('theme_bambuco', 'usealtcha');
+        if ($usealtcha) {
+            require_once($CFG->dirroot . '/theme/bambuco/thirdparty/altcha/vendor/autoload.php');
+
+            if (!isset($SESSION->bambuco_altcha_key)) {
+                $SESSION->bambuco_altcha_key = openssl_random_pseudo_bytes(32);
+            }
+
+            $config = get_config('theme_bambuco');
+            $altcha = new \AltchaOrg\Altcha\Altcha($SESSION->bambuco_altcha_key);
+
+            // Create a new challenge.
+            $options = new \AltchaOrg\Altcha\ChallengeOptions(
+                maxNumber: (int)$config->altchalevel, // The maximum random number.
+                expires: (new \DateTimeImmutable())->add(new \DateInterval('PT' . $config->altchavalidtime)),
+            );
+
+            $strings = [
+                'ariaLinkLabel' => get_string('altcha_arialinklabel', 'theme_bambuco'),
+                'error' => get_string('altcha_error', 'theme_bambuco'),
+                'expired' => get_string('altcha_expired', 'theme_bambuco'),
+                'footer' => get_string('altcha_footer', 'theme_bambuco'),
+                'label' => get_string('altcha_label', 'theme_bambuco'),
+                'verified' => get_string('altcha_verified', 'theme_bambuco'),
+                'verifying' => get_string('altcha_verifying', 'theme_bambuco'),
+                'waitAlert' => get_string('altcha_waitalert', 'theme_bambuco'),
+            ];
+
+            $challenge = $altcha->createChallenge($options);
+            $context->altchawidget = (object)[
+                'name' => 'bbcoaltcha',
+                'maxnumber' => (int)$config->altchalevel,
+                'challengejson' => json_encode($challenge),
+                'strings' => json_encode($strings),
+            ];
         }
 
         return $this->render_from_template('core/loginform', $context);
@@ -244,15 +281,6 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
         if (!is_array($additionalclasses)) {
             $additionalclasses = explode(' ', $additionalclasses);
-        }
-
-        $modenabled = \theme_bambuco\local\utils::mode_enabled();
-
-        if ($modenabled) {
-            $thememode = \theme_bambuco\local\utils::get_theme_mode();
-            if (!empty($thememode)) {
-                $additionalclasses[] = $thememode . 'mode';
-            }
         }
 
         $bodyattributes = ' id="'. $this->body_id() . '"';

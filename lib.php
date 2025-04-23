@@ -107,25 +107,6 @@ function theme_bambuco_pluginfile($course, $cm, $context, $filearea, $args, $for
 }
 
 /**
- * Get the current user preferences that are available
- *
- * @return array[]
- */
-function theme_bambuco_user_preferences(): array {
-    $userpreferences = theme_boost_user_preferences();
-
-    $userpreferences['theme_bambuco-mode'] = [
-        'type' => PARAM_TEXT,
-        'null' => NULL_NOT_ALLOWED,
-        'default' => 'light',
-        'choices' => ['light', 'dark'],
-        'permissioncallback' => [core_user::class, 'is_current_user'],
-    ];
-
-    return $userpreferences;
-}
-
-/**
  * Returns the main SCSS content.
  *
  * @param theme_config $theme The theme config object.

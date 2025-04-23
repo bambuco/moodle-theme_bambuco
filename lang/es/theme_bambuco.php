@@ -25,6 +25,28 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['advancedsettings'] = 'Configuración avanzada';
+$string['altcha_arialinklabel'] = 'Visita Altcha.org';
+$string['altcha_error'] = 'Error de verificación. Inténtalo de nuevo.';
+$string['altcha_expired'] = 'Verificación expirada. Inténtalo de nuevo.';
+$string['altcha_footer'] = 'Protegido por <a href="https://altcha.org/" target="_blank" aria-label="Visita Altcha.org">ALTCHA</a>';
+$string['altcha_label'] = 'No soy un robot';
+$string['altcha_verified'] = 'Verificado';
+$string['altcha_verifying'] = 'Verificando...';
+$string['altcha_waitalert'] = 'Verificando... por favor espera.';
+$string['altchalevel'] = 'ALTCHA - Nivel';
+$string['altchalevel_1'] = 'Bajo';
+$string['altchalevel_10'] = 'Muy alto';
+$string['altchalevel_2'] = 'Básico';
+$string['altchalevel_5'] = 'Alto';
+$string['altchalevel_desc'] = 'El nivel de ALTCHA a utilizar. Si el nivel aumenta, la validación tardará más, pero será más segura.';
+$string['altchavalidtime'] = 'ALTCHA - Tiempo de validez';
+$string['altchavalidtime_10s'] = '10 segundos';
+$string['altchavalidtime_1m'] = '1 minuto';
+$string['altchavalidtime_20s'] = '20 segundos';
+$string['altchavalidtime_2m'] = '2 minutos';
+$string['altchavalidtime_40s'] = '40 segundos';
+$string['altchavalidtime_5m'] = '5 minutos';
+$string['altchavalidtime_desc'] = 'El tiempo de validez de la verificación ALTCHA. Si se excede, el usuario debe volver a verificar.';
 $string['backgroundimage'] = 'Imagen de fondo';
 $string['backgroundimage_desc'] = 'La imagen que se mostrará como fondo del sitio. La imagen de fondo que cargue aquí anulará la imagen de fondo en los archivos preestablecidos de su tema.';
 $string['bootswatch'] = 'Bootswatch';
@@ -79,8 +101,6 @@ $string['coursesheaderposition_top'] = 'En la parte superior';
 $string['coursessettings'] = 'Configuración de cursos';
 $string['coursewidthfield'] = 'Campo de ancho del curso';
 $string['coursewidthfield_desc'] = 'El campo a utilizar como ancho del curso en la página del curso. En el valor de dicho campo se puede utilizar un valor en porcentaje, en una medida fija como px o em, o utilizar la palabra clave <b>unlimitedwidth</b>.';
-$string['darkmode'] = 'Modo oscuro';
-$string['darkmodesrlabel'] = 'Activar/desactivar el modo oscuro';
 $string['fontfamily'] = 'Familia de la fuente';
 $string['fontfamily_desc'] = 'Fuente de Google que se utilizará en el sitio.
 Ver más en <a href="https://fonts.google.com/" target="_blank">Google Fonts</a>.
@@ -138,9 +158,9 @@ $string['skin'] = 'Máscara';
 $string['skin_desc'] = 'Elija una máscara para cambiar el aspecto del tema.
 Las opciones actuales se basan en el proyecto <a href="https://bootswatch.com/" target="_blanck">Bootswatch</a>.
 Consulta la <a href="https://bootswatch.com/" target="_blanck">página de Bootswatch</a> para ver ejemplos y más información.';
-$string['skindark'] = 'Máscara para el modo oscuro';
-$string['skindark_desc'] = 'Elija una máscara para cambiar el aspecto del tema en modo oscuro.';
 $string['skins_none'] = 'No hay máscaras disponibles.';
 $string['skinsettings'] = 'Máscaras';
 $string['unaddableblocks'] = 'Bloques innecesarios';
 $string['unaddableblocks_desc'] = 'Los bloques especificados no son necesarios cuando se utiliza este tema y no aparecerán en el menú \'Agregar un bloque\'.';
+$string['usealtcha'] = 'Usar ALTCHA';
+$string['usealtcha_desc'] = 'Usar ALTCHA para verificar que el usuario no es un robot.';

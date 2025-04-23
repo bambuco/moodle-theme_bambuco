@@ -22,8 +22,6 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-use function DI\get;
-
 defined('MOODLE_INTERNAL') || die();
 
 $THEME->name = 'bambuco';

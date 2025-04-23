@@ -72,53 +72,8 @@ class hook_callbacks {
             }
         }
 
-        $thememode = utils::get_theme_mode();
-        $modenabled = utils::mode_enabled();
-
         $skinkey = utils::subthemekey('skin');
-        $skindarkkey = utils::subthemekey('skindark');
-        $skinlight = get_config('theme_bambuco', $skinkey);
-        $skindark = get_config('theme_bambuco', $skindarkkey);
-
-        $skin = $modenabled && $thememode == 'dark' ? $skindark : $skinlight;
-
-        $includeskins = [];
-
-        if (!empty($skinlight)) {
-            $includeskins[] = [
-                'mode' => 'light',
-                'url' => $CFG->wwwroot . '/theme/bambuco/skin/bootswatch/dist/' . $skinlight . '/bootstrap.min.css',
-            ];
-
-            $fixpath = $CFG->dirroot . '/theme/bambuco/skin/fixes/bootswatch/' . $skinlight . '/styles.css';
-            if (file_exists($fixpath)) {
-                $includeskins[] = [
-                    'mode' => 'light',
-                    'url' => $CFG->wwwroot . '/theme/bambuco/skin/fixes/bootswatch/' . $skinlight . '/styles.css',
-                ];
-            }
-        }
-
-        if ($modenabled) {
-            if (!empty($skindark)) {
-                $includeskins[] = [
-                    'mode' => 'dark',
-                    'url' => $CFG->wwwroot . '/theme/bambuco/skin/bootswatch/dist/' . $skindark . '/bootstrap.min.css',
-                ];
-
-                $fixpath = $CFG->dirroot . '/theme/bambuco/skin/fixes/bootswatch/' . $skindark . '/styles.css';
-                if (file_exists($fixpath)) {
-                    $includeskins[] = [
-                        'mode' => 'dark',
-                        'url' => $CFG->wwwroot . '/theme/bambuco/skin/fixes/bootswatch/' . $skindark . '/styles.css',
-                    ];
-                }
-            }
-
-            if (!empty($includeskins)) {
-                $PAGE->requires->js_call_amd('theme_bambuco/darkmode', 'setThemeMode', [$includeskins]);
-            }
-        }
+        $skin = get_config('theme_bambuco', $skinkey);
 
         if (!empty($skin)) {
             $PAGE->requires->css('/theme/bambuco/skin/bootswatch/dist/' . $skin . '/bootstrap.min.css');
@@ -216,6 +171,31 @@ class hook_callbacks {
         }
 
         $config = get_config('theme_bambuco');
+
+        if ($PAGE->pagetype == 'login-index' && !empty($config->usealtcha)) {
+            require_once($CFG->dirroot . '/theme/bambuco/thirdparty/altcha/vendor/autoload.php');
+
+            $logintoken = optional_param('logintoken', '', PARAM_TEXT);
+
+            // If not empty it is a login request.
+            if (!empty($logintoken)) {
+                $bbcoaltcha = optional_param('bbcoaltcha', '', PARAM_TEXT);
+                $payload = !empty($bbcoaltcha) ? (array)@json_decode(base64_decode($bbcoaltcha)) : '';
+
+                $altcha = new \AltchaOrg\Altcha\Altcha($SESSION->bambuco_altcha_key);
+
+                $ok = $altcha->verifySolution($payload, true);
+
+                if (!$ok) {
+                    redirect(
+                            new \moodle_url('/login/index.php'),
+                            get_string('altcha_expired', 'theme_bambuco'),
+                            null,
+                            \core\output\notification::NOTIFY_ERROR
+                    );
+                }
+            }
+        }
 
         if (empty($config->multitheme)) {
             return;

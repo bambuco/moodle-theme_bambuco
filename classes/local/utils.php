@@ -29,13 +29,6 @@ require_once($CFG->libdir . '/form/selectwithlink.php');
 class utils {
 
     /**
-     * Available theme modes.
-     *
-     * @var array
-     */
-    const AVAILABLE_MODES = ['light', 'dark'];
-
-    /**
      * Settings that the subtheme can override.
      *
      * @var array
@@ -48,7 +41,6 @@ class utils {
         'scsspre',
         'scss',
         'skin',
-        'skindark',
     ];
 
     /**
@@ -227,43 +219,6 @@ class utils {
         }
 
         return $coursefooter;
-    }
-
-    /**
-     * Get the theme mode.
-     *
-     * @return string
-     */
-    public static function get_theme_mode(): string {
-        global $SESSION;
-
-        $mode = get_user_preferences('theme_bambuco-mode', null);
-
-        if (!$mode) {
-            if (property_exists($SESSION, 'theme_bambuco_mode')) {
-                $mode = $SESSION->theme_bambuco_mode;
-            } else {
-                return '';
-            }
-        }
-
-        if (!in_array($mode, self::AVAILABLE_MODES)) {
-            $mode = 'light';
-        }
-
-        return $mode;
-    }
-
-    /**
-     * Check if the dark mode is enabled.
-     *
-     * @return bool
-     */
-    public static function mode_enabled(): bool {
-
-        $skindark = get_config('theme_bambuco', 'skindark');
-
-        return !empty($skindark);
     }
 
     /**

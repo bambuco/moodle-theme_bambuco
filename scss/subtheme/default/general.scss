@@ -131,30 +131,7 @@
     }
 }
 
-.darkmode-toggle {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    font-size: 80%;
-}
-
-body {
-    &#page-admin-plugins.darkmode {
-        #plugins-control-panel {
-
-            .notes .requiredby,
-            .pluginname .componentname,
-            .version .versionnumber {
-                color: inherit;
-            }
-
-            .uninstall a {
-                background-color: #333;
-            }
-
-            .pluginupdateinfo {
-                background-color: var(--gray-dark);
-            }
-        }
-    }
+altcha-widget {
+    margin-bottom: 10px;
+    display: block;
 }

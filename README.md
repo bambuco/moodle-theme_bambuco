@@ -17,6 +17,9 @@ Package tested in: moodle 4.5+.
 - **GIT:** https://github.com/bambuco/moodle-theme_bambuco
 
 ## IN VERSION ##
+2025011003:
+- Removed Dark mode, BambuCo theme has good compatibility with the local_boost_dark plugin https://moodle.org/plugins/local_boost_dark
+
 2025011002:
 - New local presets
 
@@ -27,6 +30,7 @@ Package tested in: moodle 4.5+.
 2024053002:
 - Include core recaptcha requirement in auth.
 - Include custom styles in the tiny editor body.
+- Use ALTCHA in login (Require PHP >= 8.1).
 
 2024053001:
 - Compatibility with Moodle 4.3+
