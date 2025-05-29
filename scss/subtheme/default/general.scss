@@ -131,6 +131,11 @@
     }
 }
 
+body.inpopup #page {
+    margin-top: 0;
+}
+
+// stylelint-disable-next-line selector-type-no-unknown
 altcha-widget {
     margin-bottom: 10px;
     display: block;

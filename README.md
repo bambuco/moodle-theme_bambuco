@@ -19,6 +19,7 @@ Package tested in: moodle 4.5+.
 ## IN VERSION ##
 2025011003:
 - Removed Dark mode, BambuCo theme has good compatibility with the local_boost_dark plugin https://moodle.org/plugins/local_boost_dark
+- Support for all pages in "popup" mode
 
 2025011002:
 - New local presets
