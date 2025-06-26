@@ -26,10 +26,13 @@
             "page_title": "Login page",
             "favicon": "favicon.ico",
             "main_content": "<h1>Headers keep HTML validators happy</h1>"
-        }
+        },
+        "mustachetesting": true
     }
 }}
+{{^mustachetesting}}
 {{> theme_boost/head }}
+{{/mustachetesting}}
 
 <body {{{ bodyattributes }}}>
 {{> core/local/toast/wrapper}}

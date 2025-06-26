@@ -83,13 +83,11 @@ if (!in_array($type, ['all', 'all-rtl', 'editor', 'editor-rtl'])) {
     css_send_css_not_found();
 }
 
+// The theme exists in standard location - ok.
 $existthemeconfig = file_exists("$CFG->dirroot/theme/$themename/config.php");
-$existthemedirconfig = file_exists("$CFG->themedir/$themename/config.php");
-if ($existthemeconfig) {
-    // The theme exists in standard location - ok.
-} else if (!empty($CFG->themedir) && $existthemedirconfig) {
-    // Alternative theme location contains this theme - ok.
-} else {
+// Alternative theme location contains this theme - ok.
+$existthemedirconfig = empty($CFG->themedir) ? false : file_exists("$CFG->themedir/$themename/config.php");
+if (!$existthemeconfig && !$existthemedirconfig) {
     header('HTTP/1.0 404 not found');
     die('Theme was not found, sorry.');
 }

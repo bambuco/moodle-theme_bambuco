@@ -37,7 +37,7 @@
             "page_title": "Test page",
             "favicon": "favicon.ico",
             "main_content": "<h1>Headings make html validators happier</h1>",
-            "htmlattributes": "lang=\"en\" dir=\"ltr\"",
+            "htmlattributes": "lang=\"en\" dir=\"ltr\""
          },
         "bodyattributes":"",
         "sidepreblocks": "<h2>Blocks html goes here</h2>",
@@ -47,10 +47,13 @@
         "blockdraweropen": true,
         "regionmainsettingsmenu": "",
         "hasregionmainsettingsmenu": false,
-        "addblockbutton": ""
+        "addblockbutton": "",
+        "mustachetesting": true
     }
 }}
+{{^mustachetesting}}
 {{> theme_boost/head }}
+{{/mustachetesting}}
 
 <body {{{ bodyattributes }}}>
 {{> core/local/toast/wrapper}}

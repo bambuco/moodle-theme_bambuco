@@ -68,9 +68,12 @@
             "name": "Footer Image",
             "content": "<p>Footer content goes here</p>"
         },
+        "mustachetesting": true
     }
 }}
+{{^mustachetesting}}
 {{> theme_boost/head }}
+{{/mustachetesting}}
 
 <body {{{ bodyattributes }}}>
 {{> core/local/toast/wrapper}}

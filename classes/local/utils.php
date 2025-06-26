@@ -262,7 +262,7 @@ class utils {
     /**
      * Get the subtheme by id number.
      *
-     * @param string $idnumber Subtheme idnumber.
+     * @param string $id Subtheme id number.
      * @return object|null
      */
     public static function get_subthemebyidnumber(string $id): ?object {
