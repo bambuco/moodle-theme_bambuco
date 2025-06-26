@@ -24,8 +24,6 @@
 
 use theme_bambuco\local\utils;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Inject additional SCSS.
  *
@@ -255,7 +253,7 @@ function theme_bambuco_alter_css_urls(&$urls) {
     }
 
     foreach ($urls as $key => $url) {
-        if ($url->param('type') == 'bbcoscss') {
+        if ($url->param('type') == 'scss') {
             $url->param('bbcost', $subtheme->id);
             $url->param('subtype', 'subtheme_' . $subtheme->id);
         } else if (empty($CFG->themedesignermode) && strpos($url->get_path(), '/theme/styles.php/bambuco/') !== false) {

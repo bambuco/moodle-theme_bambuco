@@ -22,6 +22,8 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use tool_customlang\local\mlang\langstring;
+
 defined('MOODLE_INTERNAL') || die();
 
 $bbst = optional_param('bbst', -1, PARAM_INT);
@@ -31,20 +33,30 @@ if ($bbst >= 0) {
 
 $subtheme = theme_bambuco\local\utils::settingup_subtheme();
 
-$settings = new admin_category('theme_bambuco', get_string('configtitle', 'theme_bambuco'));
+$settings = new admin_category('theme_bambuco', new lang_string('configtitle', 'theme_bambuco'));
 
-include(dirname(__FILE__) . '/settings/general.php');
-include(dirname(__FILE__) . '/settings/advanced.php');
-include(dirname(__FILE__) . '/settings/skin.php');
+require_once(dirname(__FILE__) . '/settings/general.php');
+require_once(dirname(__FILE__) . '/settings/advanced.php');
+require_once(dirname(__FILE__) . '/settings/skin.php');
 
 // Not for subthemes.
 if (!$subtheme) {
-    include(dirname(__FILE__) . '/settings/login.php');
-    include(dirname(__FILE__) . '/settings/courses.php');
-    include(dirname(__FILE__) . '/settings/multitheme.php');
+    require_once(dirname(__FILE__) . '/settings/login.php');
+    require_once(dirname(__FILE__) . '/settings/courses.php');
+    require_once(dirname(__FILE__) . '/settings/multitheme.php');
 }
 
 // Manage the subthemes.
 $externalpage = new admin_externalpage('theme_bambuco_subthemes', new lang_string('subthemes', 'theme_bambuco'),
 new moodle_url("/theme/bambuco/subthemes.php"), 'moodle/site:config');
 $settings->add('theme_bambuco', $externalpage);
+
+if ($ADMIN->fulltree && !$subtheme) {
+    $settingsfull = new admin_settingpage('themesettingbambuco', new lang_string('configtitle', 'theme_bambuco'));
+    $url = new moodle_url('/');
+    $setting = new admin_setting_heading('theme_bambuco/settingsfulldescription',
+        new lang_string('choosereadme', 'theme_bambuco'),
+        new lang_string('settingsfulldescription', 'theme_bambuco', (string)$url));
+    $settingsfull->add($setting);
+    $settings->add('theme_bambuco', $settingsfull);
+}

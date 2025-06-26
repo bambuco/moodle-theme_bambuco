@@ -102,11 +102,11 @@ class core_renderer extends \theme_boost\output\core_renderer {
     }
 
     /**
-      * Renders the header bar.
-      *
-      * @param \context_header $contextheader Header bar object.
-      * @return string HTML for the header bar.
-      */
+     * Renders the header bar.
+     *
+     * @param \context_header $contextheader Header bar object.
+     * @return string HTML for the header bar.
+     */
     protected function render_context_header(\context_header $contextheader) {
         global $DB;
 
@@ -157,7 +157,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
                     $context = $this->page->context;
 
                     $menudata = [
-                        'options' => []
+                        'options' => [],
                     ];
                     $options = explode("\n", $config->coursemenu);
 
@@ -201,10 +201,10 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
                                     $cm = get_coursemodule_from_instance($modulename, $instance->id, $course->id);
 
-                                    $item->url = new \moodle_url('/mod/' . $modulename . '/view.php', array('id' => $cm->id));
+                                    $item->url = new \moodle_url('/mod/' . $modulename . '/view.php', ['id' => $cm->id]);
 
                                 } else {
-                                    $item->url = new \moodle_url('/mod/' . $modulename . '/index.php', array('id' => $course->id));
+                                    $item->url = new \moodle_url('/mod/' . $modulename . '/index.php', ['id' => $course->id]);
                                 }
                             }
 
@@ -248,7 +248,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
      * @return string
      */
     public function render_login_signup_form($form) {
-        global $OUTPUT, $CFG;
+        global $CFG;
 
         $signupidentityproviders = get_config('theme_bambuco', 'signupidentityproviders');
         $content = parent::render_login_signup_form($form);
@@ -257,7 +257,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
             $authsequence = get_enabled_auth_plugins(true);
             $providers = \auth_plugin_base::get_identity_providers($authsequence);
-            $identityproviders = \auth_plugin_base::prepare_identity_providers_for_output($providers, $OUTPUT);
+            $identityproviders = \auth_plugin_base::prepare_identity_providers_for_output($providers, $this->output);
 
             $context = [
                 'identityproviders' => $identityproviders,

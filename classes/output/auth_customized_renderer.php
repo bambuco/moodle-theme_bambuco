@@ -39,9 +39,8 @@ class auth_customized_renderer extends \auth_customized\output\renderer {
      * @param \auth_customized\forms\signup $form The form renderable
      * @return string HTML string
      */
-    public function render_signup(\auth_customized\forms\signup $form) : string {
-        global $OUTPUT;
-        return $OUTPUT->render_login_signup_form($form);
+    public function render_signup(\auth_customized\forms\signup $form): string {
+        return $this->output->render_login_signup_form($form);
     }
 
 }

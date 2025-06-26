@@ -49,10 +49,15 @@ $string['altchavalidtime_5m'] = '5 minutos';
 $string['altchavalidtime_desc'] = 'El tiempo de validez de la verificación ALTCHA. Si se excede, el usuario debe volver a verificar.';
 $string['backgroundimage'] = 'Imagen de fondo';
 $string['backgroundimage_desc'] = 'La imagen que se mostrará como fondo del sitio. La imagen de fondo que cargue aquí anulará la imagen de fondo en los archivos preestablecidos de su tema.';
+$string['bbcoscss'] = 'SCSS sin formato';
+$string['bbcoscss_desc'] = 'Utilice este campo para proporcionar código SCSS o CSS que se inyectará al final de la hoja de estilo.';
+$string['bbcoscsspre'] = 'SCSS inicial sin formato';
+$string['bbcoscsspre_desc'] = 'En este campo puede proporcionar el código SCSS de inicialización, se inyectará antes que todo lo demás. La mayoría de las veces se usa esta configuración para definir variables.';
 $string['bootswatch'] = 'Bootswatch';
 $string['bootswatch_desc'] = 'Bootswatch es un conjunto de variables y CSS que personaliza Bootstrap';
 $string['brandcolor'] = 'Color de marca';
 $string['brandcolor_desc'] = 'El color que se acentua en el sitio.';
+$string['cachedef_postprocessedcss'] = 'Cachedef css posprocesado';
 $string['choosereadme'] = 'BambuCo es un tema moderno altamente personalizable. Este tema está basado en el tema de Moodle: Boost.';
 $string['configtitle'] = 'BambuCo';
 $string['contentbycategory'] = 'Contenido por categoría';
@@ -101,6 +106,12 @@ $string['coursesheaderposition_top'] = 'En la parte superior';
 $string['coursessettings'] = 'Configuración de cursos';
 $string['coursewidthfield'] = 'Campo de ancho del curso';
 $string['coursewidthfield_desc'] = 'El campo a utilizar como ancho del curso en la página del curso. En el valor de dicho campo se puede utilizar un valor en porcentaje, en una medida fija como px o em, o utilizar la palabra clave <b>unlimitedwidth</b>.';
+$string['customizesubtheme'] = 'Personalizar';
+$string['defaultsubtheme'] = 'Volver al tema predeterminado';
+$string['editingsubtheme'] = 'Editando subtema <b>{$a}</b>.';
+$string['eventsubtheme_created'] = 'Subtema creado';
+$string['eventsubtheme_deleted'] = 'Subtema eliminado';
+$string['eventsubtheme_updated'] = 'Subtema actualizado';
 $string['fontfamily'] = 'Familia de la fuente';
 $string['fontfamily_desc'] = 'Fuente de Google que se utilizará en el sitio.
 Ver más en <a href="https://fonts.google.com/" target="_blank">Google Fonts</a>.
@@ -118,6 +129,15 @@ $string['loginmanualtitle'] = 'Usar nombre de usuario y contraseña';
 $string['loginmorecontent'] = 'Más contenido';
 $string['loginmorecontent_desc'] = 'Contenido adicional para mostrar en la página de inicio de sesión.';
 $string['loginsettings'] = 'Configuración de inicio de sesión';
+$string['multitheme'] = 'Multitema';
+$string['multithemecoursefield'] = 'Campo personalizado del curso';
+$string['multithemecoursefield_desc'] = 'Campo personalizado del curso para asignar un subtema.
+El valor del campo debe coincidir con el ID del subtema; de lo contrario, se mostrará el tema predeterminado.';
+$string['multithemeenabled'] = 'Habilitar multitema';
+$string['multithemeenabled_desc'] = 'Habilite la función multitema. Esta función le permite asignar un subtema a un usuario o a un curso según un campo de perfil de usuario o un campo personalizado de curso.';
+$string['multithemeuserfield'] = 'Campo de perfil de usuario';
+$string['multithemeuserfield_desc'] = 'Campo de perfil de usuario para asignar un subtema.
+El valor del campo debe coincidir con el ID del subtema; de lo contrario, se mostrará el tema predeterminado.';
 $string['nobootswatch'] = 'Ninguno';
 $string['otherfontfamily'] = 'Otra fuentes';
 $string['otherfontfamily_desc'] = 'Otras fuentes a incluir en el sitio. La fuente no se aplica al sitio, sólo se incluye en la página.';
@@ -145,10 +165,18 @@ $string['region-intocontent'] = 'En el contenido';
 $string['region-side-pre'] = 'Derecha';
 $string['region-top'] = 'Arriba';
 $string['returntohome'] = 'Regresar al inicio';
-$string['bbcoscss'] = 'SCSS sin formato';
-$string['bbcoscss_desc'] = 'Utilice este campo para proporcionar código SCSS o CSS que se inyectará al final de la hoja de estilo.';
-$string['bbcoscsspre'] = 'SCSS inicial sin formato';
-$string['bbcoscsspre_desc'] = 'En este campo puede proporcionar el código SCSS de inicialización, se inyectará antes que todo lo demás. La mayoría de las veces se usa esta configuración para definir variables.';
+$string['settingsfulldescription'] = 'Este tema está organizado para la edición en páginas y así evitar la sobrecarga que puede resultar al agrupar todas las configuraciones en una sola página. <br>
+Puedes editar cada configuración en:<br>
+<ul>
+    <li><a href="{$a}admin/settings.php?section=theme_bambuco_general">General</a></li>
+    <li><a href="{$a}admin/settings.php?section=theme_bambuco_advanced">Avanzado</a></li>
+    <li><a href="{$a}admin/settings.php?section=theme_bambuco_skin">Máscara</a>: Cambiar plantilla de Bootstrap</li>
+    <li><a href="{$a}admin/settings.php?section=theme_bambuco_login">Inicio de sesión</a>: Estilos para la página de inicio de sesión y registro.</li>
+    <li><a href="{$a}admin/settings.php?section=theme_bambuco_courses">Cursos</a></li>
+    <li><a href="{$a}admin/settings.php?section=theme_bambuco_multitheme">Multitema</a></li>
+    <li><a href="{$a}theme/bambuco/subthemes.php">Subtemas</a>: Los subtemas permiten crear estilos para cursos y usuarios específicos. Esta opción debe habilitarse en la sección Multitema.</li>
+</ul>
+<p><b>Este tema fue creado y es mantenido libre por <a href="https://bambuco.co" target="_blank">BambuCo</a></b>.</p>';
 $string['signup'] = 'Registrarse';
 $string['signupidentityproviders'] = 'Mostrar registro con externos';
 $string['signupidentityproviders_desc'] = 'Mostrar enlace para usar servicios externos en la página de registro.';
@@ -160,6 +188,21 @@ Las opciones actuales se basan en el proyecto <a href="https://bootswatch.com/" 
 Consulta la <a href="https://bootswatch.com/" target="_blanck">página de Bootswatch</a> para ver ejemplos y más información.';
 $string['skins_none'] = 'No hay máscaras disponibles.';
 $string['skinsettings'] = 'Máscaras';
+$string['subtheme_homeurl'] = 'URL de inicio';
+$string['subtheme_homeurl_help'] = 'URL de inicio para redirigir al usuario cuando se usa el subtema. La URL puede ser relativa o absoluta.';
+$string['subtheme_idnumber'] = 'ID del subtema';
+$string['subtheme_idnumber_help'] = 'Este ID se utiliza para asociar el subtema con el perfil de usuario o el campo personalizado del curso.';
+$string['subtheme_inherit'] = 'Heredar';
+$string['subtheme_inherit_help'] = 'El subtema heredará la configuración del tema principal.';
+$string['subtheme_join'] = 'Unirse';
+$string['subtheme_join_help'] = 'El subtema se unirá a la configuración del tema principal.';
+$string['subtheme_name'] = 'Nombre';
+$string['subtheme_name_help'] = 'El nombre visible del subtema.';
+$string['subtheme_overwrite'] = 'Sobrescribir';
+$string['subtheme_overwrite_help'] = 'El subtema sobrescribirá la configuración del tema principal.';
+$string['subthemedelete'] = 'Eliminar subtema';
+$string['subthemedeleted'] = 'Subtema eliminado';
+$string['subthemes'] = 'Subtemas';
 $string['unaddableblocks'] = 'Bloques innecesarios';
 $string['unaddableblocks_desc'] = 'Los bloques especificados no son necesarios cuando se utiliza este tema y no aparecerán en el menú \'Agregar un bloque\'.';
 $string['usealtcha'] = 'Usar ALTCHA';

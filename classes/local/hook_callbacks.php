@@ -16,7 +16,7 @@
 
 namespace theme_bambuco\local;
 
-use \theme_bambuco\local\utils;
+use theme_bambuco\local\utils;
 
 /**
  * Allows plugins to add any elements to the html.

@@ -132,12 +132,12 @@ $string['loginsettings'] = 'Login settings';
 $string['multitheme'] = 'Multi theme';
 $string['multithemecoursefield'] = 'Course custom field';
 $string['multithemecoursefield_desc'] = 'Course custom field for assigning a subtheme.
-The field value must match a subtheme ID number, or the default theme will be displayed.';
+The field value must match a subtheme ID, or the default theme will be displayed.';
 $string['multithemeenabled'] = 'Enable multi theme';
-$string['multithemeenabled_desc'] = 'Enable the multi theme feature. This feature allows you to assign a subtheme to a user based on a user profile field.';
+$string['multithemeenabled_desc'] = 'Enable the multi-topic feature. This feature allows you to assign a subtopic to a user or course based on a user profile field or a course custom field.';
 $string['multithemeuserfield'] = 'User profile field';
 $string['multithemeuserfield_desc'] = 'User profile field for assigning a subtheme.
-The field value must match a subtheme ID number, or the default theme will be displayed.';
+The field value must match a subtheme ID, or the default theme will be displayed.';
 $string['nobootswatch'] = 'None';
 $string['otherfontfamily'] = 'Other font family';
 $string['otherfontfamily_desc'] = 'Other fonts to include in the site. The font is not applied to the site, it is only included in the page.';
@@ -165,6 +165,18 @@ $string['region-intocontent'] = 'Into the content';
 $string['region-side-pre'] = 'Right';
 $string['region-top'] = 'Top';
 $string['returntohome'] = 'Return to the home';
+$string['settingsfulldescription'] = 'The theme is organized for page editing to avoid overload by bringing all settings into a single upload. <br>
+You can edit each setting in:<br>
+<ul>
+    <li><a href="{$a}admin/settings.php?section=theme_bambuco_general">General</a></li>
+    <li><a href="{$a}admin/settings.php?section=theme_bambuco_advanced">Advanced</a></li>
+    <li><a href="{$a}admin/settings.php?section=theme_bambuco_skin">Skin</a>: Change Bootstrap Template</li>
+    <li><a href="{$a}admin/settings.php?section=theme_bambuco_login">Login</a>: Styles for the login and sign up page.</li>
+    <li><a href="{$a}admin/settings.php?section=theme_bambuco_courses">Course</a></li>
+    <li><a href="{$a}admin/settings.php?section=theme_bambuco_multitheme">Multi theme</a></li>
+    <li><a href="{$a}theme/bambuco/subthemes.php">Subthemes</a>: Subtopics allow to create styles for specific courses and users. This must be enabled in the Multi theme section.</li>
+</ul>
+<p><b>This theme was created and maintained by <a href="https://bambuco.co" target="_blank">BambuCo</a></b>.</p>';
 $string['signup'] = 'Sign up';
 $string['signupidentityproviders'] = 'Show signup with externals';
 $string['signupidentityproviders_desc'] = 'Show link to use external services in signup page.';
@@ -178,8 +190,8 @@ $string['skins_none'] = 'No skins are available.';
 $string['skinsettings'] = 'Skin settings';
 $string['subtheme_homeurl'] = 'Home URL';
 $string['subtheme_homeurl_help'] = 'The Home URL to redirect the user when the subtheme is used. The URL can be a relative or absolute URL.';
-$string['subtheme_idnumber'] = 'ID number';
-$string['subtheme_idnumber_help'] = 'The ID number of the subtheme. This ID number is used to to associate the subtheme with user profile or course custom field.';
+$string['subtheme_idnumber'] = 'Subtheme ID';
+$string['subtheme_idnumber_help'] = 'The ID of the subtheme. This ID is used to to associate the subtheme with user profile or course custom field.';
 $string['subtheme_inherit'] = 'Inherit';
 $string['subtheme_inherit_help'] = 'The subtheme will inherit the settings from the parent theme.';
 $string['subtheme_join'] = 'Join';
