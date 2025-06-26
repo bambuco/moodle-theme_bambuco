@@ -61,5 +61,19 @@ function xmldb_theme_bambuco_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2025011002.02, 'theme', 'bambuco');
     }
 
+    if ($oldversion < 2025011003) {
+
+        $select = "plugin = 'theme_bambuco' AND name LIKE 'scss%'";
+        $currentconfig = $DB->get_records_select('config_plugins', $select);
+
+        foreach ($currentconfig as $config) {
+            $config->name = 'bbco' . $config->name;
+            $DB->update_record('config_plugins', $config);
+        }
+
+        // Savepoint reached.
+        upgrade_plugin_savepoint(true, 2025011003, 'theme', 'bambuco');
+    }
+
     return true;
 }

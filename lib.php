@@ -63,7 +63,7 @@ function theme_bambuco_get_extra_scss($theme) {
     // Always return the background image with the scss when we have it.
     // We need include the $theme->settings->scss because it is included by the parent theme in a bad moment.
     // We need to include it when other styles are already loaded.
-    $scsskey = utils::subthemekeys('scss');
+    $scsskey = utils::subthemekeys('bbcoscss');
 
     $contentscss = '';
     foreach ($scsskey as $key) {
@@ -177,7 +177,7 @@ function theme_bambuco_get_pre_scss($theme) {
     }
 
     // Prepend pre-scss.
-    $scssprekey = utils::subthemekeys('scsspre');
+    $scssprekey = utils::subthemekeys('bbcoscsspre');
     foreach ($scssprekey as $key) {
         if (isset($theme->settings->$key)) {
             $scss .= $theme->settings->$key . "\n";
@@ -200,7 +200,7 @@ function theme_bambuco_css_postprocess($css) {
         $theme = theme_config::load('bambuco');
 
         $themescss = '';
-        $scssprekey = utils::subthemekeys('scsspre');
+        $scssprekey = utils::subthemekeys('bbcoscsspre');
         $scsspre = '';
         foreach ($scssprekey as $key) {
             if (isset($theme->settings->$key)) {
@@ -208,7 +208,7 @@ function theme_bambuco_css_postprocess($css) {
             }
         }
 
-        $scsskey = utils::subthemekeys('scss');
+        $scsskey = utils::subthemekeys('bbcoscss');
         $scss = '';
         foreach ($scsskey as $key) {
             if (isset($theme->settings->$key)) {
@@ -255,7 +255,7 @@ function theme_bambuco_alter_css_urls(&$urls) {
     }
 
     foreach ($urls as $key => $url) {
-        if ($url->param('type') == 'scss') {
+        if ($url->param('type') == 'bbcoscss') {
             $url->param('bbcost', $subtheme->id);
             $url->param('subtype', 'subtheme_' . $subtheme->id);
         } else if (empty($CFG->themedesignermode) && strpos($url->get_path(), '/theme/styles.php/bambuco/') !== false) {

@@ -38,8 +38,8 @@ class utils {
         'backgroundimage',
         'brandcolor',
         'fontfamily',
-        'scsspre',
-        'scss',
+        'bbcoscsspre',
+        'bbcoscss',
         'skin',
     ];
 
