@@ -16,7 +16,7 @@
 
 namespace theme_bambuco\local;
 
-use quizaccess_seb\property_list;
+defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->libdir . '/form/selectwithlink.php');
 /**
@@ -63,7 +63,7 @@ class utils {
      *
      * @var object|null
      */
-    static $subtheme = null;
+    public static $subtheme = null;
 
     /**
      * Wrap text in two spans.
@@ -263,7 +263,7 @@ class utils {
      * Get the subtheme by id number.
      *
      * @param string $idnumber Subtheme idnumber.
-     * @return object
+     * @return object|null
      */
     public static function get_subthemebyidnumber(string $id): ?object {
         global $DB;
@@ -302,7 +302,7 @@ class utils {
     /**
      * Set the setting up subtheme in the session.
      *
-     * @param string $id Current setting up subtheme.
+     * @param int|null $id Subtheme id or null to unset.
      * @return void
      */
     public static function set_settingup_subtheme(?int $id): void {
@@ -346,7 +346,7 @@ class utils {
         }
 
         if (empty($subtheme)) {
-            //  All parameters are customizable for the default theme.
+            // All parameters are customizable for the default theme.
             $settings[$key] = true;
             return true;
         }

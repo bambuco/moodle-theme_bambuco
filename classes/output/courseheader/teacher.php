@@ -37,8 +37,7 @@ class teacher implements renderable, templatable {
     /**
      * Constructor.
      *
-     * @param string $uniqueid The uniqueid of the block instance.
-     * @param string $view The view type.
+     * @param object $course Course object containing course information.
      */
     public function __construct($course) {
 
@@ -48,10 +47,10 @@ class teacher implements renderable, templatable {
     /**
      * Export this data so it can be used as the context for a mustache template.
      *
-     * @param \core_renderer $output
-     * @return array Context variables for the template
+     * @param renderer_base $output The renderer to use for rendering.
+     * @return array An array of variables to be used in the template.
      */
-    public function export_for_template(renderer_base $output) {
+    public function export_for_template(renderer_base $output): array {
         global $CFG, $DB;
 
         $defaultvariables = [
@@ -77,7 +76,7 @@ class teacher implements renderable, templatable {
                     $teacherdata = $DB->get_record('user', ['id' => $key]);
                     $teacher->image = $output->user_picture($teacherdata, [
                         'size' => 100,
-                        'link' => false
+                        'link' => false,
                     ]);
 
                     $url = $CFG->wwwroot . '/user/profile.php?id=' . $key;

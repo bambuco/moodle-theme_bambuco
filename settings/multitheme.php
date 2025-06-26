@@ -22,11 +22,11 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
- defined('MOODLE_INTERNAL') || die();
+defined('MOODLE_INTERNAL') || die();
 
- $page = new admin_settingpage('theme_bambuco_multitheme', new lang_string('multitheme', 'theme_bambuco'));
+$page = new admin_settingpage('theme_bambuco_multitheme', new lang_string('multitheme', 'theme_bambuco'));
 
- if ($ADMIN->fulltree) {
+if ($ADMIN->fulltree) {
 
     // Enable/disable multitheme.
     $name = 'theme_bambuco/multitheme';
@@ -73,4 +73,5 @@
     $page->add($setting);
 
 }
+
 $settings->add('theme_bambuco', $page);

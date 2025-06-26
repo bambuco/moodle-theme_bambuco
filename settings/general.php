@@ -73,11 +73,11 @@ if ($ADMIN->fulltree) {
         // Preset files setting.
         // Never changed for subthemes.
         $name = 'theme_bambuco/presetfiles';
-        $title = get_string('presetfiles','theme_bambuco');
+        $title = get_string('presetfiles', 'theme_bambuco');
         $description = get_string('presetfiles_desc', 'theme_bambuco');
 
         $setting = new admin_setting_configstoredfile($name, $title, $description, 'preset', 0,
-            array('maxfiles' => 20, 'accepted_types' => array('.scss')));
+            ['maxfiles' => 20, 'accepted_types' => ['.scss']]);
         $page->add($setting);
     }
 

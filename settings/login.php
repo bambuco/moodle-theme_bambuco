@@ -90,7 +90,7 @@ if ($ADMIN->fulltree) {
     // Layout type.
     $options = [
         'default' => new lang_string('loginformlayout_default', 'theme_bambuco'),
-        'toexternal' => new lang_string('loginformlayout_toexternal', 'theme_bambuco')
+        'toexternal' => new lang_string('loginformlayout_toexternal', 'theme_bambuco'),
     ];
 
     $name = 'theme_bambuco/loginformlayout';

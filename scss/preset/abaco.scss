@@ -161,7 +161,10 @@ a {
     }
 }
 
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
     color: $gray-800;
 }
 
@@ -249,5 +252,6 @@ h1, h2, h3, h4 {
 // End of custom Navbar
 
 .form-autocomplete-selection [data-active-selection="true"] {
-    color: $white!important;
+    /* stylelint-disable-next-line declaration-no-important */
+    color: $white !important;
 }

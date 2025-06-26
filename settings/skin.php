@@ -39,7 +39,7 @@ if ($ADMIN->fulltree) {
 
     $filesinpath = scandir($path);
 
-    if(!is_array($filesinpath)) {
+    if (!is_array($filesinpath)) {
         $filesinpath = [];
     }
 

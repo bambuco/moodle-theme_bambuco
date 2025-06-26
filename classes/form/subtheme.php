@@ -24,7 +24,7 @@
 
 namespace theme_bambuco\form;
 
-use \theme_bambuco\local\utils;
+use theme_bambuco\local\utils;
 
 /**
  * Class subtheme

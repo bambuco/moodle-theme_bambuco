@@ -83,9 +83,11 @@ if (!in_array($type, ['all', 'all-rtl', 'editor', 'editor-rtl'])) {
     css_send_css_not_found();
 }
 
-if (file_exists("$CFG->dirroot/theme/$themename/config.php")) {
+$existthemeconfig = file_exists("$CFG->dirroot/theme/$themename/config.php");
+$existthemedirconfig = file_exists("$CFG->themedir/$themename/config.php");
+if ($existthemeconfig) {
     // The theme exists in standard location - ok.
-} else if (!empty($CFG->themedir) and file_exists("$CFG->themedir/$themename/config.php")) {
+} else if (!empty($CFG->themedir) && $existthemedirconfig) {
     // Alternative theme location contains this theme - ok.
 } else {
     header('HTTP/1.0 404 not found');
@@ -128,7 +130,7 @@ $cache = true;
 // the global theme revision and the theme specific revision then
 // tell the browser not to cache this style sheet because it's
 // likely being regenerated.
-if ($themerev <= 0 or $themerev != $rev or $themesubrev != $currentthemesubrev) {
+if ($themerev <= 0 || $themerev != $rev || $themesubrev != $currentthemesubrev) {
     $rev = $themerev;
     $themesubrev = $currentthemesubrev;
     $cache = false;
@@ -332,6 +334,8 @@ function theme_styles_get_etag($themename, $rev, $type, $themesubrev, $usesvg) {
 /**
  * Return cached post processed CSS content.
  *
+ * @param theme_config $theme The theme config object.
+ * @param string $subtheme The subtheme identifier.
  * @return bool|string The cached css content or false if not found.
  */
 function bambuco_get_css_cached_content($theme, $subtheme) {
@@ -346,7 +350,9 @@ function bambuco_get_css_cached_content($theme, $subtheme) {
 /**
  * Set post processed CSS content cache.
  *
- * @param string $csscontent The post processed CSS content.
+ * @param theme_config $theme The theme config object.
+ * @param string $subtheme The subtheme identifier.
+ * @param string $csscontent The CSS content to cache.
  * @return bool True if the content was successfully cached.
  */
 function bambuco_set_css_content_cache($theme, $subtheme, $csscontent) {
@@ -360,6 +366,8 @@ function bambuco_set_css_content_cache($theme, $subtheme, $csscontent) {
 /**
  * Return whether the post processed CSS content has been cached.
  *
+ * @param theme_config $theme The theme config object.
+ * @param string $subtheme The subtheme identifier.
  * @return bool Whether the post-processed CSS is available in the cache.
  */
 function bambuco_has_css_cached_content($theme, $subtheme) {

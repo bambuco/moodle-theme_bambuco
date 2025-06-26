@@ -24,8 +24,6 @@
 
 use theme_bambuco\local\utils;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Inject additional SCSS.
  *

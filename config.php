@@ -75,7 +75,6 @@ $THEME->layouts = [
     // My courses page.
     'mycourses' => [
         'file' => 'drawers.php',
-        'regions' => ['side-pre'],
         'regions' => ['above', 'top', 'intocontent', 'side-pre', 'below', 'bottom'],
         'options' => ['nonavbar' => true],
         'defaultregion' => 'side-pre',
@@ -83,7 +82,6 @@ $THEME->layouts = [
     // My dashboard page.
     'mydashboard' => [
         'file' => 'drawers.php',
-        'regions' => ['side-pre'],
         'regions' => ['above', 'top', 'intocontent', 'side-pre', 'below', 'bottom'],
         'options' => ['nonavbar' => true, 'langmenu' => true],
         'defaultregion' => 'side-pre',
@@ -125,5 +123,5 @@ $THEME->haseditswitch = true;
 $THEME->usescourseindex = true;
 // By default, all boost theme do not need their titles displayed.
 $THEME->activityheaderconfig = [
-    'notitle' => true
+    'notitle' => true,
 ];

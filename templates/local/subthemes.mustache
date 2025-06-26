@@ -19,6 +19,39 @@
 
     Example context (json):
     {
+        "baseurl": "https://moodle.example.com",
+        "pix": {
+            "i": {
+                "link": "https://moodle.example.com/theme/image.php/bambuco/core/169/1",
+                "grading": "https://moodle.example.com/theme/image.php/bambuco/core/169/2",
+                "edit": "https://moodle.example.com/theme/image.php/bambuco/core/169/3",
+                "delete": "https://moodle.example.com/theme/image.php/bambuco/core/169/4",
+                "t/add": "https://moodle.example.com/theme/image.php/bambuco/core/169/5"
+            }
+        },
+        "str": {
+            "customizesubtheme": "Customize subtheme",
+            "edit": "Edit",
+            "delete": "Delete",
+            "add": "Add"
+        },
+        "subthemes": [
+            {
+                "id": 1,
+                "name": "Subtheme One",
+                "idnumber": "subtheme_one",
+                "homeurl": null,
+                "fullhomeurl": null
+            },
+            {
+                "id": 2,
+                "name": "Subtheme Two",
+                "idnumber": "subtheme_two",
+                "homeurl": null,
+                "fullhomeurl": null
+            }
+        ],
+        "sesskey": "_abc123xyz"
     }
 }}
 <div class="container-fluid">
@@ -38,13 +71,13 @@
                     </ul>
                     <div class="card-footer">
                         <div class="btn-group" role="group">
-                            <a href="{{{baseurl}}}/admin/category.php?category=theme_bambuco&bbst={{id}}" class="btn btn-info" type="button">
+                            <a href="{{{baseurl}}}/admin/category.php?category=theme_bambuco&bbst={{id}}" class="btn btn-info">
                                 {{#pix}} i/grading {{/pix}} {{#str}} customizesubtheme, theme_bambuco {{/str}}
                             </a>
-                            <a href="{{{baseurl}}}/theme/bambuco/subtheme_edit.php?id={{id}}" class="btn btn-secondary" type="button">
+                            <a href="{{{baseurl}}}/theme/bambuco/subtheme_edit.php?id={{id}}" class="btn btn-secondary">
                                 {{#pix}} i/edit {{/pix}} {{#str}} edit {{/str}}
                             </a>
-                            <a href="{{{baseurl}}}/theme/bambuco/subthemes.php?delete={{id}}&sesskey={{sesskey}}" class="btn btn-danger" type="button">
+                            <a href="{{{baseurl}}}/theme/bambuco/subthemes.php?delete={{id}}&sesskey={{sesskey}}" class="btn btn-danger">
                                 {{#pix}} i/delete {{/pix}} {{#str}} delete {{/str}}
                             </a>
                         </div>
@@ -55,7 +88,7 @@
     </div>
 </div>
 <div class="btn-box">
-    <a href="{{{baseurl}}}/theme/bambuco/subtheme_edit.php" class="btn btn-primary btn-lg" type="button">
+    <a href="{{{baseurl}}}/theme/bambuco/subtheme_edit.php" class="btn btn-primary btn-lg">
         {{#pix}} t/add {{/pix}} {{#str}} add {{/str}}
     </a>
 </div>

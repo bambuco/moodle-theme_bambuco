@@ -46,7 +46,7 @@ if ($ADMIN->fulltree) {
         'default' => new lang_string('coursesheader_default', 'theme_bambuco'),
         'none' => new lang_string('coursesheader_none', 'theme_bambuco'),
         'basic' => new lang_string('coursesheader_basic', 'theme_bambuco'),
-        'teacher' => new lang_string('coursesheader_teacher', 'theme_bambuco')
+        'teacher' => new lang_string('coursesheader_teacher', 'theme_bambuco'),
     ];
 
     $name = 'theme_bambuco/coursesheader';
@@ -76,7 +76,7 @@ if ($ADMIN->fulltree) {
     // Header layout.
     $options = [
         'default' => new lang_string('courseheaderlayout_default', 'theme_bambuco'),
-        'fullwidth' => new lang_string('courseheaderlayout_fullwidth', 'theme_bambuco')
+        'fullwidth' => new lang_string('courseheaderlayout_fullwidth', 'theme_bambuco'),
     ];
 
     $name = 'theme_bambuco/courseheaderlayout';
