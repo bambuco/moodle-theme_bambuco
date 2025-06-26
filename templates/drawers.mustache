@@ -36,7 +36,7 @@
             "doctype": "<!DOCTYPE html>",
             "page_title": "Test page",
             "favicon": "favicon.ico",
-            "main_content": "<h1>Headings make html validators happier</h1>"
+            "main_content": "<h1>Headings make html validators happier</h1>",
             "htmlattributes": "lang=\"en\" dir=\"ltr\"",
         },
         "bodyattributes":"",
@@ -71,6 +71,10 @@
         "mustachetesting": true
     }
 }}
+{{#mustachetesting}}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+{{/mustachetesting}}
 {{^mustachetesting}}
 {{> theme_boost/head }}
 {{/mustachetesting}}
