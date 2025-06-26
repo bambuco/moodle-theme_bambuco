@@ -176,7 +176,7 @@ You can edit each setting in:<br>
     <li><a href="{$a}admin/settings.php?section=theme_bambuco_multitheme">Multi theme</a></li>
     <li><a href="{$a}theme/bambuco/subthemes.php">Subthemes</a>: Subtopics allow to create styles for specific courses and users. This must be enabled in the Multi theme section.</li>
 </ul>
-<p><b>This theme was created and maintained by <a href="https://bambuco.co" target="_blank">BambuCo</a></b></p>';
+<p><b>This theme was created and maintained by <a href="https://bambuco.co" target="_blank">BambuCo</a></b>.</p>';
 $string['signup'] = 'Sign up';
 $string['signupidentityproviders'] = 'Show signup with externals';
 $string['signupidentityproviders_desc'] = 'Show link to use external services in signup page.';

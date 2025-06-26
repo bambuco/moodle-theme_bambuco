@@ -51,12 +51,12 @@ $externalpage = new admin_externalpage('theme_bambuco_subthemes', new lang_strin
 new moodle_url("/theme/bambuco/subthemes.php"), 'moodle/site:config');
 $settings->add('theme_bambuco', $externalpage);
 
-$settingsfull = new admin_settingpage('themesettingbambuco', new lang_string('configtitle', 'theme_bambuco'));
-if ($ADMIN->fulltree) {
+if ($ADMIN->fulltree && !$subtheme) {
+    $settingsfull = new admin_settingpage('themesettingbambuco', new lang_string('configtitle', 'theme_bambuco'));
     $url = new moodle_url('/');
     $setting = new admin_setting_heading('theme_bambuco/settingsfulldescription',
         new lang_string('choosereadme', 'theme_bambuco'),
         new lang_string('settingsfulldescription', 'theme_bambuco', (string)$url));
     $settingsfull->add($setting);
+    $settings->add('theme_bambuco', $settingsfull);
 }
-$settings->add('theme_bambuco', $settingsfull);

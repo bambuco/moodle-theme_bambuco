@@ -176,7 +176,7 @@ Puedes editar cada configuración en:<br>
     <li><a href="{$a}admin/settings.php?section=theme_bambuco_multitheme">Multitema</a></li>
     <li><a href="{$a}theme/bambuco/subthemes.php">Subtemas</a>: Los subtemas permiten crear estilos para cursos y usuarios específicos. Esta opción debe habilitarse en la sección Multitema.</li>
 </ul>
-<p><b>Este tema fue creado y es mantenido libre por <a href="https://bambuco.co" target="_blank">BambuCo</a></b></p>';
+<p><b>Este tema fue creado y es mantenido libre por <a href="https://bambuco.co" target="_blank">BambuCo</a></b>.</p>';
 $string['signup'] = 'Registrarse';
 $string['signupidentityproviders'] = 'Mostrar registro con externos';
 $string['signupidentityproviders_desc'] = 'Mostrar enlace para usar servicios externos en la página de registro.';
