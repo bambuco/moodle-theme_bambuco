@@ -182,7 +182,7 @@ class hook_callbacks {
                 $bbcoaltcha = optional_param('bbcoaltcha', '', PARAM_TEXT);
                 $payload = !empty($bbcoaltcha) ? (array)@json_decode(base64_decode($bbcoaltcha)) : '';
 
-                $altcha = new \AltchaOrg\Altcha\Altcha($SESSION->bambuco_altcha_key);
+                $altcha = new \AltchaOrg\Altcha\Altcha($SESSION->bambuco_altcha_key ?? '');
 
                 $ok = $altcha->verifySolution($payload, true);
 

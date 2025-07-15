@@ -248,7 +248,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
      * @return string
      */
     public function render_login_signup_form($form) {
-        global $CFG;
+        global $CFG, $OUTPUT;
 
         $signupidentityproviders = get_config('theme_bambuco', 'signupidentityproviders');
         $content = parent::render_login_signup_form($form);
@@ -257,7 +257,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
             $authsequence = get_enabled_auth_plugins(true);
             $providers = \auth_plugin_base::get_identity_providers($authsequence);
-            $identityproviders = \auth_plugin_base::prepare_identity_providers_for_output($providers, $this->output);
+            $identityproviders = \auth_plugin_base::prepare_identity_providers_for_output($providers, $OUTPUT);
 
             $context = [
                 'identityproviders' => $identityproviders,
