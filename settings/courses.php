@@ -30,6 +30,7 @@ if ($ADMIN->fulltree) {
 
     // Header position.
     $options = [
+        'over' => new lang_string('coursesheaderposition_over', 'theme_bambuco'),
         'top' => new lang_string('coursesheaderposition_top', 'theme_bambuco'),
         'content' => new lang_string('coursesheaderposition_content', 'theme_bambuco'),
     ];
@@ -59,11 +60,13 @@ if ($ADMIN->fulltree) {
     // Header layout.
     $options = [
         'course-view-' => new lang_string('courseheaderview_course', 'theme_bambuco'),
+        'course-' => new lang_string('courseheaderview_anycourse', 'theme_bambuco'),
         'mod-' => new lang_string('courseheaderview_mod', 'theme_bambuco'),
         'blocks-' => new lang_string('courseheaderview_block', 'theme_bambuco'),
         'my-' => new lang_string('courseheaderview_my', 'theme_bambuco'),
         'user-' => new lang_string('courseheaderview_user', 'theme_bambuco'),
         'report-' => new lang_string('courseheaderview_report', 'theme_bambuco'),
+        'grade-' => new lang_string('courseheaderview_grade', 'theme_bambuco'),
     ];
 
     $name = 'theme_bambuco/courseheaderview';

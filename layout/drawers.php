@@ -167,6 +167,7 @@ if ($inpopup) {
         'headercontent' => $headercontent,
         'addblockbutton' => $addblockbutton,
         'coursefooter' => \theme_bambuco\local\utils::get_coursefooter($PAGE->course),
+        'courseheaderover' => $config->coursesheaderposition == 'over',
         'courseheaderintop' => $config->coursesheaderposition == 'top',
         'courseheaderincontent' => $config->coursesheaderposition == 'content',
     ];

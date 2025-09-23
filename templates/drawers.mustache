@@ -121,6 +121,14 @@
             </div>
         {{/hasblocksabove}}
 
+        {{#courseheaderover}}
+            {{{ output.full_header }}}
+            {{#secondarymoremenu}}
+                <div class="secondary-navigation d-print-none">
+                    {{> core/moremenu}}
+                </div>
+            {{/secondarymoremenu}}
+        {{/courseheaderover}}
         <div id="topofscroll" class="main-inner">
             <div class="drawer-toggles d-flex">
                 {{#courseindex}}
@@ -159,12 +167,12 @@
             </div>
             {{#courseheaderintop}}
                 {{{ output.full_header }}}
+                {{#secondarymoremenu}}
+                    <div class="secondary-navigation d-print-none">
+                        {{> core/moremenu}}
+                    </div>
+                {{/secondarymoremenu}}
             {{/courseheaderintop}}
-            {{#secondarymoremenu}}
-                <div class="secondary-navigation d-print-none">
-                    {{> core/moremenu}}
-                </div>
-            {{/secondarymoremenu}}
             <div id="page-content" class="pb-3 d-print-block">
                 <div id="region-main-box">
                     {{#hasregionmainsettingsmenu}}

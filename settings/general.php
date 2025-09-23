@@ -63,6 +63,7 @@ if ($ADMIN->fulltree) {
         $choices['default.scss'] = 'default.scss';
         $choices['plain.scss'] = 'plain.scss';
         $choices['abaco.scss'] = 'Ábaco';
+        $choices['fluido.scss'] = 'Fluido';
 
         $setting = new admin_setting_configthemepreset($name, $title, $description, $default, $choices, 'bambuco');
         $setting->set_updatedcallback('theme_reset_all_caches');

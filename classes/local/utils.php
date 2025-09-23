@@ -164,6 +164,17 @@ class utils {
 
         $enabledviews = explode(',', $config->courseheaderview);
 
+        if (in_array('course-', $enabledviews)) {
+            $enabledviews[] = 'question-';
+            $enabledviews[] = 'contentbank';
+            $enabledviews[] = 'badges-';
+            $enabledviews[] = 'admin-tool-lp-coursecompetencies';
+            $enabledviews[] = 'filter-';
+            $enabledviews[] = 'enrol-';
+            $enabledviews[] = 'files';
+            $enabledviews[] = 'group';
+        }
+
         foreach ($enabledviews as $view) {
             if (!empty($view) && strpos($pagetype, $view) === 0) {
                 return true;

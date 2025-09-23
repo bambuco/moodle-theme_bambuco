@@ -17,12 +17,16 @@ Package tested in: moodle 4.5+.
 - **GIT:** https://github.com/bambuco/moodle-theme_bambuco
 
 ## IN VERSION ##
+2025011004:
+- New preset Fluido.
+- New course view position: Over.
+
 2025011003:
 - Removed Dark mode, BambuCo theme has good compatibility with the local_boost_dark plugin https://moodle.org/plugins/local_boost_dark
-- Support for all pages in "popup" mode
+- Support for all pages in "popup" mode.
 
 2025011002:
-- New local presets
+- New local presets.
 
 2025011001:
 - Compatibility with Moodle 4.5+.

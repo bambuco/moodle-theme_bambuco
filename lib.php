@@ -118,7 +118,7 @@ function theme_bambuco_get_main_scss_content($theme) {
     $filename = $theme->settings->$preset;
     $fs = get_file_storage();
 
-    $custompresents = ['abaco.scss'];
+    $custompresents = ['abaco.scss', 'fluido.scss'];
     $context = context_system::instance();
     if ($filename == 'default.scss') {
         $scss .= file_get_contents($CFG->dirroot . '/theme/boost/scss/preset/default.scss');

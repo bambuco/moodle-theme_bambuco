@@ -30,13 +30,13 @@ defined('MOODLE_INTERNAL') || die();
 $plugin->component = 'theme_bambuco';
 
 // This is the version of the plugin.
-$plugin->version = 2025011003;
+$plugin->version = 2025011004;
 
 // This is the named version.
-$plugin->release = '4.5.03';
+$plugin->release = '4.5.04';
 
 // This is a stable release.
-$plugin->maturity = MATURITY_BETA;
+$plugin->maturity = MATURITY_RC;
 
 // This is the version of Moodle this plugin requires.
 $plugin->requires = 2024100701;

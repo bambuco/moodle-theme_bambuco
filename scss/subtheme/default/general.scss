@@ -124,6 +124,25 @@
     }
 }
 
+.list-unstyled {
+    a {
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+        display: block;
+        line-height: 110%;
+
+        &:hover {
+            background-color: var(--primary);
+            color: var(--light);
+            text-decoration: none;
+        }
+    }
+
+    &:last-child > a {
+        border-bottom: none;
+    }
+}
+
 #page-tag-index {
     .media {
         padding: 20px 0;
