@@ -22,6 +22,7 @@ $green:   #357a32 !default;
 $teal:    #20c997 !default;
 $cyan:    #008196 !default;
 $lightgreen: #93c54b !default;
+$bglight: #edf5ff !default;
 
 $primary:       #325d88 !default;
 $success:       $green !default;
@@ -98,9 +99,9 @@ $theme-colors: map-merge((
     danger: $danger,
     primaryreverse: $white,
     secondaryreverse: $white,
-    activedefault: #f5e625,
+    activedefault: $lightgreen,
     activereverse: $primary,
-    bglight: #edf5ff,
+    bglight: $bglight,
 ), $theme-colors);
 // stylelint-enable
 
