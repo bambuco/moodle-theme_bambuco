@@ -1,3 +1,4 @@
+/* stylelint-disable declaration-no-important */
 // Bootstrap variables
 $white:    #fff !default;
 $gray-100: #f8f9fa !default;
@@ -173,7 +174,7 @@ a:not([class]) {
     color: var(--secondaryreverse);
     border: none;
     font-weight: bold;
-    box-shadow: 0px 3px 3px #00000059;
+    box-shadow: 0 3px 3px #00000059;
 
     &:hover {
         background-color: var(--activedefault);
@@ -194,7 +195,7 @@ a:not([class]) {
     }
 
     h2.login-heading {
-        color: var(--primaryreverse);
+        color: var(--primaryreverse) !important;
         font-size: 1.1rem;
     }
 
@@ -232,18 +233,20 @@ a:not([class]) {
         color: var(--primaryreverse);
     }
 
+    /* stylelint-disable selector-type-no-unknown */
     altcha-widget {
         .altcha {
             margin: auto;
         }
     }
+    /* stylelint-enable selector-type-no-unknown */
 }
 
 // End of custom login page
 
 // Custom Navbar
 .navbar {
-    background-color: var(--primary)!important;
+    background-color: var(--primary) !important;
     color: var(--primaryreverse);
 
     &.fixed-top {
@@ -295,17 +298,17 @@ a:not([class]) {
 
         btn[data-action="opensearch"],
         .nav-link {
-            background-color: var(--primary)!important;
+            background-color: var(--primary) !important;
             color: var(--primaryreverse);
             position: relative;
             height: 26px;
-            border-radius: $border-radius!important;
+            border-radius: $border-radius !important;
 
             &.active:focus,
             &.active:hover,
             &:hover {
                 color: var(--primary);
-                background-color: var(--activedefault)!important;
+                background-color: var(--activedefault) !important;
             }
         }
 
@@ -313,8 +316,8 @@ a:not([class]) {
             background-color: var(--activedefault);
             color: var(--activereverse);
             border-radius: $border-radius;
-            padding: 13px;
             padding: 5px 20px;
+            margin-left: 5px;
             font-weight: bold;
 
             &:hover {
@@ -329,12 +332,12 @@ a:not([class]) {
         }
 
         .dropdown-toggle:after {
-            color: var(--primaryreverse)!important;
+            color: var(--primaryreverse) !important;
         }
 
         .btn.carousel-navigation-link {
             filter: invert(1);
-            color: var(--primary)!important;
+            color: var(--primary) !important;
         }
 
         .usertext {
@@ -366,11 +369,11 @@ a:not([class]) {
 
     .editmode-switch-form {
         .text-primary {
-            color: var(--activedefault)!important;
+            color: var(--activedefault) !important;
         }
 
         .custom-control-input:checked ~ .custom-control-label:before {
-            border-color: var(--activedefault)!important;
+            border-color: var(--activedefault) !important;
         }
     }
 
@@ -388,7 +391,7 @@ a:not([class]) {
 }
 
 [data-control="bbco-contenthover"][data-position="absolute"] > div {
-    background-color: var(--primary)!important;
+    background-color: var(--primary) !important;
 }
 // End of custom Navbar
 .drawer.drawer-right,
@@ -470,15 +473,15 @@ a:not([class]) {
 
             .option-description,
             .text-dark {
-                color: var(--primaryreverse)!important;
+                color: var(--primaryreverse) !important;
             }
 
             &.bg-primary-light {
-                color: var(--primary)!important;
+                color: var(--primary) !important;
 
                 .option-description,
                 .text-dark {
-                    color: var(--primary)!important;
+                    color: var(--primary) !important;
                 }
             }
         }
@@ -507,14 +510,14 @@ a:not([class]) {
     }
 
     .reportbuilder-filters-sidebar {
-        background: transparent!important;
+        background: transparent !important;
         border-bottom-color: var(--primaryreverse);
     }
 }
 
 .action-menu {
     .dropdown-toggle {
-        color: var(--primaryreverse)!important;
+        color: var(--primaryreverse) !important;
         background-color: var(--primary);
         border: none;
         padding: 7px 15px;
@@ -523,7 +526,7 @@ a:not([class]) {
         &:focus,
         &:hover {
             background-color: var(--activedefault);
-            color: var(--activereverse)!important;
+            color: var(--activereverse) !important;
         }
     }
 
@@ -567,7 +570,7 @@ a:not([class]) {
         border: none;
         color: var(--secondaryreverse);
         font-size: 1rem;
-        padding: 7px 15px!important;
+        padding: 7px 15px !important;
         border-radius: $border-radius;
 
         &:hover {
@@ -592,8 +595,8 @@ a:not([class]) {
     }
 
     .nav-tabs {
-        background-color: var(--primary)!important;
-        border-bottom: 1px solid var(--secondary)!important;
+        background-color: var(--primary) !important;
+        border-bottom: 1px solid var(--secondary) !important;
 
         .nav-link {
             color: var(--primaryreverse);
@@ -675,7 +678,7 @@ a:not([class]) {
     padding-top: 50px;
 
     .page-context-header {
-        background-color: transparent!important;
+        background-color: transparent !important;
     }
 
     h1.h2 {
@@ -686,7 +689,7 @@ a:not([class]) {
 
     #page-navbar {
         border-radius: 0 $border-radius $border-radius 0 !important;
-        padding: 0 10px 0 70px!important;
+        padding: 0 10px 0 70px !important;
         background-color: #fff8;
         margin-bottom: 5px;
         position: absolute;
@@ -756,7 +759,7 @@ a:not([class]) {
 .block_kamaleon {
     &.design-cesbootstrapcarousel {
         background-color: var(--primary);
-        border-radius: 0!important;
+        border-radius: 0 !important;
 
         .carousel.slide {
             max-width: 1200px;
@@ -769,13 +772,13 @@ a:not([class]) {
         }
 
         .contenedor-bn {
-            max-width: 560px!important;
-            margin: 0!important;
+            max-width: 560px !important;
+            margin: 0 !important;
             float: right;
             margin-right: 440px !important;
 
             .content {
-                background-color: transparent!important;
+                background-color: transparent !important;
                 text-align: right;
                 font-size: 120%;
             }
@@ -787,18 +790,18 @@ a:not([class]) {
 
         .titulo-bn {
             text-align: right;
-            font-weight: normal!important;
-            color: var(--activedefault)!important;
+            font-weight: normal !important;
+            color: var(--activedefault) !important;
             font-style: italic;
             text-transform: uppercase;
         }
 
         .texto-bn-bold {
-            color: #fff!important;
+            color: #fff !important;
             text-align: right;
-            padding: 0!important;
-            font-size: 75px!important;
-            line-height: 70px!important;
+            padding: 0 !important;
+            font-size: 75px !important;
+            line-height: 70px !important;
             margin: 20px 0 40px !important;
         }
 
@@ -817,17 +820,17 @@ a:not([class]) {
 }
 
 .block_vitrina-courseslist {
-    background-color: transparent!important;
+    background-color: transparent !important;
 
     .block_vitrina-tabcontent {
         text-align: center;
     }
 
     .coursebox {
-        box-shadow: none!important;
-        background-color: var(--primary)!important;
-        color: var(--primaryreverse)!important;
-        border-radius: $border-radius!important;
+        box-shadow: none !important;
+        background-color: var(--primary) !important;
+        color: var(--primaryreverse) !important;
+        border-radius: $border-radius !important;
         border-width: 3px;
         padding: 15px;
 
@@ -837,7 +840,7 @@ a:not([class]) {
             }
 
             h3.course-name {
-                color: var(--primaryreverse)!important;
+                color: var(--primaryreverse) !important;
             }
 
             .coursesummary {
@@ -845,7 +848,7 @@ a:not([class]) {
             }
 
             .feeinfo {
-                background-color: transparent!important;
+                background-color: transparent !important;
                 padding-left: 0;
             }
         }
@@ -853,34 +856,34 @@ a:not([class]) {
         .panel-foot {
             text-align: right;
             padding-right: 15px;
-            padding-bottom: 0!important;
+            padding-bottom: 0 !important;
 
             .btn {
-                background-color: var(--secondary)!important;
-                color: var(--secondaryreverse)!important;
+                background-color: var(--secondary) !important;
+                color: var(--secondaryreverse) !important;
                 border-radius: $border-radius;
                 border: none;
                 font-weight: bold;
                 font-size: 80%;
 
                 &:hover {
-                    background-color: var(--activedefault)!important;
-                    color: var(--activereverse)!important;
+                    background-color: var(--activedefault) !important;
+                    color: var(--activereverse) !important;
                 }
             }
         }
 
         &:hover {
-            background-color: var(--secondary)!important;
+            background-color: var(--secondary) !important;
 
             .panel-foot {
                 .btn {
-                    background-color: var(--primary)!important;
-                    color: var(--primaryreverse)!important;
+                    background-color: var(--primary) !important;
+                    color: var(--primaryreverse) !important;
 
                     &:hover {
-                        background-color: var(--activedefault)!important;
-                        color: var(--activereverse)!important;
+                        background-color: var(--activedefault) !important;
+                        color: var(--activereverse) !important;
                     }
                 }
             }
@@ -888,7 +891,7 @@ a:not([class]) {
     }
 
     .loadmore {
-        width: auto!important;
+        width: auto !important;
         display: inline-block;
         font-size: 120%;
     }
@@ -914,7 +917,7 @@ a:not([class]) {
                     border-radius: 5px;
 
                     &:before {
-                    content: "";
+                        content: "";
                         display: block;
                         width: 0;
                         height: 0;
@@ -933,12 +936,6 @@ a:not([class]) {
 
     .catalog-return a {
         border-radius: $border-radius;
-    }
-}
-
-#page-blocks-vitrina-index {
-    .block_vitrina-content:before {
-        height: auto;
     }
 }
 
@@ -972,8 +969,8 @@ a:not([class]) {
     .format-menutopic {
         &.course-header-fullwidth {
             .header-maxwidth {
-                max-width: 100%!important;
-                margin: 0!important;
+                max-width: 100% !important;
+                margin: 0 !important;
             }
         }
     }
@@ -982,8 +979,8 @@ a:not([class]) {
     .path-local,
     .path-backup {
         :not(.format-site) .header-maxwidth {
-            max-width: 100%!important;
-            margin: 0!important;
+            max-width: 100% !important;
+            margin: 0 !important;
             padding: 0 50px;
         }
     }
@@ -999,7 +996,7 @@ a:not([class]) {
 
         .contenedor-bn {
             margin-right: 300px !important;
-            width: calc(100% - 300px)!important;
+            width: calc(100% - 300px) !important;
         }
 
         .texto-bn-bold {
@@ -1013,7 +1010,7 @@ a:not([class]) {
     body.courseheader-custom.course-header-fullwidth {
 
         #page-header {
-            align-items: center!important;
+            align-items: center !important;
         }
     }
 
