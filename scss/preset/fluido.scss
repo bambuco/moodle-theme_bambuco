@@ -296,7 +296,7 @@ a:not([class]) {
             height: $navbar-height;
         }
 
-        btn[data-action="opensearch"],
+        .btn[data-action="opensearch"],
         .nav-link {
             background-color: var(--primary) !important;
             color: var(--primaryreverse);
@@ -592,6 +592,7 @@ a:not([class]) {
     .navigation.moremenu {
         background-color: transparent;
         border: none;
+        margin: 0;
     }
 
     .nav-tabs {
@@ -767,8 +768,8 @@ a:not([class]) {
         }
 
         .carousel-item {
-            background-size: contain!important;
-            background-repeat: no-repeat!important;
+            background-size: contain !important;
+            background-repeat: no-repeat !important;
         }
 
         .contenedor-bn {
@@ -964,6 +965,22 @@ a:not([class]) {
     border-radius: 50%;
 }
 
+.content-item-container {
+    background-color: var(--primary);
+
+    &.unread {
+        background-color: var(--secondary);
+    }
+}
+
+/* Plugin fixes */
+.elements-plugin-container {
+
+    .nav.nav-tabs .nav-item a.active {
+        background-color: var(--secondary);
+    }
+}
+
 @media (min-width: 768px) {
     .format-onetopic,
     .format-menutopic {
@@ -1013,5 +1030,4 @@ a:not([class]) {
             align-items: center !important;
         }
     }
-
 }
