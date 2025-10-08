@@ -1,1 +1,10 @@
 /**EDITOR-STYLES**/
+.mce-content-body .modal {
+    opacity: 1;
+    display: block;
+    position: relative;
+}
+
+.mce-content-body .modal.fade:not(.show) {
+    opacity: 1;
+}

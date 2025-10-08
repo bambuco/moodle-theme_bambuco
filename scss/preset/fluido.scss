@@ -973,6 +973,34 @@ a:not([class]) {
     }
 }
 
+.modal-header {
+    background-color: var(--secondary);
+    color: var(--secondaryreverse);
+
+    .modal-title {
+        color: var(--secondaryreverse) !important;
+        width: 100%;
+        text-align: center;
+        font-style: normal;
+    }
+
+    .close,
+    .btn-close {
+        color: var(--secondaryreverse);
+        opacity: 1;
+
+        span {
+            border-radius: 50%;
+            border: 1px solid var(--secondaryreverse);
+            width: 25px;
+            height: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}
+
 /* Plugin fixes */
 .elements-plugin-container {
 
