@@ -379,6 +379,10 @@ a:not([class]) {
 
     .popover-region-container {
         top: $navbar-height - 32px;
+
+        .popover-region-header-text {
+            color: var(--primary);
+        }
     }
 
     .navbar-toggler-icon {
@@ -512,6 +516,10 @@ a:not([class]) {
     .reportbuilder-filters-sidebar {
         background: transparent !important;
         border-bottom-color: var(--primaryreverse);
+    }
+
+    .completion-dialog {
+        color: var(--primaryreverse) !important;
     }
 }
 
@@ -728,8 +736,16 @@ a:not([class]) {
         }
     }
 
+    .btn .icon {
+        padding: 5px;
+        border-radius: $border-radius;
+    }
+
+    .btn.btn.btn-primary,
+    .btn .icon,
     .btn.btn-primary.search-icon {
         border-color: var(--primaryreverse);
+        color: var(--primaryreverse);
 
         &:focus,
         &:hover {
@@ -967,16 +983,31 @@ a:not([class]) {
 
 .content-item-container {
     background-color: var(--primary);
+    color: var(--primaryreverse);
+
+    a {
+        color: var(--primaryreverse);
+
+        &:hover {
+            color: var(--activedefault);
+        }
+    }
 
     &.unread {
         background-color: var(--secondary);
+        color: var(--secondaryreverse);
     }
+}
+
+.modal-content {
+    padding-top: 0 !important;
 }
 
 .modal-header {
     background-color: var(--secondary);
     color: var(--secondaryreverse);
 
+    > h4,
     .modal-title {
         color: var(--secondaryreverse) !important;
         width: 100%;
@@ -1057,5 +1088,28 @@ a:not([class]) {
         #page-header {
             align-items: center !important;
         }
+    }
+}
+
+@media (max-width: 512px) {
+    body.courseheader-custom #page-header {
+
+        h1.h2 {
+            > span {
+                font-size: 2rem;
+            }
+        }
+    }
+
+    .path-course #page-header {
+        background-image: none;
+
+        > .w-100 > div.d-flex.align-items-center {
+            max-width: unset !important;
+        }
+    }
+
+    .format-onetopic .onelinetabs .tabs-wrapper .nav.nav-tabs {
+        background-color: transparent !important;
     }
 }

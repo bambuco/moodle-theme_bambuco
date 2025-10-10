@@ -157,3 +157,7 @@ altcha-widget {
     margin-bottom: 10px;
     display: block;
 }
+
+body.tox-fullscreen .modal-dialog .modal-header {
+    height: auto;
+}
