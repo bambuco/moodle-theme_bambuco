@@ -43,9 +43,7 @@ if ($delete && confirm_sesskey()) {
         echo $OUTPUT->heading(get_string('subthemedelete', 'theme_bambuco'));
         $optionsyes = ['delete' => $delete, 'confirm' => md5($delete), 'sesskey' => sesskey()];
         echo $OUTPUT->confirm(
-            get_string('deletecheck',
-            '',
-            "'{$subtheme->name}'"),
+            get_string('deletecheck', '', "'{$subtheme->name}'"),
             new moodle_url($url, $optionsyes),
             $url
         );

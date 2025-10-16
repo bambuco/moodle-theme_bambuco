@@ -39,8 +39,7 @@ if ($ADMIN->fulltree) {
         $default = 'navigation,settings,course_list,section_links';
         $setting = new admin_setting_configtext(
             'theme_bambuco/unaddableblocks' . $subthemekey,
-            get_string('unaddableblocks',
-            'theme_bambuco'),
+            get_string('unaddableblocks', 'theme_bambuco'),
             get_string('unaddableblocks_desc', 'theme_bambuco'),
             $default,
             PARAM_TEXT

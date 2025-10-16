@@ -72,7 +72,6 @@ if ($ADMIN->fulltree) {
             $setting->set_updatedcallback('theme_reset_all_caches');
             $page->add($setting);
         }
-
     } else {
         $page->add(
             new admin_setting_heading(
