@@ -51,16 +51,22 @@ if ($ADMIN->fulltree || !empty($any)) {
     }
 
     // Manage the subthemes.
-    $externalpage = new admin_externalpage('theme_bambuco_subthemes', new lang_string('subthemes', 'theme_bambuco'),
-    new moodle_url("/theme/bambuco/subthemes.php"), 'moodle/site:config');
+    $externalpage = new admin_externalpage(
+        'theme_bambuco_subthemes',
+        new lang_string('subthemes', 'theme_bambuco'),
+        new moodle_url("/theme/bambuco/subthemes.php"),
+        'moodle/site:config'
+    );
     $settings->add('theme_bambuco', $externalpage);
 
     if ($ADMIN->fulltree && !$subtheme) {
         $settingsfull = new admin_settingpage('themesettingbambuco', new lang_string('configtitle', 'theme_bambuco'));
         $url = new moodle_url('/');
-        $setting = new admin_setting_heading('theme_bambuco/settingsfulldescription',
+        $setting = new admin_setting_heading(
+            'theme_bambuco/settingsfulldescription',
             new lang_string('choosereadme', 'theme_bambuco'),
-            new lang_string('settingsfulldescription', 'theme_bambuco', (string)$url));
+            new lang_string('settingsfulldescription', 'theme_bambuco', (string)$url)
+        );
         $settingsfull->add($setting);
         $settings->add('theme_bambuco', $settingsfull);
     }

@@ -29,7 +29,7 @@ $THEME->sheets = [];
 $THEME->editor_sheets = ['tinyeditor'];
 $THEME->editor_scss = [];
 $THEME->usefallback = false;
-$THEME->scss = function($theme) {
+$THEME->scss = function ($theme) {
     return theme_bambuco_get_main_scss_content($theme);
 };
 

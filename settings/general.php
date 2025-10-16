@@ -29,7 +29,6 @@ defined('MOODLE_INTERNAL') || die();
 $page = new admin_settingpage('theme_bambuco_general', get_string('generalsettings', 'theme_bambuco'));
 
 if ($ADMIN->fulltree) {
-
     $subtheme = utils::settingup_subtheme();
     $subthemekey = empty($subtheme) ? '' : '_' . $subtheme->id;
 
@@ -38,9 +37,14 @@ if ($ADMIN->fulltree) {
         // Blocks to be excluded when this theme is enabled in the "Add a block" list: Administration, Navigation, Courses and
         // Section links.
         $default = 'navigation,settings,course_list,section_links';
-        $setting = new admin_setting_configtext('theme_bambuco/unaddableblocks' . $subthemekey,
-            get_string('unaddableblocks', 'theme_bambuco'), get_string('unaddableblocks_desc', 'theme_bambuco'),
-            $default, PARAM_TEXT);
+        $setting = new admin_setting_configtext(
+            'theme_bambuco/unaddableblocks' . $subthemekey,
+            get_string('unaddableblocks',
+            'theme_bambuco'),
+            get_string('unaddableblocks_desc', 'theme_bambuco'),
+            $default,
+            PARAM_TEXT
+        );
         $page->add($setting);
     }
 
@@ -77,8 +81,14 @@ if ($ADMIN->fulltree) {
         $title = get_string('presetfiles', 'theme_bambuco');
         $description = get_string('presetfiles_desc', 'theme_bambuco');
 
-        $setting = new admin_setting_configstoredfile($name, $title, $description, 'preset', 0,
-            ['maxfiles' => 20, 'accepted_types' => ['.scss']]);
+        $setting = new admin_setting_configstoredfile(
+            $name,
+            $title,
+            $description,
+            'preset',
+            0,
+            ['maxfiles' => 20, 'accepted_types' => ['.scss']]
+        );
         $page->add($setting);
     }
 
@@ -168,6 +178,6 @@ if ($ADMIN->fulltree) {
         $setting->set_updatedcallback('theme_reset_all_caches');
         $page->add($setting);
     }
-
 }
+
 $settings->add('theme_bambuco', $page);

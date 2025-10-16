@@ -36,18 +36,22 @@ $url = new moodle_url('/theme/bambuco/subthemes.php', []);
 
 // Delete an knowlegde base item, after confirmation.
 if ($delete && confirm_sesskey()) {
-
     $subtheme = \theme_bambuco\local\utils::get_subtheme($delete);
+
     if ($confirm != md5($delete)) {
         echo $OUTPUT->header();
         echo $OUTPUT->heading(get_string('subthemedelete', 'theme_bambuco'));
         $optionsyes = ['delete' => $delete, 'confirm' => md5($delete), 'sesskey' => sesskey()];
-        echo $OUTPUT->confirm(get_string('deletecheck', '', "'{$subtheme->name}'"),
-                                new moodle_url($url, $optionsyes), $url);
+        echo $OUTPUT->confirm(
+            get_string('deletecheck',
+            '',
+            "'{$subtheme->name}'"),
+            new moodle_url($url, $optionsyes),
+            $url
+        );
         echo $OUTPUT->footer();
         die;
     } else if (data_submitted()) {
-
         $DB->delete_records('theme_bambuco_subthemes', ['id' => $delete]);
 
         $event = \theme_bambuco\event\subtheme_deleted::create([

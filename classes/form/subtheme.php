@@ -34,7 +34,6 @@ use theme_bambuco\local\utils;
  * @license    Commercial
  */
 class subtheme extends \moodleform {
-
     /**
      * Add elements to form
      */
@@ -84,6 +83,5 @@ class subtheme extends \moodleform {
 
         // Finally set the current form data.
         $this->set_data($data);
-
     }
 }

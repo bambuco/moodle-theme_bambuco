@@ -27,7 +27,6 @@ defined('MOODLE_INTERNAL') || die();
 $page = new admin_settingpage('theme_bambuco_courses', new lang_string('coursessettings', 'theme_bambuco'));
 
 if ($ADMIN->fulltree) {
-
     // Header position.
     $options = [
         'over' => new lang_string('coursesheaderposition_over', 'theme_bambuco'),
@@ -152,7 +151,6 @@ if ($ADMIN->fulltree) {
     $customfields = $DB->get_records_sql($sql);
 
     if (is_array($fields) && count($fields) > 0) {
-
         foreach ($customfields as $k => $v) {
             $fields[$k] = format_string($v->name, true);
         }
@@ -163,6 +161,6 @@ if ($ADMIN->fulltree) {
     $description = new lang_string('coursewidthfield_desc', 'theme_bambuco');
     $setting = new admin_setting_configselect($name, $title, $description, 0, $fields);
     $page->add($setting);
-
 }
+
 $settings->add('theme_bambuco', $page);

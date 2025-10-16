@@ -30,7 +30,6 @@ defined('MOODLE_INTERNAL') || die();
 $page = new admin_settingpage('theme_bambuco_skin', get_string('skinsettings', 'theme_bambuco'));
 
 if ($ADMIN->fulltree) {
-
     // Manually checked skins that are not compatible with Moodle.
     $notcompatible = ['morph'];
     $skins = [];
@@ -46,7 +45,6 @@ if ($ADMIN->fulltree) {
     $files = array_diff($filesinpath, ['..', '.']);
 
     foreach ($files as $file) {
-
         if (in_array($file, $notcompatible)) {
             continue;
         }
@@ -64,17 +62,26 @@ if ($ADMIN->fulltree) {
 
         if (utils::iscustomizable_subtheme('skin', $subtheme)) {
             // Skin to customize the appearance.
-            $setting = new admin_setting_configselect('theme_bambuco/skin' . $subthemekey,
-                get_string('skin', 'theme_bambuco'), get_string('skin_desc', 'theme_bambuco'), '', $skins);
+            $setting = new admin_setting_configselect(
+                'theme_bambuco/skin' . $subthemekey,
+                get_string('skin', 'theme_bambuco'),
+                get_string('skin_desc', 'theme_bambuco'),
+                '',
+                $skins
+            );
             $setting->set_updatedcallback('theme_reset_all_caches');
             $page->add($setting);
         }
 
     } else {
-        $page->add(new admin_setting_heading('theme_bambuco_skin',
-            get_string('skins_none', 'theme_bambuco'), ''));
+        $page->add(
+            new admin_setting_heading(
+                'theme_bambuco_skin',
+                get_string('skins_none', 'theme_bambuco'),
+                ''
+            )
+        );
     }
-
 }
 
 $settings->add('theme_bambuco', $page);

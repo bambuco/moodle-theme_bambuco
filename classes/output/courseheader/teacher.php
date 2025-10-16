@@ -28,7 +28,6 @@ use templatable;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class teacher implements renderable, templatable {
-
     /**
      * @var object Course information.
      */
@@ -65,8 +64,8 @@ class teacher implements renderable, templatable {
         // Course instructors.
         if ($course->has_course_contacts()) {
             $instructors = $course->get_course_contacts();
-            if ($instructors && count($instructors) > 0) {
 
+            if ($instructors && count($instructors) > 0) {
                 $teachers = [];
                 foreach ($instructors as $key => $instructor) {
                     $teacher = new \stdClass();

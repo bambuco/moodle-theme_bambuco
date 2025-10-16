@@ -44,7 +44,6 @@ $editform = new \theme_bambuco\form\subtheme(null, ['data' => $subtheme]);
 if ($editform->is_cancelled()) {
     redirect($url);
 } else if ($data = $editform->get_data()) {
-
     $customsettings = new stdClass();
     foreach (\theme_bambuco\local\utils::SUBTHEME_SETTINGS as $setting) {
         $key = 'setting_' . $setting;

@@ -26,7 +26,6 @@ use theme_bambuco\local\utils;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class hook_callbacks {
-
     /**
      * Callback to add custom skin.
      *
@@ -48,7 +47,6 @@ class hook_callbacks {
                 utils::set_subtheme($SESSION->theme_bambuco_subthemecourse[$COURSE->id]);
             }
         } else if ($COURSE->id != SITEID && !empty($config->multithemecoursefield)) {
-
             // Load custom course fields.
             $handler = \core_customfield\handler::get_handler('core_course', 'course');
             $datas = $handler->get_instance_data($COURSE->id, true);
@@ -84,7 +82,6 @@ class hook_callbacks {
                 $PAGE->requires->css('/theme/bambuco/skin/fixes/bootswatch/' . $skin . '/styles.css');
             }
         }
-
     }
 
     /**
@@ -140,7 +137,6 @@ class hook_callbacks {
 
         // Course header.
         if (!in_array($config->coursesheader, ['none', 'default'])) {
-
             $inpage = utils::use_custom_header();
             if ($inpage) {
                 $coursebanner = utils::get_courseimage($PAGE->course);
@@ -188,10 +184,10 @@ class hook_callbacks {
 
                 if (!$ok) {
                     redirect(
-                            new \moodle_url('/login/index.php'),
-                            get_string('altcha_expired', 'theme_bambuco'),
-                            null,
-                            \core\output\notification::NOTIFY_ERROR
+                        new \moodle_url('/login/index.php'),
+                        get_string('altcha_expired', 'theme_bambuco'),
+                        null,
+                        \core\output\notification::NOTIFY_ERROR
                     );
                 }
             }
@@ -243,7 +239,6 @@ class hook_callbacks {
 
         // Check for not logged in.
         if (!empty($config->multithemeuserfield)) {
-
             $field = $DB->get_record('user_info_data', ['fieldid' => $config->multithemeuserfield, 'userid' => $USER->id]);
             if ($field) {
                 $subtheme = utils::get_subthemebyidnumber($field->data);
@@ -253,12 +248,10 @@ class hook_callbacks {
                     return;
                 }
             }
-
         }
 
         $SESSION->theme_bambuco_subtheme = false;
         utils::set_subtheme(null);
-
     }
 
     /**

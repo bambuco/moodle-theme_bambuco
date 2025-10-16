@@ -54,9 +54,7 @@ if ($inpopup) {
         'bodyattributes' => $OUTPUT->body_attributes($extraclasses),
     ];
     echo $OUTPUT->render_from_template('theme_boost/columns1', $templatecontext);
-
 } else {
-
     $extraclasses = ['uses-drawers'];
 
     if ($courseindexopen) {

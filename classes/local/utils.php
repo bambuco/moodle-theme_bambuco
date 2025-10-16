@@ -119,10 +119,10 @@ class utils {
                                 $file->get_filearea() . $file->get_filepath() . $file->get_filename();
 
                     $url = \moodle_url::make_file_url(
-                            "$CFG->wwwroot/pluginfile.php",
-                            $urlpath,
-                            !$isimage
-                        );
+                        "$CFG->wwwroot/pluginfile.php",
+                        $urlpath,
+                        !$isimage
+                    );
 
                     $courseimage = $url;
                     break;
@@ -222,10 +222,10 @@ class utils {
                             break;
                         } else {
                             $coursefooter->content = format_text(
-                                                                $options[1],
-                                                                FORMAT_HTML,
-                                                                ['context' => \context_course::instance($course->id)]
-                                                            );
+                                $options[1],
+                                FORMAT_HTML,
+                                ['context' => \context_course::instance($course->id)]
+                            );
                             break;
                         }
                     }

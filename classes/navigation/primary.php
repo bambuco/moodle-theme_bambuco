@@ -29,7 +29,6 @@ use renderer_base;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class primary extends \core\navigation\output\primary {
-
     /**
      * Get/Generate the user menu.
      *

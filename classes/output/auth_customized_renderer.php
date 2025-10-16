@@ -32,7 +32,6 @@ namespace theme_bambuco\output;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class auth_customized_renderer extends \auth_customized\output\renderer {
-
     /**
      * Return the template content for the signup.
      *
@@ -42,5 +41,4 @@ class auth_customized_renderer extends \auth_customized\output\renderer {
     public function render_signup(\auth_customized\forms\signup $form): string {
         return $this->output->render_login_signup_form($form);
     }
-
 }

@@ -30,7 +30,7 @@ define('NO_DEBUG_DISPLAY', true);
 
 define('ABORT_AFTER_CONFIG', true);
 require('../../config.php');
-require_once($CFG->dirroot.'/lib/csslib.php');
+require_once($CFG->dirroot . '/lib/csslib.php');
 
 $themename = 'bambuco';
 if ($slashargument = min_get_slash_argument()) {
@@ -47,11 +47,13 @@ if ($slashargument = min_get_slash_argument()) {
         $usesvg = true;
     }
 
-    list($rev, $type, $subthemeid) = explode('/', $slashargument, 3);
+    $args = explode('/', $slashargument, 3);
+    $rev = $args[0];
+    $type = $args[1];
+    $subthemeid = $args[2] ?? 0;
     $rev       = min_clean_param($rev, 'RAW');
     $type      = min_clean_param($type, 'SAFEDIR');
     $subthemeid = min_clean_param($subthemeid, 'INT');
-
 } else {
     $rev       = min_optional_param('rev', 0, 'RAW');
     $type      = min_optional_param('type', 'all', 'SAFEDIR');
@@ -149,7 +151,6 @@ if ($type === 'editor' || $type === 'editor-rtl') {
     } else {
         css_send_uncached_css($csscontent);
     }
-
 }
 
 if (($fallbacksheet = theme_styles_fallback_content($theme)) && !bambuco_has_css_cached_content($theme, $subtheme)) {
@@ -194,7 +195,6 @@ if ($sendaftergeneration || $lock) {
             // Do not pollute browser caches if invalid revision requested,
             // let's ignore legacy IE breakage here too.
             css_send_uncached_css(file_get_contents($candidatesheet));
-
         } else {
             // Real browsers - this is the expected result!
             css_send_cached_css($candidatesheet, $etag);

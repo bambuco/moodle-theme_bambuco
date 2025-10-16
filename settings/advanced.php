@@ -30,22 +30,31 @@ defined('MOODLE_INTERNAL') || die();
 $page = new admin_settingpage('theme_bambuco_advanced', get_string('advancedsettings', 'theme_bambuco'));
 
 if ($ADMIN->fulltree) {
-
     $subtheme = utils::settingup_subtheme();
     $subthemekey = empty($subtheme) ? '' : '_' . $subtheme->id;
 
     if (utils::iscustomizable_subtheme('bbcoscsspre', $subtheme)) {
         // Raw SCSS to include before the content.
-        $setting = new admin_setting_scsscode('theme_bambuco/bbcoscsspre' . $subthemekey,
-            get_string('bbcoscsspre', 'theme_bambuco'), get_string('bbcoscsspre_desc', 'theme_bambuco'), '', PARAM_RAW);
+        $setting = new admin_setting_scsscode(
+            'theme_bambuco/bbcoscsspre' . $subthemekey,
+            get_string('bbcoscsspre', 'theme_bambuco'),
+            get_string('bbcoscsspre_desc', 'theme_bambuco'),
+            '',
+            PARAM_RAW
+        );
         $setting->set_updatedcallback('theme_reset_all_caches');
         $page->add($setting);
     }
 
     if (utils::iscustomizable_subtheme('bbcoscss', $subtheme)) {
         // Raw SCSS to include after the content.
-        $setting = new admin_setting_scsscode('theme_bambuco/bbcoscss' . $subthemekey, get_string('bbcoscss', 'theme_bambuco'),
-            get_string('bbcoscss_desc', 'theme_bambuco'), '', PARAM_RAW);
+        $setting = new admin_setting_scsscode(
+            'theme_bambuco/bbcoscss' . $subthemekey,
+            get_string('bbcoscss', 'theme_bambuco'),
+            get_string('bbcoscss_desc', 'theme_bambuco'),
+            '',
+            PARAM_RAW
+        );
         $setting->set_updatedcallback('theme_reset_all_caches');
         $page->add($setting);
     }

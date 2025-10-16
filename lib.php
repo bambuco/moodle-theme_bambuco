@@ -86,13 +86,13 @@ function theme_bambuco_get_extra_scss($theme) {
  * @return bool
  */
 function theme_bambuco_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = []) {
-    if ($context->contextlevel == CONTEXT_SYSTEM
-            && (
-                in_array($filearea, ['logo', 'backgroundimage', 'loginbackgroundimage', 'courseheaderimagefile']) ||
-                strpos($filearea, 'backgroundimage_') === 0 // Subtheme bgimage.
-            )
-        ) {
-
+    if (
+        $context->contextlevel == CONTEXT_SYSTEM &&
+        (
+            in_array($filearea, ['logo', 'backgroundimage', 'loginbackgroundimage', 'courseheaderimagefile']) ||
+            strpos($filearea, 'backgroundimage_') === 0 // Subtheme bgimage.
+        )
+    ) {
         $theme = theme_config::load('bambuco');
         // By default, theme files must be cache-able by both browsers and proxies.
         if (!array_key_exists('cacheability', $options)) {
@@ -169,7 +169,7 @@ function theme_bambuco_get_pre_scss($theme) {
         if (empty($value)) {
             continue;
         }
-        array_map(function($target) use (&$scss, $value) {
+        array_map(function ($target) use (&$scss, $value) {
             $scss .= '$' . $target . ': ' . $value . ";\n";
         }, (array) $targets);
     }
@@ -222,7 +222,6 @@ function theme_bambuco_css_postprocess($css) {
             try {
                 // Compile!
                 $themescss = $compiler->to_css();
-
             } catch (\Exception $e) {
                 $themescss = '';
                 debugging('Error while compiling SCSS: ' . $e->getMessage(), DEBUG_DEVELOPER);
@@ -231,7 +230,6 @@ function theme_bambuco_css_postprocess($css) {
             // Try to save memory.
             $compiler = null;
             unset($compiler);
-
         }
 
         $css = str_replace('/**EDITOR-STYLES**/', $themescss, $css);
@@ -264,6 +262,5 @@ function theme_bambuco_alter_css_urls(&$urls) {
             $url = new moodle_url($url);
             $urls[$key] = $url;
         }
-
     }
 }

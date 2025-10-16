@@ -34,7 +34,6 @@ use core\output\html_writer;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class core_renderer extends \theme_boost\output\core_renderer {
-
     /**
      * Renders the login form.
      *
@@ -52,8 +51,11 @@ class core_renderer extends \theme_boost\output\core_renderer {
             $url = $url->out(false);
         }
         $context->logourl = $url;
-        $context->sitename = format_string($SITE->fullname, true,
-                ['context' => \context_course::instance(SITEID), "escape" => false]);
+        $context->sitename = format_string(
+            $SITE->fullname,
+            true,
+            ['context' => \context_course::instance(SITEID), "escape" => false]
+        );
         $context->wwwroot = (string)(new \moodle_url('/'));
 
         if ($context->hasidentityproviders) {
@@ -136,11 +138,9 @@ class core_renderer extends \theme_boost\output\core_renderer {
         $inpage = \theme_bambuco\local\utils::use_custom_header();
 
         if ($inpage) {
-
             $course = $this->page->course;
 
             if ($course) {
-
                 if ($config->coursesheader != 'basic') {
                     if ($config->coursesheader == 'none') {
                         return '';
@@ -169,7 +169,6 @@ class core_renderer extends \theme_boost\output\core_renderer {
                         }
 
                         if ($one[0] == '*' || has_capability($one[0], $context)) {
-
                             $item = new \stdClass();
                             $item->target = trim($one[3]);
                             $item->name = trim($one[4]);
@@ -202,14 +201,12 @@ class core_renderer extends \theme_boost\output\core_renderer {
                                     $cm = get_coursemodule_from_instance($modulename, $instance->id, $course->id);
 
                                     $item->url = new \moodle_url('/mod/' . $modulename . '/view.php', ['id' => $cm->id]);
-
                                 } else {
                                     $item->url = new \moodle_url('/mod/' . $modulename . '/index.php', ['id' => $course->id]);
                                 }
                             }
 
                             $menudata['options'][] = $item;
-
                         }
                     }
 
@@ -218,7 +215,6 @@ class core_renderer extends \theme_boost\output\core_renderer {
                     }
                 }
             }
-
         }
 
         return $html;
@@ -254,7 +250,6 @@ class core_renderer extends \theme_boost\output\core_renderer {
         $content = parent::render_login_signup_form($form);
 
         if ($signupidentityproviders && !$CFG->authpreventaccountcreation) {
-
             $authsequence = get_enabled_auth_plugins(true);
             $providers = \auth_plugin_base::get_identity_providers($authsequence);
             $identityproviders = \auth_plugin_base::prepare_identity_providers_for_output($providers, $this);
@@ -283,7 +278,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
             $additionalclasses = explode(' ', $additionalclasses);
         }
 
-        $bodyattributes = ' id="'. $this->body_id() . '"';
+        $bodyattributes = ' id="' . $this->body_id() . '"';
         $coursewidthfield = get_config('theme_bambuco', 'coursewidthfield');
 
         $bodyclasses = $this->body_css_classes($additionalclasses);
@@ -306,5 +301,4 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
         return $bodyattributes;
     }
-
 }

@@ -27,7 +27,6 @@ defined('MOODLE_INTERNAL') || die();
 $page = new admin_settingpage('theme_bambuco_multitheme', new lang_string('multitheme', 'theme_bambuco'));
 
 if ($ADMIN->fulltree) {
-
     // Enable/disable multitheme.
     $name = 'theme_bambuco/multitheme';
     $title = new lang_string('multithemeenabled', 'theme_bambuco');
@@ -71,7 +70,6 @@ if ($ADMIN->fulltree) {
     $setting = new admin_setting_configselect($name, $title, $description, 0, $fields);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
-
 }
 
 $settings->add('theme_bambuco', $page);

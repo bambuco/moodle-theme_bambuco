@@ -27,7 +27,6 @@ defined('MOODLE_INTERNAL') || die();
 $page = new admin_settingpage('theme_bambuco_login', new lang_string('loginsettings', 'theme_bambuco'));
 
 if ($ADMIN->fulltree) {
-
     if (PHP_VERSION_ID > 80100) {
         // Include ALTCHA in login.
         $name = 'theme_bambuco/usealtcha';
@@ -106,6 +105,5 @@ if ($ADMIN->fulltree) {
     $setting = new admin_setting_confightmleditor($name, $title, $description, '');
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
-
 }
 $settings->add('theme_bambuco', $page);
