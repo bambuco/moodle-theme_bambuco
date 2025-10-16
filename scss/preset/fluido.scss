@@ -295,8 +295,8 @@ a:not([class]) {
                 &.active:hover,
                 &:focus,
                 &:hover {
-                    color: var(--primaryreverse);
                     background-color: var(--activedefault);
+                    color: var(--activereverse);
                 }
             }
         }
