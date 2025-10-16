@@ -117,6 +117,16 @@ $spacers: (
     6: ($spacer * 3)
 ) !default;
 
+:root {
+    --primary: #325d88;
+    --primaryreverse: #fff;
+    --secondary: #6c757d;
+    --secondaryreverse: #fff;
+    --activedefault: #93c54b;
+    --activereverse: #325d88;
+    --bglight: #edf5ff;
+}
+
 // Import FontAwesome.
 @import "fontawesome";
 
@@ -134,16 +144,6 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: #6e6e6e;
-}
-
-:root {
-    --primary: #325d88;
-    --primaryreverse: #fff;
-    --secondary: #6c757d;
-    --secondaryreverse: #fff;
-    --activedefault: #93c54b;
-    --activereverse: #325d88;
-    --bglight: #edf5ff;
 }
 
 // Rounded user pictures

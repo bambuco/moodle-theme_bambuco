@@ -33,7 +33,6 @@ function xmldb_theme_bambuco_upgrade($oldversion) {
     $dbman = $DB->get_manager(); // Loads moodle_database class.
 
     if ($oldversion < 2025011002.02) {
-
         // Define new table.
         $table = new xmldb_table('theme_bambuco_subthemes');
 
@@ -60,7 +59,6 @@ function xmldb_theme_bambuco_upgrade($oldversion) {
     }
 
     if ($oldversion < 2025011003) {
-
         $select = "plugin = 'theme_bambuco' AND name LIKE 'scss%'";
         $currentconfig = $DB->get_records_select('config_plugins', $select);
 

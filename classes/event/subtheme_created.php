@@ -31,7 +31,6 @@ namespace theme_bambuco\event;
  *
  */
 class subtheme_created extends \core\event\base {
-
     /**
      * Init method.
      */
@@ -67,5 +66,4 @@ class subtheme_created extends \core\event\base {
     public function get_url() {
         return new \moodle_url('/theme/bambuco/subtheme_edit.php', ['id' => $this->objectid]);
     }
-
 }

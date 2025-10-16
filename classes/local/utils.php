@@ -27,7 +27,6 @@ require_once($CFG->libdir . '/form/selectwithlink.php');
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class utils {
-
     /**
      * Settings that the subtheme can override.
      *
@@ -76,7 +75,6 @@ class utils {
 
         // Only apply to headings that don't already have HTML tags.
         if (strip_tags($text) == $text) {
-
             if ($removeextra && strpos($text, '(') > 0) {
                 // Remove content between parentheses.
                 $text = preg_replace('/\([^)]*\)/', '', $text);
@@ -117,9 +115,14 @@ class utils {
                 $isimage = $file->is_valid_image();
 
                 if ($isimage) {
-                    $url = \moodle_url::make_file_url("$CFG->wwwroot/pluginfile.php",
-                            '/' . $file->get_contextid() . '/' . $file->get_component() . '/' .
-                            $file->get_filearea() . $file->get_filepath() . $file->get_filename(), !$isimage);
+                    $urlpath = '/' . $file->get_contextid() . '/' . $file->get_component() . '/' .
+                                $file->get_filearea() . $file->get_filepath() . $file->get_filename();
+
+                    $url = \moodle_url::make_file_url(
+                            "$CFG->wwwroot/pluginfile.php",
+                            $urlpath,
+                            !$isimage
+                        );
 
                     $courseimage = $url;
                     break;
@@ -128,11 +131,10 @@ class utils {
         }
 
         if (empty($courseimage) && $config->courseheaderimage != 'overviewonly') {
-
             switch ($config->courseheaderimagetype) {
                 case 'generated':
                     $courseimage = $OUTPUT->get_generated_image_for_id($course->id);
-                break;
+                    break;
                 default:
                     $imageurl = $PAGE->theme->setting_file_url('courseheaderimagefile', 'courseheaderimagefile');
                     if (!empty($imageurl)) {
@@ -198,7 +200,6 @@ class utils {
 
         // Content by category.
         if (!empty($config->contentbycategory) && $course->id != SITEID) {
-
             $category = $DB->get_record('course_categories', ['id' => $course->category]);
 
             if ($category) {
@@ -220,8 +221,11 @@ class utils {
                             $coursefooter->name = $category->name;
                             break;
                         } else {
-                            $coursefooter->content = format_text($options[1], FORMAT_HTML,
-                                                    ['context' => \context_course::instance($course->id)]);
+                            $coursefooter->content = format_text(
+                                                                $options[1],
+                                                                FORMAT_HTML,
+                                                                ['context' => \context_course::instance($course->id)]
+                                                            );
                             break;
                         }
                     }
