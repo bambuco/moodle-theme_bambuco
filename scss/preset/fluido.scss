@@ -136,6 +136,16 @@ body {
     color: #6e6e6e;
 }
 
+:root {
+    --primary: #325d88;
+    --primaryreverse: #fff;
+    --secondary: #6c757d;
+    --secondaryreverse: #fff;
+    --activedefault: #93c54b;
+    --activereverse: #325d88;
+    --bglight: #edf5ff;
+}
+
 // Rounded user pictures
 .userpicture {
     border-radius: 50%;
@@ -155,6 +165,10 @@ body {
 
 .btn-outline-warning {
     @include button-outline-variant($warning-outline);
+}
+
+a {
+    text-decoration: none;
 }
 
 a:not([class]) {
@@ -270,7 +284,8 @@ a:not([class]) {
             align-items: center;
 
             .nav-link {
-                color: $white;
+                color: var(--primaryreverse);
+                background-color: var(--primary);
                 position: relative;
                 height: 10px;
                 padding: 13px;
@@ -280,7 +295,7 @@ a:not([class]) {
                 &.active:hover,
                 &:focus,
                 &:hover {
-                    color: var(--primary);
+                    color: var(--primaryreverse);
                     background-color: var(--activedefault);
                 }
             }
@@ -617,7 +632,7 @@ a:not([class]) {
             &:hover {
                 color: var(--activedefault);
                 background-color: transparent;
-                border-bottom: 3px solid var(--secondary);
+                border-bottom: 3px solid var(--activedefault);
             }
         }
     }

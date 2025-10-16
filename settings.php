@@ -33,30 +33,35 @@ if ($bbst >= 0) {
 
 $subtheme = theme_bambuco\local\utils::settingup_subtheme();
 
-$settings = new admin_category('theme_bambuco', new lang_string('configtitle', 'theme_bambuco'));
+// Show the settings page in installation and when exist any setting.
+// If not, the settings page will not be shown in the admin tree.
+$any = get_config('theme_bambuco', 'preset');
+if ($ADMIN->fulltree || !empty($any)) {
+    $settings = new admin_category('theme_bambuco', new lang_string('configtitle', 'theme_bambuco'));
 
-require_once(dirname(__FILE__) . '/settings/general.php');
-require_once(dirname(__FILE__) . '/settings/advanced.php');
-require_once(dirname(__FILE__) . '/settings/skin.php');
+    require_once(dirname(__FILE__) . '/settings/general.php');
+    require_once(dirname(__FILE__) . '/settings/advanced.php');
+    require_once(dirname(__FILE__) . '/settings/skin.php');
 
-// Not for subthemes.
-if (!$subtheme) {
-    require_once(dirname(__FILE__) . '/settings/login.php');
-    require_once(dirname(__FILE__) . '/settings/courses.php');
-    require_once(dirname(__FILE__) . '/settings/multitheme.php');
-}
+    // Not for subthemes.
+    if (!$subtheme) {
+        require_once(dirname(__FILE__) . '/settings/login.php');
+        require_once(dirname(__FILE__) . '/settings/courses.php');
+        require_once(dirname(__FILE__) . '/settings/multitheme.php');
+    }
 
-// Manage the subthemes.
-$externalpage = new admin_externalpage('theme_bambuco_subthemes', new lang_string('subthemes', 'theme_bambuco'),
-new moodle_url("/theme/bambuco/subthemes.php"), 'moodle/site:config');
-$settings->add('theme_bambuco', $externalpage);
+    // Manage the subthemes.
+    $externalpage = new admin_externalpage('theme_bambuco_subthemes', new lang_string('subthemes', 'theme_bambuco'),
+    new moodle_url("/theme/bambuco/subthemes.php"), 'moodle/site:config');
+    $settings->add('theme_bambuco', $externalpage);
 
-if ($ADMIN->fulltree && !$subtheme) {
-    $settingsfull = new admin_settingpage('themesettingbambuco', new lang_string('configtitle', 'theme_bambuco'));
-    $url = new moodle_url('/');
-    $setting = new admin_setting_heading('theme_bambuco/settingsfulldescription',
-        new lang_string('choosereadme', 'theme_bambuco'),
-        new lang_string('settingsfulldescription', 'theme_bambuco', (string)$url));
-    $settingsfull->add($setting);
-    $settings->add('theme_bambuco', $settingsfull);
+    if ($ADMIN->fulltree && !$subtheme) {
+        $settingsfull = new admin_settingpage('themesettingbambuco', new lang_string('configtitle', 'theme_bambuco'));
+        $url = new moodle_url('/');
+        $setting = new admin_setting_heading('theme_bambuco/settingsfulldescription',
+            new lang_string('choosereadme', 'theme_bambuco'),
+            new lang_string('settingsfulldescription', 'theme_bambuco', (string)$url));
+        $settingsfull->add($setting);
+        $settings->add('theme_bambuco', $settingsfull);
+    }
 }
