@@ -198,8 +198,11 @@ a:not([class]) {
 
 // Custom login page
 .login-container {
-    background-color: var(--primary);
+    background-color: transparent;
     color: var(--primaryreverse);
+    box-shadow: none;
+    padding: 0;
+    text-align: center;
 
     a:not([class]) {
         color: var(--activedefault);
@@ -226,6 +229,32 @@ a:not([class]) {
         }
     }
 
+    .someallowguest,
+    .login-identityproviders,
+    .login-form {
+        background-color: var(--primary);
+        padding: 2em;
+        border-radius: $border-radius;
+        margin-bottom: 10px;
+    }
+
+    .login-signup {
+        margin: 20px 0;
+        padding: 20px;
+
+        a.btn {
+            width: 100%;
+            background-color: var(--activedefault);
+            color: var(--activereverse);
+            font-weight: normal;
+            font-size: 110%;
+        }
+    }
+
+    .login-divider {
+        display: none;
+    }
+
     .login-form-submit {
         text-align: center;
     }
@@ -241,10 +270,6 @@ a:not([class]) {
             color: var(--primaryreverse);
             border: 1px solid var(--primaryreverse);
         }
-    }
-
-    .dropdown-toggle {
-        color: var(--primaryreverse);
     }
 
     /* stylelint-disable selector-type-no-unknown */
@@ -673,6 +698,21 @@ a:not([class]) {
             color: var(--primaryreverse);
         }
 
+        &.pageitem {
+            background-color: var(--activedefault);
+            color: var(--activereverse);
+
+            .courseindex-link,
+            .courseindex-chevron,
+            a {
+                color: var(--activereverse);
+
+                &:hover {
+                    color: var(--activereverse);
+                }
+            }
+        }
+
         .completioninfo {
             &.completion_complete {
                 color: $lightgreen;
@@ -700,6 +740,7 @@ a:not([class]) {
     color: var(--primaryreverse);
     width: 100%;
     padding-top: 50px;
+    height: auto !important;
 
     .page-context-header {
         background-color: transparent !important;
