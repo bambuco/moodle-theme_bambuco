@@ -272,6 +272,25 @@ a:not([class]) {
         }
     }
 
+    .alerts {
+        > .d-flex {
+            justify-content: center;
+
+            > .btn.btn-secondary {
+                background-color: transparent !important;
+                box-shadow: none !important;
+                color: var(--activedefault) !important;
+                font-weight: normal !important;
+                border-bottom: 1px solid !important;
+                border-radius: 0 !important;
+
+                &:hover {
+                    color: var(--primaryreverse) !important;
+                }
+            }
+        }
+    }
+
     /* stylelint-disable selector-type-no-unknown */
     altcha-widget {
         .altcha {
