@@ -211,6 +211,8 @@ a:not([class]) {
         }
     }
 
+    form.mform h3.d-flex,
+    h1.login-heading,
     h2.login-heading {
         color: var(--primaryreverse) !important;
         font-size: 1.1rem;
@@ -229,6 +231,9 @@ a:not([class]) {
         }
     }
 
+    #notice.box,
+    form.mform,
+    .signupform,
     .someallowguest,
     .login-identityproviders,
     .login-form {
@@ -259,6 +264,8 @@ a:not([class]) {
         text-align: center;
     }
 
+    .continuebutton .btn.btn-primary,
+    form.mform .btn.btn-primary,
     .login-form-submit .btn,
     .login-identityprovider-btn {
         background-color: var(--activedefault);
