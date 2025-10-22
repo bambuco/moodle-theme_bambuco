@@ -298,6 +298,12 @@ a:not([class]) {
         }
     }
 
+    #modal-content {
+        .modal-body {
+            color: var(--primary);
+        }
+    }
+
     /* stylelint-disable selector-type-no-unknown */
     altcha-widget {
         .altcha {
@@ -839,6 +845,13 @@ a:not([class]) {
 
 .format-onetopic .onelinetabs .tabs-wrapper.hasscroll {
     padding: 0;
+}
+
+.path-mod.format-onetopic.inpopup,
+.path-mod.format-onetopic.pagelayout-popup {
+    .tabs-wrapper {
+        display: none;
+    }
 }
 
 .course-section {
