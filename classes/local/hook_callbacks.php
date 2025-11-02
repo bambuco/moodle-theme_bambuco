@@ -107,32 +107,31 @@ class hook_callbacks {
 
         $otherfontfamily = $config->otherfontfamily;
 
-        if (empty($font) && empty($otherfontfamily)) {
-            return;
-        }
-
         $headers = [];
-        $headers[] = '<link rel="preconnect" href="https://fonts.googleapis.com">';
-        $headers[] = '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>';
+        if (!empty($font) || !empty($otherfontfamily)) {
 
-        $includefonts = [];
-        if (!empty($font)) {
-            $includefonts[] = $font;
-        }
+            $headers[] = '<link rel="preconnect" href="https://fonts.googleapis.com">';
+            $headers[] = '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>';
 
-        if (!empty($otherfontfamily)) {
-            $otherfontfamily = explode(',', $otherfontfamily);
-        } else {
-            $otherfontfamily = [];
-        }
+            $includefonts = [];
+            if (!empty($font)) {
+                $includefonts[] = $font;
+            }
 
-        $includefonts = array_merge($includefonts, $otherfontfamily);
+            if (!empty($otherfontfamily)) {
+                $otherfontfamily = explode(',', $otherfontfamily);
+            } else {
+                $otherfontfamily = [];
+            }
 
-        foreach ($includefonts as $font) {
-            $font = str_replace(' ', '+', $font);
-            $headers[] = '<link href="https://fonts.googleapis.com/css2?family='
-                                . $font
-                                . ':wght@400;500;600;700&display=swap" rel="stylesheet">';
+            $includefonts = array_merge($includefonts, $otherfontfamily);
+
+            foreach ($includefonts as $font) {
+                $font = str_replace(' ', '+', $font);
+                $headers[] = '<link href="https://fonts.googleapis.com/css2?family='
+                                    . $font
+                                    . ':wght@400;500;600;700&display=swap" rel="stylesheet">';
+            }
         }
 
         // Course header.
