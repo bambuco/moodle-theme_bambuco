@@ -18,7 +18,7 @@
  * Overriden theme boost core renderer.
  *
  * @package    theme_bambuco
- * @copyright  2023 David Herney Bernal - cirano. https://bambuco.co
+ * @copyright  2023 David Herney - cirano. https://bambuco.co
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -30,7 +30,7 @@ use core\output\html_writer;
  * Core renderers.
  *
  * @package    theme_bambuco
- * @copyright  2023 David Herney Bernal - cirano. https://bambuco.co
+ * @copyright  2023 David Herney - cirano. https://bambuco.co
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class core_renderer extends \theme_boost\output\core_renderer {
@@ -65,39 +65,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
         $usealtcha = get_config('theme_bambuco', 'usealtcha');
         if ($usealtcha) {
-            require_once($CFG->dirroot . '/theme/bambuco/thirdparty/altcha/vendor/autoload.php');
-
-            if (!isset($SESSION->bambuco_altcha_key)) {
-                $SESSION->bambuco_altcha_key = openssl_random_pseudo_bytes(32);
-            }
-
-            $config = get_config('theme_bambuco');
-            $altcha = new \AltchaOrg\Altcha\Altcha($SESSION->bambuco_altcha_key);
-
-            // Create a new challenge.
-            $options = new \AltchaOrg\Altcha\ChallengeOptions(
-                maxNumber: (int)$config->altchalevel, // The maximum random number.
-                expires: (new \DateTimeImmutable())->add(new \DateInterval('PT' . $config->altchavalidtime)),
-            );
-
-            $strings = [
-                'ariaLinkLabel' => get_string('altcha_arialinklabel', 'theme_bambuco'),
-                'error' => get_string('altcha_error', 'theme_bambuco'),
-                'expired' => get_string('altcha_expired', 'theme_bambuco'),
-                'footer' => get_string('altcha_footer', 'theme_bambuco'),
-                'label' => get_string('altcha_label', 'theme_bambuco'),
-                'verified' => get_string('altcha_verified', 'theme_bambuco'),
-                'verifying' => get_string('altcha_verifying', 'theme_bambuco'),
-                'waitAlert' => get_string('altcha_waitalert', 'theme_bambuco'),
-            ];
-
-            $challenge = $altcha->createChallenge($options);
-            $context->altchawidget = (object)[
-                'name' => 'bbcoaltcha',
-                'maxnumber' => (int)$config->altchalevel,
-                'challengejson' => json_encode($challenge),
-                'strings' => json_encode($strings),
-            ];
+            $context->altchawidget = \theme_bambuco\local\utils::get_altcha_widget_params('login');
         }
 
         return $this->render_from_template('core/loginform', $context);

@@ -298,10 +298,27 @@ a:not([class]) {
         }
     }
 
+    .invalid-feedback {
+        background-color: #efd3d3;
+        border-radius: 10px;
+
+        a {
+            color: var(--primary);
+
+            &:hover {
+                color: var(--secondary);
+            }
+        }
+    }
+
     #modal-content {
         .modal-body {
             color: var(--primary);
         }
+    }
+
+    [data-name="altcha"] {
+        width: 100%;
     }
 
     /* stylelint-disable selector-type-no-unknown */

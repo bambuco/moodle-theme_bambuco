@@ -109,7 +109,6 @@ class hook_callbacks {
 
         $headers = [];
         if (!empty($font) || !empty($otherfontfamily)) {
-
             $headers[] = '<link rel="preconnect" href="https://fonts.googleapis.com">';
             $headers[] = '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>';
 
@@ -168,18 +167,13 @@ class hook_callbacks {
         $config = get_config('theme_bambuco');
 
         if ($PAGE->pagetype == 'login-index' && !empty($config->usealtcha)) {
-            require_once($CFG->dirroot . '/theme/bambuco/thirdparty/altcha/vendor/autoload.php');
 
             $logintoken = optional_param('logintoken', '', PARAM_TEXT);
 
             // If not empty it is a login request.
             if (!empty($logintoken)) {
-                $bbcoaltcha = optional_param('bbcoaltcha', '', PARAM_TEXT);
-                $payload = !empty($bbcoaltcha) ? (array)@json_decode(base64_decode($bbcoaltcha)) : '';
 
-                $altcha = new \AltchaOrg\Altcha\Altcha($SESSION->bambuco_altcha_key ?? '');
-
-                $ok = $altcha->verifySolution($payload, true);
+                $ok = \theme_bambuco\local\utils::validate_altcha_solution('login');
 
                 if (!$ok) {
                     redirect(

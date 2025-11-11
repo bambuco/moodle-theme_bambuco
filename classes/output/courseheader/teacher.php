@@ -24,7 +24,7 @@ use templatable;
  * Output for the course header based in teacher presentation.
  *
  * @package    theme_bambuco
- * @copyright  2023 David Herney Bernal - cirano. https://bambuco.co
+ * @copyright  2023 David Herney - cirano. https://bambuco.co
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class teacher implements renderable, templatable {

@@ -18,7 +18,7 @@
  * This file is responsible for serving the one huge CSS of each theme.
  *
  * @package    theme_bambuco
- * @copyright  2023 David Herney Bernal - cirano. https://bambuco.co
+ * @copyright  2023 David Herney - cirano. https://bambuco.co
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

@@ -23,7 +23,7 @@ require_once($CFG->libdir . '/form/selectwithlink.php');
  * Some util functions.
  *
  * @package    theme_bambuco
- * @copyright  2023 David Herney Bernal - cirano. https://bambuco.co
+ * @copyright  2023 David Herney - cirano. https://bambuco.co
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class utils {
@@ -432,5 +432,79 @@ class utils {
         }
 
         return $keys;
+    }
+
+    /**
+     * Get the altcha widget parameters.
+     *
+     * @param string $target Target identifier.
+     * @return object Object with the widget parameters.
+     */
+    public static function get_altcha_widget_params(string $target): object {
+        global $CFG, $SESSION;
+
+        require_once($CFG->dirroot . '/theme/bambuco/thirdparty/altcha/vendor/autoload.php');
+
+        if (!isset($SESSION->bambuco_altcha)) {
+            $SESSION->bambuco_altcha = [];
+        }
+
+        if (!isset($SESSION->bambuco_altcha[$target])) {
+            $SESSION->bambuco_altcha[$target] = openssl_random_pseudo_bytes(32);
+        }
+
+        $config = get_config('theme_bambuco');
+        $altcha = new \AltchaOrg\Altcha\Altcha($SESSION->bambuco_altcha[$target]);
+
+        // Create a new challenge.
+        $options = new \AltchaOrg\Altcha\ChallengeOptions(
+            maxNumber: (int)$config->altchalevel, // The maximum random number.
+            expires: (new \DateTimeImmutable())->add(new \DateInterval('PT' . $config->altchavalidtime)),
+        );
+
+        $strings = [
+            'ariaLinkLabel' => get_string('altcha_arialinklabel', 'theme_bambuco'),
+            'error' => get_string('altcha_error', 'theme_bambuco'),
+            'expired' => get_string('altcha_expired', 'theme_bambuco'),
+            'footer' => get_string('altcha_footer', 'theme_bambuco'),
+            'label' => get_string('altcha_label', 'theme_bambuco'),
+            'verified' => get_string('altcha_verified', 'theme_bambuco'),
+            'verifying' => get_string('altcha_verifying', 'theme_bambuco'),
+            'waitAlert' => get_string('altcha_waitalert', 'theme_bambuco'),
+        ];
+
+        $challenge = $altcha->createChallenge($options);
+        $params = (object)[
+            'name' => 'bbcoaltcha',
+            'maxnumber' => (int)$config->altchalevel,
+            'challengejson' => json_encode($challenge),
+            'strings' => json_encode($strings),
+        ];
+
+        return $params;
+
+    }
+
+    /**
+     * Validate the altcha solution.
+     *
+     * @param string $target Target identifier.
+     * @return bool
+     */
+    public static function validate_altcha_solution(string $target): bool {
+        global $CFG, $SESSION;
+
+        if (!isset($SESSION->bambuco_altcha) || !isset($SESSION->bambuco_altcha[$target])) {
+            return false;
+        }
+
+        require_once($CFG->dirroot . '/theme/bambuco/thirdparty/altcha/vendor/autoload.php');
+
+        $bbcoaltcha = optional_param('bbcoaltcha', '', PARAM_TEXT);
+        $payload = !empty($bbcoaltcha) ? (array)@json_decode(base64_decode($bbcoaltcha)) : '';
+
+        $altcha = new \AltchaOrg\Altcha\Altcha($SESSION->bambuco_altcha[$target] ?? '');
+
+        return $altcha->verifySolution($payload, true);
     }
 }

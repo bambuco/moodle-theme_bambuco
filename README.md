@@ -13,7 +13,7 @@ Package tested in: moodle 4.5+.
 ```
 
 ## ABOUT ##
-- **Developed by:** David Herney - david dot bernal at bambuco dot co
+- **Developed by:** David Herney - david dot herney at bambuco dot co
 - **GIT:** https://github.com/bambuco/moodle-theme_bambuco
 
 ## IN VERSION ##

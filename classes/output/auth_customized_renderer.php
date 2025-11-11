@@ -18,7 +18,7 @@
  * Overriden auth_customized renderer.
  *
  * @package    theme_bambuco
- * @copyright  2024 David Herney Bernal - cirano. https://bambuco.co
+ * @copyright  2024 David Herney - cirano. https://bambuco.co
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -28,7 +28,7 @@ namespace theme_bambuco\output;
  * Plugin auth_customized renderer custom implementation.
  *
  * @package    theme_bambuco
- * @copyright  2024 David Herney Bernal - cirano. https://bambuco.co
+ * @copyright  2024 David Herney - cirano. https://bambuco.co
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class auth_customized_renderer extends \auth_customized\output\renderer {

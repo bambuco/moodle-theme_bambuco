@@ -166,13 +166,7 @@
                 </div>
             {{/recaptcha}}
             {{#altchawidget}}
-                <script src="https://cdn.jsdelivr.net/npm/altcha/dist/altcha.min.js" async type="module"></script>
-                <altcha-widget
-                    name="{{name}}"
-                    maxnumber="{{maxnumber}}"
-                    challengejson="{{challengejson}}"
-                    strings="{{strings}}"
-                ></altcha-widget>
+                {{>theme_bambuco/altchawidget}}
             {{/altchawidget}}
             <div class="login-form-submit form-group">
                 <button class="btn btn-primary btn-lg" type="submit" id="loginbtn">{{#str}}login{{/str}}</button>
