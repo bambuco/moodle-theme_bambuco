@@ -353,7 +353,6 @@ class utils {
      * @return bool
      */
     public static function iscustomizable_subtheme(string $key, ?object $subtheme): bool {
-
         static $settings = [];
 
         if (isset($settings[$key])) {
@@ -482,7 +481,6 @@ class utils {
         ];
 
         return $params;
-
     }
 
     /**

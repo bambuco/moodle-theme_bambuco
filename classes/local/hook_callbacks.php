@@ -167,12 +167,10 @@ class hook_callbacks {
         $config = get_config('theme_bambuco');
 
         if ($PAGE->pagetype == 'login-index' && !empty($config->usealtcha)) {
-
             $logintoken = optional_param('logintoken', '', PARAM_TEXT);
 
             // If not empty it is a login request.
             if (!empty($logintoken)) {
-
                 $ok = \theme_bambuco\local\utils::validate_altcha_solution('login');
 
                 if (!$ok) {
