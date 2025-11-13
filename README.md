@@ -17,6 +17,10 @@ Package tested in: moodle 4.5+.
 - **GIT:** https://github.com/bambuco/moodle-theme_bambuco
 
 ## IN VERSION ##
+2025111100:
+- Compatibility with Moodle 5.0
+- Include: showloginform, togglepassword, smallscreensonly
+
 2025011004:
 - New preset Fluido.
 - New course view position: Over.

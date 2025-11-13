@@ -30,19 +30,19 @@ defined('MOODLE_INTERNAL') || die();
 $plugin->component = 'theme_bambuco';
 
 // This is the version of the plugin.
-$plugin->version = 2025011004.03;
+$plugin->version = 2025111100;
 
 // This is the named version.
-$plugin->release = '4.5.04';
+$plugin->release = '5.0.0';
 
 // This is a stable release.
 $plugin->maturity = MATURITY_RC;
 
 // This is the version of Moodle this plugin requires.
-$plugin->requires = 2024100701;
+$plugin->requires = 2025041403;
 
 // This is a list of plugins, this plugin depends on (and their versions).
 $plugin->dependencies = [
-    'theme_boost' => 2024100700,
+    'theme_boost' => 2025041400,
 ];
-$plugin->supported = [405, 405];
+$plugin->supported = [500, 500];

@@ -111,13 +111,13 @@
                             data-placement="right"
                             title="{{#str}}opendrawerindex, core{{/str}}"
                         >
-                            <span class="sr-only">{{#str}}opendrawerindex, core{{/str}}</span>
+                            <span class="visually-hidden">{{#str}}opendrawerindex, core{{/str}}</span>
                             {{#pix}} t/index_drawer, moodle {{/pix}}
                         </button>
                     </div>
                 {{/courseindex}}
                 {{#hasblocks}}
-                    <div class="drawer-toggler drawer-right-toggle ml-auto d-print-none">
+                    <div class="drawer-toggler drawer-right-toggle d-print-none">
                         <button
                             class="btn icon-no-margin"
                             data-toggler="drawers"
@@ -127,7 +127,7 @@
                             data-placement="right"
                             title="{{#str}}opendrawerblocks, core{{/str}}"
                         >
-                            <span class="sr-only">{{#str}}opendrawerblocks, core{{/str}}</span>
+                            <span class="visually-hidden">{{#str}}opendrawerblocks, core{{/str}}</span>
                             <span class="dir-rtl-hide">{{#pix}}t/blocks_drawer, core{{/pix}}</span>
                             <span class="dir-ltr-hide">{{#pix}}t/blocks_drawer_rtl, core{{/pix}}</span>
                         </button>
@@ -179,7 +179,7 @@
                     </section>
 
                     {{#hasblockscontent}}
-                        <div class="ml-auto d-print-none">
+                        <div class="d-print-none">
                             {{{ blockscontent }}}
                         </div>
                     {{/hasblockscontent}}
