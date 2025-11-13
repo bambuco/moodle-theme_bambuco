@@ -482,7 +482,6 @@ class utils {
         ];
 
         return $params;
-
     }
 
     /**
