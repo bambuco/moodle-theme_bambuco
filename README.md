@@ -18,6 +18,9 @@ Package tested in: moodle 4.5+.
 
 ## IN VERSION ##
 2025111100:
+- Included secure layout with bottom blocks.
+
+2025111100:
 - Compatibility with Moodle 5.0
 - Include: showloginform, togglepassword, smallscreensonly
 
