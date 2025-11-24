@@ -103,6 +103,17 @@ $THEME->layouts = [
         'regions' => ['above', 'top', 'intocontent', 'side-pre', 'below', 'bottom'],
         'defaultregion' => 'side-pre',
     ],
+    // The pagelayout used for safebrowser and securewindow.
+    'secure' => [
+        'file' => 'secure.php',
+        'regions' => ['side-pre', 'bottom'],
+        'defaultregion' => 'side-pre',
+        'options' => [
+            'activityheader' => [
+                'notitle' => false,
+            ],
+        ],
+    ],
 ];
 
 $THEME->parents = ['boost'];

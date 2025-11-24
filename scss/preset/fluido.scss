@@ -860,6 +860,17 @@ a:not([class]) {
     }
 }
 
+.pagelayout-maintenance,
+.pagelayout-secure {
+    #page-header {
+        width: auto;
+
+        .page-header-headings {
+            background-color: transparent !important;
+        }
+    }
+}
+
 .format-onetopic .onelinetabs .tabs-wrapper.hasscroll {
     padding: 0;
 }
