@@ -97,6 +97,7 @@ $string['coursemenu_desc'] = 'Utilice la estructura: capacidad|tipo|enlace|desti
 - Destino del enlace: _blank, _self u otra opción de destino ancla, también puede estar vacío.';
 $string['coursesheader'] = 'Encabezado de cursos';
 $string['coursesheader_basic'] = 'Básico';
+$string['coursesheader_column'] = 'Columna';
 $string['coursesheader_default'] = 'Predeterminado';
 $string['coursesheader_desc'] = 'El encabezado para mostrar en la página de cursos.';
 $string['coursesheader_none'] = 'Ninguno';

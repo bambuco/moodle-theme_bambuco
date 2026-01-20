@@ -97,6 +97,7 @@ $string['coursemenu_desc'] = 'Use the structure: capability|type|link|target|lab
 - link target: _blank, _self or other anchor target option, can be empty too';
 $string['coursesheader'] = 'Courses header';
 $string['coursesheader_basic'] = 'Basic';
+$string['coursesheader_column'] = 'Column';
 $string['coursesheader_default'] = 'Default';
 $string['coursesheader_desc'] = 'The header to display in the courses page.';
 $string['coursesheader_none'] = 'None';

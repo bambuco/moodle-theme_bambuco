@@ -19,15 +19,16 @@ namespace theme_bambuco\output\courseheader;
 use renderable;
 use renderer_base;
 use templatable;
+use theme_bambuco\local\utils;
 
 /**
- * Output for the course header based in teacher presentation.
+ * Output for the course header based in column presentation.
  *
  * @package    theme_bambuco
- * @copyright  2023 David Herney - cirano. https://bambuco.co
+ * @copyright  2025 David Herney - cirano. https://bambuco.co
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class teacher implements renderable, templatable {
+class column implements renderable, templatable {
     /**
      * @var object Course information.
      */
@@ -49,44 +50,15 @@ class teacher implements renderable, templatable {
      * @return array An array of variables to be used in the template.
      */
     public function export_for_template(renderer_base $output): array {
-        global $CFG, $DB;
+        global $PAGE, $COURSE;
+
+        $coursebanner = utils::get_courseimage($PAGE->course);
 
         $defaultvariables = [
-            'hasteachers' => false,
+            'hasbanner' => !empty($coursebanner),
+            'imageurl' => $coursebanner,
+            'coursename' => format_string($COURSE->fullname),
         ];
-
-        $course = $this->course;
-        if ($course instanceof \stdClass) {
-            $course = new \core_course_list_element($course);
-        }
-
-        // Course instructors.
-        if ($course->has_course_contacts()) {
-            $instructors = $course->get_course_contacts();
-
-            if ($instructors && count($instructors) > 0) {
-                $teachers = [];
-                foreach ($instructors as $key => $instructor) {
-                    $teacher = new \stdClass();
-                    $teacher->name = $instructor['username'];
-                    $teacher->improvedname = \theme_bambuco\local\utils::wrap_text($instructor['username']);
-
-                    $teacherdata = $DB->get_record('user', ['id' => $key]);
-                    $teacher->image = $output->user_picture($teacherdata, [
-                        'size' => 100,
-                        'link' => false,
-                    ]);
-
-                    $url = $CFG->wwwroot . '/user/profile.php?id=' . $key;
-                    $teacher->url = $url;
-
-                    $teachers[] = $teacher;
-                }
-
-                $defaultvariables['teachers'] = $teachers;
-                $defaultvariables['hasteachers'] = !empty($teachers);
-            }
-        }
 
         return $defaultvariables;
     }

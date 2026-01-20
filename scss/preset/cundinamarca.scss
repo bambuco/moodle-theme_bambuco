@@ -1,0 +1,890 @@
+/* stylelint-disable declaration-no-important */
+// Bootstrap variables
+$white:    #fff !default;
+$gray-100: #f1f1f1 !default;
+$gray-200: #e9ecef !default;
+$gray-300: #e1e1e1 !default;
+$gray-400: #ced4da !default;
+$gray-500: #b4b4b4 !default;
+$gray-600: #6a737b !default;
+$gray-700: #495057 !default;
+$gray-800: #403f41 !default;
+$gray-900: #2F2F2F !default;
+$black:    #000 !default;
+
+$blue:    #0f6cbf !default;
+$indigo:  #6610f2 !default;
+$purple:  #613d7c !default;
+$pink:    #db1a74 !default;
+$red:     #ca3120 !default;
+$orange:  #f0ad4e !default;
+$yellow:  #ff7518 !default;
+$green:   #357a32 !default;
+$teal:    #20c997 !default;
+$cyan:    #008196 !default;
+$lightgreen: #93c54b !default;
+$bglight: #f1f1f1 !default;
+
+$primary:       #325d88 !default;
+$success:       $green !default;
+$info:          $cyan !default;
+$warning:       $orange !default;
+$danger:        $red !default;
+$secondary:     #6c757d !default;
+
+$info-outline:    #1f7e9a;
+$warning-outline: #a6670e;
+
+// Tables
+$table-accent-bg: rgba($black, .03) !default;
+
+// Options
+$enable-responsive-font-sizes: true !default;
+
+// Body
+$body-color:    $gray-900 !default;
+$main-inner-max-width: 1100px !default;
+
+// Fonts
+$font-size-base: 0.9375rem !default;
+$rfs-base-font-size: 0.9rem !default;
+$headings-font-weight:   700 !default;
+
+// Navbar
+$navbar-dark-hover-color:           rgba($white, 1) !default;
+$navbar-light-color:                rgba($black, 0.6) !default;
+$navbar-light-hover-color:          rgba($black, .9) !default;
+
+// Breadcrumbs
+$breadcrumb-padding-y:              .5rem !default;
+$breadcrumb-padding-x:              0 !default;
+$breadcrumb-item-padding:           .5rem !default;
+$breadcrumb-margin-bottom:          0 !default;
+$breadcrumb-bg:                     transparent !default;
+$breadcrumb-divider: "/" !default;
+$breadcrumb-divider-rtl: "/" !default;
+
+// Alerts
+$alert-border-width:                0 !default;
+
+$card-group-margin: .25rem;
+
+// Toasts
+$toast-color:                       $white !default;
+$toast-background-color:            rgba($gray-900, .95) !default;
+$toast-header-color:                $gray-100 !default;
+$toast-header-background-color:     rgba($white, .1) !default;
+
+// Custom control size
+$custom-control-indicator-size: 1.25rem;
+
+$input-btn-focus-color: rgba($primary, .75) !default;
+
+$input-border-color: $gray-500 !default;
+
+$dropdown-link-hover-color: $white;
+$dropdown-link-hover-bg: $primary;
+
+$popover-max-width: 300px !default;
+
+$border-radius: .5rem !default;
+$border-radius-lg: 1.2rem !default;
+
+// stylelint-disable
+$theme-colors: () !default;
+$theme-colors: map-merge((
+    primary: $primary,
+    secondary: $secondary,
+    success: $success,
+    info: $info,
+    warning: $warning,
+    danger: $danger,
+    primaryreverse: $white,
+    secondaryreverse: $white,
+    activedefault: $lightgreen,
+    activereverse: $primary,
+    bglight: $bglight,
+), $theme-colors);
+// stylelint-enable
+
+$spacer: 1rem !default;
+$spacers: (
+    0: 0,
+    1: ($spacer * .25),
+    2: ($spacer * .5),
+    3: $spacer,
+    4: ($spacer * 1.5),
+    5: ($spacer * 2),
+    6: ($spacer * 3)
+) !default;
+
+:root {
+    --primary: #325d88;
+    --primaryreverse: #fff;
+    --secondary: #6c757d;
+    --secondaryreverse: #fff;
+    --activedefault: #93c54b;
+    --activereverse: #325d88;
+    --bglight: #edf5ff;
+}
+
+// Import FontAwesome.
+@import "fontawesome";
+
+// Import All of Bootstrap
+@import "bootstrap";
+
+// Import Core moodle CSS
+@import "moodle";
+
+$navbar-height: 100px !default;
+
+// Preset CSS
+
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #545454;
+}
+
+// Rounded user pictures
+.userpicture {
+    border-radius: 50%;
+}
+
+// Reset the default styling back to the bootstrap defaults for
+// the secondary outline button because gray-200 is much too light
+// for an outline button.
+.btn-outline-secondary {
+    @include button-outline-variant($gray-600);
+    border-color: $gray-600;
+}
+
+.btn-outline-info {
+    @include button-outline-variant($info-outline);
+}
+
+.btn-outline-warning {
+    @include button-outline-variant($warning-outline);
+}
+
+a {
+    text-decoration: none;
+}
+
+a:not([class]) {
+    color: var(--secondary);
+
+    &:hover {
+        color: var(--primary);
+    }
+}
+
+.btn {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.3px;
+}
+
+.btn.btn-icon.bg-secondary {
+    color: var(--primary);
+}
+
+.btn.btn-secondary {
+    background-color: var(--secondary);
+    color: var(--secondaryreverse);
+    border-color: transparent;
+
+    &:hover {
+        filter: opacity(0.8);
+    }
+}
+
+// Custom login page
+.login-container {
+    background: #fff;
+    box-shadow: 0px 0px 20px 0px #00000040;
+    padding: 40px 30px 20px;
+    width: 774px !important;
+    max-width: 100%;
+
+    .loginform {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        div[role="main"] {
+            width: 100%;
+        }
+
+        > .btn-box {
+            display: flex;
+            align-items: center;
+            justify-content: end;
+
+            a {
+                background: transparent;
+                border: none;
+                font-weight: normal;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+
+        .icon-showform:before {
+            top: -15px;
+        }
+    }
+
+    .loginbox-container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .loginbox-identity {
+        width: calc(50% - 20px);
+    }
+
+    .hasinstructions {
+        width: 50%;
+        display: flex;
+        justify-content: end;
+    }
+
+    h2.login-heading {
+        font-size: 14px;
+    }
+
+    .login-identityproviders .login-identityprovider-btn {
+        background-color: var(--primary);
+        color: var(--primaryreverse);
+        border: 1px solid var(--primary);
+        font-weight: normal;
+
+        &:hover {
+            background-color: var(--primaryreverse);
+            color: var(--primary);
+        }
+    }
+
+    .login-form-submit.form-group {
+        text-align: center;
+    }
+
+    a:not([class]) {
+        color: $gray-900;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    .login-divider {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .invalid-feedback {
+        background-color: #efd3d3;
+        border-radius: 10px;
+
+        a {
+            color: var(--primary);
+
+            &:hover {
+                color: var(--secondary);
+            }
+        }
+    }
+
+    #modal-content {
+        .modal-body {
+            color: var(--primary);
+        }
+    }
+
+    [data-name="altcha"] {
+        width: 100%;
+    }
+
+    /* stylelint-disable selector-type-no-unknown */
+    altcha-widget {
+        .altcha {
+            margin: auto;
+        }
+    }
+    /* stylelint-enable selector-type-no-unknown */
+}
+// End of custom login page
+
+// Custom Navbar
+.navbar {
+    &.fixed-top {
+        border-bottom: none;
+    }
+
+    .navbar-brand {
+        color: $white;
+    }
+
+    .primary-navigation {
+        .moremenu .nav-link.active {
+            border-bottom-color: var(--secondary);
+            font-weight: bold;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+
+            .nav-link {
+                color: $white;
+
+                &.active:focus,
+                &.active:hover,
+                &:focus,
+                &:hover {
+                    border-bottom-color: var(--secondary);
+                }
+            }
+        }
+    }
+
+    #usernavigation {
+        .popover-region,
+        .simplesearchform {
+            display: flex;
+            align-items: center;
+            height: $navbar-height;
+        }
+
+        .btn[data-action="opensearch"],
+        .nav-link {
+            background-color: transparent !important;
+            color: $white;
+            position: relative;
+            height: 26px;
+            border-radius: $border-radius !important;
+
+            &.active:focus,
+            &.active:hover,
+            &:hover {
+                color: var(--secondary);
+                background-color: transparent !important;
+            }
+        }
+
+        .usermenu .login a {
+            background-color: transparent;
+            color: $white;
+            border-radius: $border-radius;
+            padding: 5px 20px;
+            margin-left: 5px;
+            font-weight: bold;
+
+            &:hover {
+                background-color: transparent;
+                color: var(--secondary);
+                text-decoration: none;
+            }
+
+            &:focus {
+                box-shadow: none;
+            }
+        }
+
+        .dropdown-toggle:after {
+            color: $white !important;
+        }
+
+        .usertext {
+            color: $white;
+        }
+
+        #lang-menu-toggle,
+        .langbutton {
+            color: $white;
+        }
+    }
+
+    .simplesearchform {
+        .collapse.show,
+        .collapsing {
+            background-color: var(--primary);
+        }
+
+        .btn-submit {
+            color: var(--primaryreverse);
+            background: var(--primary);
+
+            &:hover {
+                color: var(--primary);
+                background-color: var(--activedefault);
+            }
+        }
+    }
+
+    .editmode-switch-form {
+        .input-group label,
+        .text-primary {
+            color: $white !important;
+        }
+
+        .custom-control-input:checked ~ .custom-control-label:before {
+            border-color: $white !important;
+        }
+    }
+
+    .popover-region-container {
+        top: $navbar-height - 32px;
+
+        .popover-region-header-text {
+            color: var(--primary);
+        }
+    }
+
+    .navbar-toggler-icon {
+        filter: invert(1);
+    }
+
+    .divider {
+        height: 50% !important;
+    }
+}
+// End of custom Navbar
+
+// Blocks
+section.block {
+    border: none;
+}
+
+#block-region-side-pre,
+#block-region-content {
+    .card-body {
+        h5.card-title {
+            font-size: 16px;
+        }
+
+        .card-text.content {
+            margin-top: 10px;
+            border-top: 1px solid $gray-400;
+            padding-top: 10px;
+        }
+    }
+}
+
+#block-region-above section.block,
+#block-region-top section.block,
+#block-region-bottom section.block:not(.block_html) {
+    padding: 20px;
+
+    .card-body {
+        max-width: $main-inner-max-width;
+        width: 100%;
+        margin: auto;
+
+        h5.card-title {
+            font-size: 16px;
+        }
+
+        h3 {
+            color: var(--secondary);
+        }
+
+        p {
+            font-size: 14px;
+            padding-right: 20px;
+        }
+    }
+}
+// End of Blocks
+
+body:not(#page-site-index) {
+    .navbar {
+        background-color: var(--primary) !important;
+
+        .primary-navigation {
+            .nav-item {
+                .nav-link {
+                    color: var(--primaryreverse);
+                    background-color: var(--primary);
+                }
+            }
+        }
+
+        #usernavigation {
+            .btn[data-action="opensearch"],
+            .nav-link {
+                background-color: var(--primary) !important;
+                color: var(--primaryreverse);
+
+                &.active:focus,
+                &.active:hover,
+                &:hover {
+                    color: var(--secondary);
+                }
+            }
+
+            .usermenu .login a {
+                background-color: var(--activedefault);
+                color: var(--activereverse);
+
+                &:hover {
+                    background-color: var(--secondary);
+                    color: var(--secondaryreverse);
+                }
+            }
+
+            .dropdown-toggle:after {
+                color: var(--primaryreverse) !important;
+            }
+
+            .usertext {
+                color: var(--primaryreverse);
+            }
+
+            #lang-menu-toggle,
+            .langbutton {
+                color: var(--primaryreverse);
+            }
+        }
+
+        .simplesearchform {
+            .collapse.show,
+            .collapsing {
+                background-color: var(--primary);
+            }
+
+            .btn-submit {
+                color: var(--primaryreverse);
+                background: var(--primary);
+
+                &:hover {
+                    color: var(--primary);
+                    background-color: var(--activedefault);
+                }
+            }
+        }
+
+        .editmode-switch-form {
+            .text-primary {
+                color: var(--activedefault) !important;
+            }
+
+            .custom-control-input:checked ~ .custom-control-label:before {
+                border-color: var(--activedefault) !important;
+            }
+        }
+
+        .popover-region-container {
+            top: $navbar-height - 49px;
+
+            .popover-region-header-text {
+                color: var(--primary);
+            }
+        }
+
+        .navbar-toggler-icon {
+            filter: invert(1);
+        }
+
+        .divider {
+            display: none;
+        }
+    }
+}
+
+body#page-site-index {
+    background-color: $gray-900;
+
+    .navbar {
+        background-color: transparent !important;
+        box-shadow: none !important;
+        position: absolute;
+
+        .primary-navigation .nav-link,
+        #usernavigation .nav-link,
+        #usernavigation .btn[data-action="opensearch"] {
+            background-color: transparent !important;
+        }
+
+        #usernavigation .usermenu .login a {
+            background-color: transparent;
+        }
+    }
+
+    #block-region-above {
+        .card-body {
+            max-width: unset;
+        }
+    }
+
+    #block-region-bottom {
+        .block:not(.block_html) {
+            padding: 50px 20px;
+        }
+
+        .card-title {
+            color: var(--secondary);
+            text-align: center;
+            width: 100%;
+            font-size: 1.6rem;
+            display: block !important;
+            position: relative;
+            margin-bottom: 40px;
+
+            &::before {
+                content: "....";
+                font-weight: 900;
+                font-size: 30px;
+                position: absolute;
+                bottom: -20px;
+                left: calc(50% - 20px);
+                color: $gray-400;
+                letter-spacing: 5px;
+            }
+        }
+    }
+
+    #topofscroll.main-inner {
+        padding: 0 !important;
+        margin: 0 auto !important;
+        max-width: unset !important;
+
+        #page-content {
+            padding: 0 !important;
+
+            [role="main"] > br {
+                display: none;
+            }
+        }
+    }
+
+    .secondary-navigation {
+        padding: 0;
+
+        .navigation {
+            margin: 0 !important;
+        }
+    }
+}
+
+body#page-site-index:not(.editing) {
+    // Fix for navbar overlapping content on frontpage body.
+    #page {
+        margin-top: 0;
+    }
+}
+
+.usermenu [data-control="bbco-contenthover"]::before {
+    color: $white;
+}
+// End of custom Navbar
+
+// General controls
+.drawer-toggles {
+    .drawer-toggler {
+        > .btn {
+            background-color: var(--secondary);
+            color: var(--secondaryreverse);
+        }
+    }
+}
+// End of General controls
+
+// Custom plugins
+.block.block_lupa {
+    background: linear-gradient(to bottom, $gray-100 40%, $gray-300 70%);
+
+    .block_lupa-body {
+        max-width: $main-inner-max-width;
+        margin: auto;
+        justify-content: center;
+
+        .block_lupa-focusbox {
+            box-shadow: 0px 0px 10px 0px #00000026;
+
+            &.bl-smallcard {
+                max-width: 300px;
+                padding-top: 15px;
+
+                .bl-content {
+                    color: var(--primary);
+                    border-bottom: 1px solid $gray-400;
+                    margin-bottom: 10px;
+                }
+
+                .bl-action-icon {
+                    background-color: var(--primary);
+                    color: var(--primaryreverse);
+                }
+
+                .bl-counter {
+                    color: var(--secondary);
+                    font-weight: 900;
+                }
+
+                h5 {
+                    font-weight: normal;
+                    margin: 0;
+                }
+
+                .bl-actionicons {
+                    top: 3px;
+                    left: 3px;
+
+                    .btn {
+                        margin: 0 !important;
+                    }
+
+                    .icon {
+                        color: $gray-900 !important;
+                        font-size: 18px;
+                    }
+
+                    .bl-helpicon .icon {
+                        font-weight: normal;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.block_kamaleon {
+    &.design-confiarovercard .card-cards {
+        width: 325px !important;
+        height: 310px !important;
+        background-size: auto 100% !important;
+
+        .card_initial {
+            h5 {
+                color: var(--primary);
+            }
+        }
+
+        &:hover {
+            background-size: auto 120% !important;
+
+            &:before {
+                background-color: var(--secondary) !important;
+            }
+
+            .card_initial {
+                background-color: color-mix(in srgb, var(--primary) 80%, transparent) !important;
+
+                .card_content-content,
+                h5 {
+                    color: var(--primaryreverse);
+                }
+
+                .card_buttons .btn {
+                    background-color: transparent;
+                    color: var(--primaryreverse);
+                    border: 1px solid var(--primaryreverse);
+                    padding: 10px 25px;
+
+                    &:hover {
+                        background-color: var(--primaryreverse);
+                        color: var(--primary);
+                    }
+                }
+            }
+        }
+    }
+
+    &.design-tabs {
+        .contenido-tabs-text h3 {
+            position: relative;
+            margin-bottom: 40px;
+
+            &::before {
+                content: "....";
+                font-weight: 900;
+                font-size: 30px;
+                position: absolute;
+                bottom: -30px;
+                left: 0;
+                color: $gray-400;
+                letter-spacing: 5px;
+            }
+        }
+    }
+
+    &.design-tabs .contenido-tabs-image,
+    &.design-btnimagen1 .card_image {
+        position: relative;
+        padding: 12px;
+
+        &::before {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40%;
+            height: 40%;
+            border-left: 4px solid var(--secondary, #b4b4b4);
+            border-bottom: 4px solid var(--secondary, #b4b4b4);
+        }
+
+        img {
+            border-radius: 50% 50% 50% 0 !important;
+        }
+    }
+}
+// End of Custom plugins
+
+// Plugin fixes
+.elements-plugin-container {
+    .nav.nav-tabs .nav-item a.active {
+        background-color: var(--secondary);
+    }
+}
+
+.bs-popover-right,
+.bs-popover-auto[x-placement^="right"],
+.bs-popover-left,
+.bs-popover-auto[x-placement^="left"] {
+    > .arrow{
+        margin: 0.6rem 0.2rem;
+    }
+}
+// End of Plugin fixes
+
+@media (min-width: $main-inner-max-width + 40px) {
+
+    #page-my-index {
+        #page.drawers {
+            .main-inner,
+            div[role="main"] {
+                padding: 0;
+            }
+        }
+
+        #block-region-content {
+            .block.card {
+                > .card-body {
+                    padding-left: 0;
+                    padding-right: 0;
+                }
+            }
+        }
+    }
+
+    .secondary-navigation .navigation .nav-tabs,
+    body.limitedwidth #page.drawers .main-inner {
+        max-width: $main-inner-max-width;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+}
+
+@media (min-width: 992px) {
+}
+
+@media (max-width: 512px) {
+}

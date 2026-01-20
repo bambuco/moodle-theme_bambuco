@@ -107,9 +107,9 @@
     {{#cansignup}}
         <a href="{{signupurl}}" class="sr-only">{{#str}} tocreatenewaccount {{/str}}</a>
     {{/cansignup}}
-
-<div>{{{ output.supportemail }}}</div>
-
+</div>
+<div class="loginbox-container">
+    <div class="loginbox-identity">
 {{#toexternal}}
     {{#hasidentityproviders}}
         <div class="login-identityproviders">
@@ -253,14 +253,6 @@
             </form>
         </div>
     {{/canloginasguest}}
-    {{#hasinstructions}}
-        <div class="login-divider"></div>
-        <div class="hasinstructions">
-            <div class="login-instructions {{#cansignup}}mb-3{{/cansignup}}">
-                {{{instructions}}}
-            </div>
-        </div>
-    {{/hasinstructions}}
     {{#cansignup}}
         <div class="login-signup">
             <h2 class="login-heading">{{#str}}firsttime{{/str}}</h2>
@@ -281,6 +273,15 @@
         }} data-modal-content-str='["cookiesenabled_help_html", "core"]'{{!
         }}>{{#str}}cookiesnotice{{/str}}</button>
     </div>
+</div>
+
+    {{#hasinstructions}}
+        <div class="hasinstructions">
+            <div class="login-instructions {{#cansignup}}mb-3{{/cansignup}}">
+                {{{instructions}}}
+            </div>
+        </div>
+    {{/hasinstructions}}
 </div>
 
 {{#js}}

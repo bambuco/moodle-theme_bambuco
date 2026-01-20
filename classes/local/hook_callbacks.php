@@ -138,7 +138,10 @@ class hook_callbacks {
             $inpage = utils::use_custom_header();
             if ($inpage) {
                 $coursebanner = utils::get_courseimage($PAGE->course);
-                $headers[] = '<style>#page-header { background-image: url("' . $coursebanner . '"); }</style>';
+
+                if ($config->coursesheader != 'column' && !empty($coursebanner)) {
+                    $headers[] = '<style>#page-header { background-image: url("' . $coursebanner . '"); }</style>';
+                }
             }
         }
 
