@@ -119,6 +119,12 @@ body.courseheader-custom.course-header-column {
             width: 100%;
         }
 
+        > .w-100 {
+            > .align-items-center {
+                flex-direction: column;
+            }
+        }
+
         .coursebanner {
             max-height: 400px;
             overflow: hidden;
