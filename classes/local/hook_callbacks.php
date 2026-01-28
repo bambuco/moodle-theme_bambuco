@@ -129,7 +129,7 @@ class hook_callbacks {
                 $font = str_replace(' ', '+', $font);
                 $headers[] = '<link href="https://fonts.googleapis.com/css2?family='
                                     . $font
-                                    . ':wght@400;500;600;700&display=swap" rel="stylesheet">';
+                                    . ':wght@400;500;600;700;900&display=swap" rel="stylesheet">';
             }
         }
 

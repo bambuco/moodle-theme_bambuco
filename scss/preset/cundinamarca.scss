@@ -170,13 +170,42 @@ body {
 
 a {
     text-decoration: none;
+
+    &:not([class]) {
+        color: var(--secondary);
+
+        &:hover {
+            color: var(--primary);
+        }
+    }
 }
 
-a:not([class]) {
-    color: var(--secondary);
-
-    &:hover {
+.course-content,
+.onetopic-tab-body {
+    h1,
+    h2 {
         color: var(--primary);
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+        font-weight: 900;
+    }
+
+    h3 {
+        color: var(--secondary);
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+    }
+
+    h4 {
+        color: var(--primary);
+        font-size: 16px;
+        margin-bottom: 1rem;
+    }
+
+    h5 {
+        color: var(--secondary);
+        font-weight: normal;
+        font-size: 0.9375rem;
     }
 }
 
@@ -696,13 +725,6 @@ body#page-site-index:not(.editing) {
 // End of General controls
 
 // Course
-.course-content {
-    h3 {
-        color: var(--primary);
-        font-size: 16px;
-        margin-bottom: 20px;
-    }
-}
 // End of Course
 
 // Custom plugins
@@ -937,6 +959,23 @@ body#page-site-index:not(.editing) {
         }
     }
 }
+
+.block_completion_progress {
+
+    .barModeSqueeze,
+    .barModeScroll {
+        .progressBarCell {
+            &:first-of-type {
+                border-radius: 20px 0 0 20px;
+            }
+
+            &:last-of-type {
+                border-radius: 0 20px 20px 0;
+            }
+        }
+
+    }
+}
 // End of Custom plugins
 
 // Plugin fixes
@@ -950,7 +989,7 @@ body#page-site-index:not(.editing) {
 .bs-popover-auto[x-placement^="right"],
 .bs-popover-left,
 .bs-popover-auto[x-placement^="left"] {
-    > .arrow{
+    > .arrow {
         margin: 0.6rem 0.2rem;
     }
 }
@@ -960,6 +999,10 @@ body#page-site-index:not(.editing) {
 #page-user-profile #page-content section.node_category .card-body > ul > li dl dd > ul > li > a,
 .list-unstyled a {
     text-decoration: none !important;
+
+    &:hover {
+        color: var(--primaryreverse) !important;
+    }
 }
 // End of Plugin fixes
 
