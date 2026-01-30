@@ -873,6 +873,14 @@ body#page-site-index:not(.editing) {
             border-radius: 50% 50% 50% 0 !important;
         }
     }
+
+    &.design-btnimagen1 {
+        .btn-special {
+            &:hover {
+                transform: scale(0.98);
+            }
+        }
+    }
 }
 
 .format-onetopic {
@@ -982,6 +990,33 @@ body#page-site-index:not(.editing) {
         }
 
     }
+}
+
+.path-blog {
+    [role="main"] {
+        > h2 {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            font-weight: 900;
+        }
+    }
+    .attachedimages {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        padding: 10px 20px;
+        background-color: var(--bglight);
+        margin: 10px auto;
+        border-radius: 20px;
+
+        img {
+            margin: 10px;
+            border-radius: 10px;
+        }
+    }
+
 }
 // End of Custom plugins
 

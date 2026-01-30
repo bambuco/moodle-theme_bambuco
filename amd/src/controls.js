@@ -22,9 +22,9 @@
  */
 
 import $ from 'jquery';
+import Log from 'core/log';
 import Modal from 'core/modal';
 import ModalEvents from 'core/modal_events';
-import Log from 'core/log';
 
 /**
  * Initialize the component.
@@ -48,6 +48,11 @@ export const init = async() => {
             event.preventDefault();
 
             var $link = $(this);
+            const target = $link.attr('target');
+            if (target && target !== '_self') {
+                // Let the browser handle it.
+                return;
+            }
 
             var dialogue = $link.data('dialogue');
 
@@ -56,7 +61,9 @@ export const init = async() => {
                 var w = $this.attr('data-property-width');
                 var h = $this.attr('data-property-height');
 
-                var url = $link.attr('href') + '&inpopup=true';
+                var href = $link.attr('href');
+                var url = href + (href.indexOf('?') === -1 ? '?' : '&') + 'inpopup=true';
+
                 var $iframe = $('<iframe class="bbco-openinmodal-container"></iframe>');
                 $iframe.attr('src', url);
                 $iframe.on('load', function() {
