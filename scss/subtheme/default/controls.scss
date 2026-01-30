@@ -80,3 +80,8 @@ body.inpopup #region-main .activity-navigation {
 .modal.show .modal-dialog.bbco-modal-dialog .modal-body {
     padding: 0;
 }
+
+body.inpopup #region-main {
+    max-width: 1200px;
+    margin: auto;
+}
