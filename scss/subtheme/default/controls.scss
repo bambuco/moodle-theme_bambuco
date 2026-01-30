@@ -69,6 +69,10 @@
     margin: 0;
 }
 
+body.inpopup #region-main .activity-navigation {
+    display: none;
+}
+
 .modal.show .modal-dialog.bbco-modal-dialog {
     max-width: unset;
 }
