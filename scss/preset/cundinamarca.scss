@@ -731,9 +731,6 @@ body#page-site-index:not(.editing) {
 }
 // End of General controls
 
-// Course
-// End of Course
-
 // Custom plugins
 .block.block_lupa {
     background: linear-gradient(to bottom, $gray-100 40%, $gray-300 70%);
@@ -884,6 +881,12 @@ body#page-site-index:not(.editing) {
 }
 
 .format-onetopic {
+    .tabs-wrapper {
+        position: sticky !important;
+        top: $navbar-height + 5px !important;
+        z-index: 1001 !important;
+    }
+
     .verticaltabs {
         &.hastopictabs {
             display: flex;
@@ -894,9 +897,6 @@ body#page-site-index:not(.editing) {
         > .tabs-wrapper {
             border: none;
             flex-shrink: 0 !important;
-            position: sticky !important;
-            top: $navbar-height + 20px !important;
-            z-index: 1000 !important;
             background-color: var(--bglight);
             border-radius: 10px;
             box-shadow: 0 0 12px 1px lightgray;
@@ -969,6 +969,20 @@ body#page-site-index:not(.editing) {
                             color: $white;
                         }
                     }
+                }
+            }
+        }
+    }
+
+    .nav-tabs:not(.more-nav) {
+        .nav-link {
+            &.active {
+                &:not(:disabled):not(.disabled):active,
+                &:not(:disabled):not(.disabled).active,
+                &.dropdown-toggle {
+                    background-color: var(--primary) !important;
+                    color: var(--primaryreverse) !important;
+                    border-color: var(--primary) !important;
                 }
             }
         }
@@ -1046,6 +1060,29 @@ body#page-site-index:not(.editing) {
         color: var(--primaryreverse) !important;
     }
 }
+
+.card {
+    &.bg-primary,
+    &.bg-danger,
+    &.bg-info {
+        .card-footer,
+        .card-header {
+            color: var(--primaryreverse) !important;
+        }
+    }
+
+    &.bg-primary,
+    &.bg-secondary,
+    &.bg-success,
+    &.bg-info,
+    &.bg-warning,
+    &.bg-danger {
+        .card-body {
+            background-color: var(--bglight);
+        }
+    }
+}
+
 // End of Plugin fixes
 
 @media (min-width: $main-inner-max-width + 40px) {
@@ -1071,5 +1108,57 @@ body#page-site-index:not(.editing) {
     .secondary-navigation .navigation .nav-tabs,
     body.limitedwidth #page.drawers .main-inner {
         max-width: $main-inner-max-width;
+    }
+}
+
+@media (max-width: 992px) {
+    body.courseheader-custom.course-header-fullwidth #page-header {
+        margin: 0 !important;
+    }
+}
+
+@media (max-width: 512px) {
+    .drawer {
+        &.drawer-left {
+            .drawerheader {
+                a.aabtn {
+                    background-color: var(--primary);
+                    padding: 0.5rem;
+                    border-radius: 10px;
+                    height: 80% !important;
+
+                    img.logo {
+                        max-height: 100%;
+                        height: auto !important;
+                    }
+                }
+            }
+        }
+    }
+
+    .format-onetopic {
+        .nav-tabs:not(.more-nav) .nav-item {
+            flex: unset;
+            margin-right: 2px;
+
+            .nav-link {
+                border-radius: 15px;
+            }
+        }
+
+        .verticaltabs {
+            &.hastopictabs {
+                display: block;
+
+                > .tabs-wrapper {
+                    background-color: var(--secondary) !important;
+
+                    .nav-tabs {
+                        background-color: var(--bglight, #fff) !important;
+                        border-radius: 5px;
+                    }
+                }
+            }
+        }
     }
 }

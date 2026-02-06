@@ -18,3 +18,10 @@
 .mce-content-body .fade:not(.show) {
     opacity: 1;
 }
+
+.mce-content-body .tpy_two-col,
+.mce-content-body .tpy_two-col .tpy_column,
+.mce-content-body .tpy_layout-grid {
+    border: 1px dashed #333;
+    padding: 5px;
+}
