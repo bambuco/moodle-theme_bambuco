@@ -117,9 +117,16 @@ export const init = async() => {
                     properties.height = h;
                 }
 
+                var modaltitle = $link.attr('title') || $link.attr('aria-label') || '';
+
+                if (!modaltitle) {
+                    $link.find('.accesshide').empty();
+                    modaltitle = $link.text();
+                }
+
                 Modal.create({
                     body: $iframe,
-                    title: $link.attr('title') || $link.text(),
+                    title: modaltitle,
                 })
                 .then(function(modal) {
 
