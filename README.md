@@ -19,6 +19,7 @@ Package tested in: moodle 4.5+.
 ## IN VERSION ##
 2025011006:
 - Included secure layout with bottom blocks.
+- Require Altcha in guest login.
 
 2025011004:
 - New preset Fluido.
