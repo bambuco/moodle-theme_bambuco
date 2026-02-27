@@ -271,7 +271,7 @@
         </div>
     {{/cansignup}}
     <div class="login-divider"></div>
-    <div class="d-flex">
+    <div class="d-flex pnl-aditionalactions">
         {{#languagemenu}}
             <div class="login-languagemenu">
                 {{>core/action_menu}}
@@ -316,7 +316,6 @@
         {{/canloginasguest}}
     });
 
-    {{#toexternal}}
     require(['jquery'], function($) {
         $('.showmore').on('click', function () {
             var $control = $(this);
@@ -324,5 +323,4 @@
             $target.toggleClass('notshowmore');
         });
     });
-    {{/toexternal}}
 {{/js}}
