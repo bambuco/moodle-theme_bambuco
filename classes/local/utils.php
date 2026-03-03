@@ -456,10 +456,21 @@ class utils {
         $config = get_config('theme_bambuco');
         $altcha = new \AltchaOrg\Altcha\Altcha($SESSION->bambuco_altcha[$target]);
 
+        // Set the valid time for the challenge and the maximum random number.
+        // For signup, it is always 5 minutes. For other targets, it can be configured in the theme settings.
+        // The maximum random number is set to 500000 for more security in signup.
+        if ($target == 'signup') {
+            $validtime = '5M';
+            $maxnumber = 500000;
+        } else {
+            $validtime = $config->altchavalidtime;
+            $maxnumber = (int)$config->altchalevel;
+        }
+
         // Create a new challenge.
         $options = new \AltchaOrg\Altcha\ChallengeOptions(
-            maxNumber: (int)$config->altchalevel, // The maximum random number.
-            expires: (new \DateTimeImmutable())->add(new \DateInterval('PT' . $config->altchavalidtime)),
+            maxNumber: $maxnumber, // The maximum random number.
+            expires: (new \DateTimeImmutable())->add(new \DateInterval('PT' . $validtime)),
         );
 
         $strings = [
@@ -476,7 +487,7 @@ class utils {
         $challenge = $altcha->createChallenge($options);
         $params = (object)[
             'name' => 'bbcoaltcha',
-            'maxnumber' => (int)$config->altchalevel,
+            'maxnumber' => $maxnumber,
             'challengejson' => json_encode($challenge),
             'strings' => json_encode($strings),
         ];
