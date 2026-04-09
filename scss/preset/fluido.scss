@@ -726,16 +726,30 @@ a:not([class]) {
 }
 
 .courseindex {
-
     .courseindex-item {
         padding: 0.2rem 0.5rem;
 
         &.courseindex-section-title {
+            &:hover {
+                color: var(--activereverse);
+                background-color: var(--activedefault);
+
+                a.courseindex-chevron,
+                a.courseindex-link {
+                    color: var(--activereverse);
+
+                    &:hover {
+                        color: var(--activereverse);
+                    }
+                }
+            }
+
             a {
                 color: var(--primaryreverse);
 
                 &:hover {
-                    color: var(--activedefault);
+                    color: var(--activereverse);
+                    background-color: var(--activedefault);
                 }
             }
         }
