@@ -1253,7 +1253,7 @@ a:not([class]) {
 
     .block_kamaleon.design-cesbootstrapcarousel {
         .carousel-item {
-            background-position: bottom;
+            background-position: bottom !important;
         }
 
         .contenedor-bn {
