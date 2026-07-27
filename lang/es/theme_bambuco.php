@@ -47,6 +47,14 @@ $string['altchavalidtime_2m'] = '2 minutos';
 $string['altchavalidtime_40s'] = '40 segundos';
 $string['altchavalidtime_5m'] = '5 minutos';
 $string['altchavalidtime_desc'] = 'El tiempo de validez de la verificación ALTCHA. Si se excede, el usuario debe volver a verificar.';
+$string['assetsfiles'] = 'Archivos públicos del tema';
+$string['assetsfiles_desc'] = 'Suba aquí los archivos públicos del tema. No se permiten carpetas. La URL de cada archivo es estable y puede usarse en configuraciones HTML del tema.';
+$string['assetssettings'] = 'Assets';
+$string['assetsurls'] = 'URLs públicas de assets';
+$string['assetsurls_copy'] = 'Copiar URL';
+$string['assetsurls_empty'] = 'No hay archivos cargados todavía.';
+$string['assetsurls_help'] = 'Use estas URLs públicas para referenciar archivos en contenido HTML o CSS del tema.';
+$string['assetsurls_open'] = 'Abrir';
 $string['backgroundimage'] = 'Imagen de fondo';
 $string['backgroundimage_desc'] = 'La imagen que se mostrará como fondo del sitio. La imagen de fondo que cargue aquí anulará la imagen de fondo en los archivos preestablecidos de su tema.';
 $string['bbcoscss'] = 'SCSS sin formato';
@@ -177,6 +185,7 @@ Puedes editar cada configuración en:<br>
     <li><a href="{$a}admin/settings.php?section=theme_bambuco_skin">Máscara</a>: Cambiar plantilla de Bootstrap</li>
     <li><a href="{$a}admin/settings.php?section=theme_bambuco_login">Inicio de sesión</a>: Estilos para la página de inicio de sesión y registro.</li>
     <li><a href="{$a}admin/settings.php?section=theme_bambuco_courses">Cursos</a></li>
+    <li><a href="{$a}admin/settings.php?section=theme_bambuco_assets">Assets</a>: Archivos públicos reutilizables del tema.</li>
     <li><a href="{$a}admin/settings.php?section=theme_bambuco_multitheme">Multitema</a></li>
     <li><a href="{$a}theme/bambuco/subthemes.php">Subtemas</a>: Los subtemas permiten crear estilos para cursos y usuarios específicos. Esta opción debe habilitarse en la sección Multitema.</li>
 </ul>
