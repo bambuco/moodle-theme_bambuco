@@ -148,7 +148,11 @@ function theme_bambuco_assets_urls_admin_html(): string {
             html_writer::tag('strong', s($file->get_filename())) .
             html_writer::div($input . ' ' . $copybutton, 'd-flex align-items-center gap-2') .
             html_writer::div(
-                html_writer::link($url, get_string('assetsurls_open', 'theme_bambuco'), ['target' => '_blank', 'rel' => 'noopener']),
+                html_writer::link(
+                    $url,
+                    get_string('assetsurls_open', 'theme_bambuco'),
+                    ['target' => '_blank', 'rel' => 'noopener']
+                ),
                 'mt-1'
             ),
             'mb-3'
