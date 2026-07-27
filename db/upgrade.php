@@ -71,5 +71,15 @@ function xmldb_theme_bambuco_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2025011003, 'theme', 'bambuco');
     }
 
+    if ($oldversion < 2025011005.05) {
+        // Initialize new assets setting to avoid upgrade settings redirect loops.
+        if (get_config('theme_bambuco', 'assetsfiles') === false) {
+            set_config('assetsfiles', '', 'theme_bambuco');
+        }
+
+        // Savepoint reached.
+        upgrade_plugin_savepoint(true, 2025011005.05, 'theme', 'bambuco');
+    }
+
     return true;
 }
