@@ -89,7 +89,7 @@ function theme_bambuco_pluginfile($course, $cm, $context, $filearea, $args, $for
     if (
         $context->contextlevel == CONTEXT_SYSTEM &&
         (
-            in_array($filearea, ['logo', 'backgroundimage', 'loginbackgroundimage', 'courseheaderimagefile']) ||
+            in_array($filearea, ['logo', 'backgroundimage', 'loginbackgroundimage', 'courseheaderimagefile', 'assets']) ||
             strpos($filearea, 'backgroundimage_') === 0 // Subtheme bgimage.
         )
     ) {
@@ -102,6 +102,67 @@ function theme_bambuco_pluginfile($course, $cm, $context, $filearea, $args, $for
     } else {
         send_file_not_found();
     }
+}
+
+/**
+ * Build HTML with stable public URLs for uploaded theme assets.
+ *
+ * @return string
+ */
+function theme_bambuco_assets_urls_admin_html(): string {
+    $context = context_system::instance();
+    $fs = get_file_storage();
+    $files = $fs->get_area_files(
+        $context->id,
+        'theme_bambuco',
+        'assets',
+        0,
+        'filepath ASC, filename ASC',
+        false
+    );
+
+    if (empty($files)) {
+        return html_writer::div(get_string('assetsurls_empty', 'theme_bambuco'));
+    }
+
+    $rows = [];
+    foreach ($files as $file) {
+        $url = moodle_url::make_pluginfile_url(
+            $context->id,
+            'theme_bambuco',
+            'assets',
+            0,
+            $file->get_filepath(),
+            $file->get_filename(),
+            false
+        );
+
+        $safeurl = s($url->out(false));
+        $fieldid = 'theme-bambuco-asset-url-' . $file->get_id();
+        $input = '<input id="' . $fieldid . '" type="text" class="form-control" readonly value="' . $safeurl . '">';
+        $copybutton = '<button type="button" class="btn btn-secondary" onclick="document.getElementById(\'' .
+            $fieldid . '\').select();document.execCommand(\'copy\');">' .
+            get_string('assetsurls_copy', 'theme_bambuco') . '</button>';
+
+        $rows[] = html_writer::div(
+            html_writer::tag('strong', s($file->get_filename())) .
+            html_writer::div($input . ' ' . $copybutton, 'd-flex align-items-center gap-2') .
+            html_writer::div(
+                html_writer::link(
+                    $url,
+                    get_string('assetsurls_open', 'theme_bambuco'),
+                    ['target' => '_blank', 'rel' => 'noopener']
+                ),
+                'mt-1'
+            ),
+            'mb-3'
+        );
+    }
+
+    return html_writer::div(
+        html_writer::div(get_string('assetsurls_help', 'theme_bambuco'), 'mb-2') . implode('', $rows),
+        'theme-bambuco-assets-url-list'
+    );
 }
 
 /**

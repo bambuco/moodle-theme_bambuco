@@ -47,6 +47,7 @@ if ($ADMIN->fulltree || !empty($any)) {
     if (!$subtheme) {
         require_once(dirname(__FILE__) . '/settings/login.php');
         require_once(dirname(__FILE__) . '/settings/courses.php');
+        require_once(dirname(__FILE__) . '/settings/assets.php');
         require_once(dirname(__FILE__) . '/settings/multitheme.php');
     }
 

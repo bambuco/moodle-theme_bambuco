@@ -47,6 +47,14 @@ $string['altchavalidtime_2m'] = '2 minutes';
 $string['altchavalidtime_40s'] = '40 seconds';
 $string['altchavalidtime_5m'] = '5 minutes';
 $string['altchavalidtime_desc'] = 'The time that the ALTCHA verification is valid. If the time is exceeded, the user must verify again.';
+$string['assetsfiles'] = 'Theme public files';
+$string['assetsfiles_desc'] = 'Upload public theme files here. Folders are not allowed. Each file gets a stable URL that can be used in theme HTML settings.';
+$string['assetssettings'] = 'Assets';
+$string['assetsurls'] = 'Public asset URLs';
+$string['assetsurls_copy'] = 'Copy URL';
+$string['assetsurls_empty'] = 'No files uploaded yet.';
+$string['assetsurls_help'] = 'Use these public URLs to reference files in the theme HTML or CSS content.';
+$string['assetsurls_open'] = 'Open';
 $string['backgroundimage'] = 'Background image';
 $string['backgroundimage_desc'] = 'The image to display as a background of the site. The background image you upload here will override the background image in your theme preset files.';
 $string['bbcoscss'] = 'Raw SCSS';
@@ -176,6 +184,7 @@ You can edit each setting in:<br>
     <li><a href="{$a}admin/settings.php?section=theme_bambuco_skin">Skin</a>: Change Bootstrap Template</li>
     <li><a href="{$a}admin/settings.php?section=theme_bambuco_login">Login</a>: Styles for the login and sign up page.</li>
     <li><a href="{$a}admin/settings.php?section=theme_bambuco_courses">Course</a></li>
+    <li><a href="{$a}admin/settings.php?section=theme_bambuco_assets">Assets</a>: Reusable public theme files.</li>
     <li><a href="{$a}admin/settings.php?section=theme_bambuco_multitheme">Multi theme</a></li>
     <li><a href="{$a}theme/bambuco/subthemes.php">Subthemes</a>: Subtopics allow to create styles for specific courses and users. This must be enabled in the Multi theme section.</li>
 </ul>
