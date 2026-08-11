@@ -26,6 +26,7 @@ require('../../config.php');
 require_once($CFG->libdir . '/adminlib.php');
 
 $delete = optional_param('delete', '', PARAM_ALPHANUMEXT);
+$clearsubthemecache = optional_param('clearsubthemecache', 0, PARAM_BOOL);
 $confirm = optional_param('confirm', '', PARAM_ALPHANUM); // Md5 confirmation hash.
 
 require_login();
@@ -64,6 +65,54 @@ if ($delete && confirm_sesskey()) {
     }
 }
 
+// Clear only subthemes-related caches, after confirmation.
+if ($clearsubthemecache && confirm_sesskey()) {
+    if ($confirm != md5('clearsubthemecache')) {
+        echo $OUTPUT->header();
+        echo $OUTPUT->heading(get_string('subthemesclearcache', 'theme_bambuco'));
+        $optionsyes = [
+            'clearsubthemecache' => 1,
+            'confirm' => md5('clearsubthemecache'),
+            'sesskey' => sesskey(),
+        ];
+        echo $OUTPUT->confirm(
+            get_string('subthemesclearcacheconfirm', 'theme_bambuco'),
+            new moodle_url($url, $optionsyes),
+            $url
+        );
+        echo $OUTPUT->footer();
+        die;
+    } else if (data_submitted()) {
+        // Purge subtheme postprocessed CSS cache definition.
+        $cache = cache::make('theme_bambuco', 'postprocessedcss');
+        $cache->purge();
+
+        // Delete subtheme CSS files from theme localcache across all revisions.
+        $cssdirs = glob("{$CFG->localcachedir}/theme/*/bambuco/css", GLOB_ONLYDIR);
+        foreach ($cssdirs as $cssdir) {
+            $subthemecssfiles = glob("{$cssdir}/all*_*.css");
+            foreach ($subthemecssfiles as $subthemecssfile) {
+                if (preg_match('/^(?:all|all-rtl)(?:_[0-9]+)?(?:-nosvg)?_[0-9]+\\.css$/', basename($subthemecssfile))) {
+                    @unlink($subthemecssfile);
+                }
+            }
+        }
+
+        // Delete subtheme fallback CSS files from temp cache.
+        $tempcssdir = "{$CFG->tempdir}/theme/bambuco";
+        if (is_dir($tempcssdir)) {
+            $tempsubthemecssfiles = glob("{$tempcssdir}/all*_*.css");
+            foreach ($tempsubthemecssfiles as $tempsubthemecssfile) {
+                if (preg_match('/^(?:all|all-rtl)(?:_[0-9]+)?(?:-nosvg)?_[0-9]+\\.css$/', basename($tempsubthemecssfile))) {
+                    @unlink($tempsubthemecssfile);
+                }
+            }
+        }
+
+        redirect($url, get_string('subthemescachecleared', 'theme_bambuco'), null, \core\output\notification::NOTIFY_SUCCESS);
+    }
+}
+
 $PAGE->set_url($url);
 $PAGE->set_context($syscontext);
 
@@ -77,6 +126,7 @@ $data = [
     'baseurl' => $CFG->wwwroot,
     'subthemes' => array_values($subthemes),
     'sesskey' => sesskey(),
+    'clearsubthemecacheurl' => (new moodle_url($url, ['clearsubthemecache' => 1, 'sesskey' => sesskey()]))->out(false),
 ];
 
 echo $OUTPUT->render_from_template('theme_bambuco/local/subthemes', $data);

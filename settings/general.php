@@ -66,6 +66,7 @@ if ($ADMIN->fulltree) {
         $choices['default.scss'] = 'default.scss';
         $choices['plain.scss'] = 'plain.scss';
         $choices['abaco.scss'] = 'Ábaco';
+        $choices['aprender.scss'] = 'Aprender';
         $choices['fluido.scss'] = 'Fluido';
 
         $setting = new admin_setting_configthemepreset($name, $title, $description, $default, $choices, 'bambuco');
@@ -174,6 +175,30 @@ if ($ADMIN->fulltree) {
         $title = get_string('otherfontfamily', 'theme_bambuco');
         $description = get_string('otherfontfamily_desc', 'theme_bambuco');
         $setting = new admin_setting_configmultiselect($name, $title, $description, [], $fonts);
+        $setting->set_updatedcallback('theme_reset_all_caches');
+        $page->add($setting);
+    }
+
+    if (utils::iscustomizable_subtheme('fontaxes', $subtheme)) {
+        // Axes/weights to include in the Google Fonts request.
+        $name = 'theme_bambuco/fontaxes' . $subthemekey;
+        $title = get_string('fontaxes', 'theme_bambuco');
+        $description = get_string('fontaxes_desc', 'theme_bambuco');
+        $options = [
+            'wght100' => get_string('fontweight_thin', 'theme_bambuco'),
+            'wght200' => get_string('fontweight_extralight', 'theme_bambuco'),
+            'wght300' => get_string('fontweight_light', 'theme_bambuco'),
+            'wght400' => get_string('fontweight_regular', 'theme_bambuco'),
+            'wght500' => get_string('fontweight_medium', 'theme_bambuco'),
+            'wght600' => get_string('fontweight_semibold', 'theme_bambuco'),
+            'wght700' => get_string('fontweight_bold', 'theme_bambuco'),
+            'wght800' => get_string('fontweight_extrabold', 'theme_bambuco'),
+            'wght900' => get_string('fontweight_black', 'theme_bambuco'),
+            'ital' => get_string('fontaxis_ital', 'theme_bambuco'),
+            'opsz' => get_string('fontaxis_opsz', 'theme_bambuco'),
+        ];
+        $default = ['wght400', 'wght500', 'wght600', 'wght700', 'wght900'];
+        $setting = new admin_setting_configmultiselect($name, $title, $description, $default, $options);
         $setting->set_updatedcallback('theme_reset_all_caches');
         $page->add($setting);
     }

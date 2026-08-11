@@ -109,6 +109,52 @@ body.courseheader-custom {
     }
 }
 
+#tertiary-navigation.tertiary-navigation,
+.container-fluid.tertiary-navigation {
+    .dropdown.select-menu {
+        background-color: var(--primary, #0d6efd);
+        padding: 0;
+        border-radius: 7px;
+        display: inline-flex;
+        align-items: center;
+        position: relative;
+
+        > span {
+            padding: 0 5px;
+        }
+
+        .dropdown-toggle {
+            font-size: 1.1em;
+            color: var(--primaryreverse, #fff);
+            background-color: transparent;
+            border: none;
+            box-shadow: none;
+            padding-top: 0;
+            padding-bottom: 0;
+            padding-left: 0;
+            padding-right: 15px;
+            margin: 0;
+            display: inline-flex;
+            align-items: center;
+            cursor: pointer;
+
+            &::before {
+                content: "\1F4D1";
+                font-weight: 900;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                background-color: rgba(0, 0, 0, 0.15);
+                margin-right: 12px;
+                padding: 8px 12px;
+                border-top-left-radius: 7px;
+                border-bottom-left-radius: 7px;
+                font-size: 0.95em;
+            }
+        }
+    }
+}
+
 @media (min-width: 992px) {
     body.courseheader-custom {
         &.course-header-fullwidth {

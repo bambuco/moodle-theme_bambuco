@@ -81,5 +81,15 @@ function xmldb_theme_bambuco_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2025111100.02, 'theme', 'bambuco');
     }
 
+    if ($oldversion < 2025111100.03) {
+        // Initialize the Google Fonts variants while preserving the weights previously loaded by the theme.
+        if (get_config('theme_bambuco', 'fontaxes') === false) {
+            set_config('fontaxes', 'wght400,wght500,wght600,wght700,wght900', 'theme_bambuco');
+        }
+
+        // Savepoint reached.
+        upgrade_plugin_savepoint(true, 2025111100.03, 'theme', 'bambuco');
+    }
+
     return true;
 }
