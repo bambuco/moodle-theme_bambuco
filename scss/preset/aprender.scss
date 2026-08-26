@@ -1,0 +1,452 @@
+/* stylelint-disable declaration-no-important */
+// Bootstrap variables
+$white:    #fff !default;
+$gray-100: #f1f1f1 !default;
+$gray-200: #e9ecef !default;
+$gray-300: #e1e1e1 !default;
+$gray-400: #ced4da !default;
+$gray-500: #b4b4b4 !default;
+$gray-600: #6a737b !default;
+$gray-700: #495057 !default;
+$gray-800: #403f41 !default;
+$gray-900: #2f2f2f !default;
+$black:    #000 !default;
+
+$blue:    #0f6cbf !default;
+$indigo:  #6610f2 !default;
+$purple:  #613d7c !default;
+$pink:    #db1a74 !default;
+$red:     #ca3120 !default;
+$orange:  #f0ad4e !default;
+$yellow:  #ff7518 !default;
+$green:   #357a32 !default;
+$teal:    #20c997 !default;
+$cyan:    #008196 !default;
+$lightgreen: #93c54b !default;
+$bglight: #f1f1f1 !default;
+
+$primary:       #c2cc05 !default;
+$success:       $green !default;
+$info:          $cyan !default;
+$warning:       $orange !default;
+$danger:        $red !default;
+$secondary:     #004432 !default;
+
+$info-outline:    #1f7e9a;
+$warning-outline: #a6670e;
+
+// Tables
+$table-accent-bg: rgba($black, .03) !default;
+
+// Options
+$enable-responsive-font-sizes: true !default;
+
+// Body
+$body-color:    $gray-900 !default;
+$main-inner-max-width: 1100px !default;
+
+// Fonts
+$font-size-base: 0.9375rem !default;
+$rfs-base-font-size: 0.9rem !default;
+$headings-font-weight:   700 !default;
+
+// Navbar
+$navbar-dark-hover-color:           rgba($white, 1) !default;
+$navbar-light-color:                rgba($black, 0.6) !default;
+$navbar-light-hover-color:          rgba($black, .9) !default;
+
+// Breadcrumbs
+$breadcrumb-padding-y:              .5rem !default;
+$breadcrumb-padding-x:              0 !default;
+$breadcrumb-item-padding:           .5rem !default;
+$breadcrumb-margin-bottom:          0 !default;
+$breadcrumb-bg:                     transparent !default;
+$breadcrumb-divider: "/" !default;
+$breadcrumb-divider-rtl: "/" !default;
+
+// Alerts
+$alert-border-width:                0 !default;
+
+$card-group-margin: .25rem;
+
+// Toasts
+$toast-color:                       $white !default;
+$toast-background-color:            rgba($gray-900, .95) !default;
+$toast-header-color:                $gray-100 !default;
+$toast-header-background-color:     rgba($white, .1) !default;
+
+// Custom control size
+$custom-control-indicator-size: 1.25rem;
+
+$input-btn-focus-color: rgba($primary, .75) !default;
+
+$input-border-color: $gray-500 !default;
+
+$dropdown-link-hover-color: $secondary;
+$dropdown-link-hover-bg: $primary;
+
+$popover-max-width: 300px !default;
+
+$border-radius: .5rem !default;
+$border-radius-lg: 1.2rem !default;
+
+// stylelint-disable
+$theme-colors: () !default;
+$theme-colors: map-merge((
+    primary: $primary,
+    secondary: $secondary,
+    success: $success,
+    info: $info,
+    warning: $warning,
+    danger: $danger,
+    primaryreverse: $secondary,
+    secondaryreverse: $white,
+    activedefault: $lightgreen,
+    activereverse: $primary,
+    bglight: $bglight,
+), $theme-colors);
+// stylelint-enable
+
+$spacer: 1rem !default;
+$spacers: (
+    0: 0,
+    1: ($spacer * .25),
+    2: ($spacer * .5),
+    3: $spacer,
+    4: ($spacer * 1.5),
+    5: ($spacer * 2),
+    6: ($spacer * 3)
+) !default;
+
+:root {
+    --primary: #c2cc05;
+    --primaryreverse: #fff;
+    --secondary: #004432;
+    --secondaryreverse: #fff;
+    --activedefault: #93c54b;
+    --activereverse: #c2cc05;
+    --bglight: #edf5ff;
+}
+
+// Import FontAwesome.
+@import "fontawesome";
+
+// Import All of Bootstrap
+@import "bootstrap";
+
+// Import Core moodle CSS
+@import "moodle";
+
+$navbar-height: 100px !default;
+
+// Preset CSS
+
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #545454;
+}
+
+// Rounded user pictures
+.userpicture {
+    border-radius: 50%;
+}
+
+a:not([class]) {
+    color: var(--gray-900);
+
+    &:hover {
+        color: var(--gray-900);
+    }
+}
+
+.nav-tabs .nav-link {
+    color: var(--secondary);
+}
+
+// Reset the default styling back to the bootstrap defaults for
+// the secondary outline button because gray-200 is much too light
+// for an outline button.
+.btn-outline-secondary {
+    @include button-outline-variant($gray-600);
+    border-color: $gray-600;
+}
+
+.btn-outline-info {
+    @include button-outline-variant($info-outline);
+}
+
+.btn-outline-warning {
+    @include button-outline-variant($warning-outline);
+}
+
+.btn {
+    border-radius: $border-radius-lg;
+
+    &.btn-primary {
+        color: var(--primaryreverse);
+    }
+
+    &.bg-secondary {
+        color: var(--secondaryreverse);
+    }
+}
+
+#page-admin-index #page-content .alert a {
+    &.btn-secondary {
+        color: var(--secondaryreverse);
+        text-decoration: none;
+    }
+}
+
+// Custom login page
+#page-login-index {
+    background-color: var(--primary);
+}
+
+body.pagelayout-login {
+    #page {
+        background-color: var(--primary);
+
+        .login-wrapper {
+            max-width: 1200px;
+            width: 100% !important;
+            background: transparent;
+            box-shadow: unset;
+            justify-content: left;
+            margin: auto;
+            --altcha-max-width: 100%;
+
+            .login-container {
+                border-radius: 40px;
+                max-width: 380px;
+
+                h2.login-heading {
+                    font-size: 15px;
+                    font-weight: 300;
+                    color: var(--secondary);
+                    text-align: center;
+                }
+
+                .login-identityproviders .login-identityprovider-btn {
+                    background-color: var(--secondary);
+                    color: var(--secondaryreverse);
+                    font-size: 18px;
+                    border-radius: $border-radius-lg;
+                    padding: 10px;
+                    font-weight: 600;
+                }
+
+                .login-divider {
+                    border-top: 3px solid var(--secondary);
+                }
+
+                .form-group {
+                    text-align: center;
+                }
+
+                .form-control {
+                    border-color: var(--secondary);
+                }
+
+                a {
+                    color: var(--secondary);
+                }
+
+                .loginform .icon-showform:before {
+                    top: -16px;
+                }
+            }
+        }
+    }
+}
+
+// Custom Navbar
+.navbar.fixed-top {
+    background: linear-gradient(to bottom, var(--secondarydegrade, #002018), var(--secondary)) !important;
+    color: var(--secondaryreverse);
+    border-bottom: none;
+
+    .navbar-brand {
+        color: var(--secondaryreverse);
+    }
+
+    .primary-navigation {
+        .nav-item {
+            .nav-link {
+                color: var(--secondaryreverse);
+                opacity: 0.8;
+                font-weight: 300;
+
+                &.active {
+                    opacity: 1;
+                    font-weight: normal;
+                }
+
+                &.active:focus,
+                &.active:hover,
+                &:focus,
+                &:hover {
+                    border-bottom-color: var(--secondary);
+                    background-color: transparent;
+                    opacity: 1;
+                    font-weight: normal;
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+
+    #usernavigation {
+        .popover-region,
+        .simplesearchform {
+            display: flex;
+            align-items: center;
+            height: $navbar-height;
+        }
+
+        .btn[data-action="opensearch"],
+        .nav-link {
+            background-color: transparent !important;
+            color: var(--secondaryreverse) !important;
+            position: relative;
+            height: 26px;
+            border-radius: $border-radius !important;
+            opacity: 0.8;
+
+            &.active:focus,
+            &.active:hover,
+            &:hover {
+                color: var(--secondaryreverse) !important;
+                background-color: transparent !important;
+                opacity: 1;
+            }
+        }
+
+        .usermenu .login a {
+            background-color: transparent;
+            color: var(--secondaryreverse);
+            border-radius: $border-radius;
+            padding: 5px 20px;
+            margin-left: 5px;
+            font-weight: bold;
+
+            &:hover {
+                background-color: transparent;
+                color: var(--secondaryreverse);
+                text-decoration: underline;
+            }
+
+            &:focus {
+                box-shadow: none;
+            }
+        }
+
+        .dropdown-toggle:after {
+            color: $white !important;
+        }
+
+        .usertext {
+            color: $white;
+        }
+
+        #lang-menu-toggle,
+        .langbutton {
+            color: $white;
+        }
+    }
+
+    .simplesearchform {
+        .collapse.show,
+        .collapsing {
+            background-color: var(--secondary);
+        }
+
+        .btn-submit {
+            color: var(--primaryreverse);
+            background: var(--primary);
+
+            &:hover {
+                color: var(--primary);
+                background-color: var(--activedefault);
+            }
+        }
+    }
+
+    .editmode-switch-form {
+        .input-group label,
+        .text-primary {
+            color: $white !important;
+        }
+
+        .custom-control-input:checked ~ .custom-control-label:before {
+            border-color: $white !important;
+        }
+    }
+
+    .popover-region-container {
+        top: $navbar-height - 32px;
+        background-color: var(--secondary);
+
+        .popover-region-header-text {
+            color: var(--primary);
+        }
+    }
+
+    .navbar-toggler-icon {
+        filter: invert(1);
+    }
+
+    .divider {
+        height: 50% !important;
+    }
+
+    .dropdown-menu {
+        .dropdown-item {
+            font-weight: 300;
+            background-color: transparent;
+            &:hover {
+                font-weight: normal;
+                color: var(--secondary);
+            }
+        }
+    }
+}
+
+// Blocks
+.block {
+    .card-title {
+        color: var(--secondary);
+    }
+}
+
+/* General */
+.badge.bg-secondary.text-dark {
+    color: var(--secondaryreverse) !important;
+}
+
+// Kamaleon
+@media (max-width: 512px) {
+    #page-site-index {
+        .block_kamaleon {
+            &.design-degradedcarousel {
+                .carousel-item {
+                    .carousel-caption {
+                        background-color: var(--secondaryreverse);
+                        margin-bottom: 30px;
+
+                        .titulo-bn,
+                        .texto-bn-bold {
+                            font-size: 22px;
+                            line-height: 24px;
+                        }
+                    }
+                }
+
+                .carousel-control {
+                    z-index: 10;
+                }
+            }
+        }
+    }
+}

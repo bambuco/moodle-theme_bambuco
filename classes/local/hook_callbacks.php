@@ -103,9 +103,15 @@ class hook_callbacks {
 
         // Included fonts.
         $fontkey = utils::subthemekey('fontfamily');
-        $font = $config->$fontkey;
+        $font = property_exists($config, $fontkey) ? $config->$fontkey : '';
 
-        $otherfontfamily = $config->otherfontfamily;
+        $otherfontfamilykey = utils::subthemekey('otherfontfamily');
+        $otherfontfamily = property_exists($config, $otherfontfamilykey) ? $config->$otherfontfamilykey : '';
+
+        $fontaxeskey = utils::subthemekey('fontaxes');
+        $fontaxes = property_exists($config, $fontaxeskey) ? $config->$fontaxeskey : 'wght400,wght500,wght600,wght700,wght900';
+        $fontaxes = explode(',', $fontaxes);
+        $fontaxesparam = self::build_google_fonts_axis_param($fontaxes);
 
         $headers = [];
         if (!empty($font) || !empty($otherfontfamily)) {
@@ -124,12 +130,18 @@ class hook_callbacks {
             }
 
             $includefonts = array_merge($includefonts, $otherfontfamily);
+            $includefonts = array_values(array_unique(array_filter($includefonts)));
 
+            $families = [];
             foreach ($includefonts as $font) {
                 $font = str_replace(' ', '+', $font);
+                $families[] = $font . $fontaxesparam;
+            }
+
+            if (!empty($families)) {
                 $headers[] = '<link href="https://fonts.googleapis.com/css2?family='
-                                    . $font
-                                    . ':wght@400;500;600;700;900&display=swap" rel="stylesheet">';
+                                    . implode('&family=', $families)
+                                    . '&display=swap" rel="stylesheet">';
             }
         }
 
@@ -246,6 +258,63 @@ class hook_callbacks {
 
         $SESSION->theme_bambuco_subtheme = false;
         utils::set_subtheme(null);
+    }
+
+    /**
+     * Build axis parameter for Google Fonts URL.
+     *
+     * @param array $fontaxes Selected options from theme setting.
+     * @return string
+     */
+    private static function build_google_fonts_axis_param(array $fontaxes): string {
+        $weights = [];
+        foreach ($fontaxes as $axis) {
+            if (preg_match('/^wght([1-9]00)$/', $axis, $matches)) {
+                $weights[] = (int)$matches[1];
+            }
+        }
+
+        if (empty($weights)) {
+            $weights = [400];
+        }
+
+        $weights = array_values(array_unique($weights));
+        sort($weights, SORT_NUMERIC);
+
+        $hasital = in_array('ital', $fontaxes);
+        $hasopsz = in_array('opsz', $fontaxes);
+
+        if ($hasital && $hasopsz) {
+            $variants = [];
+            foreach ($weights as $weight) {
+                $variants[] = '0,14..32,' . $weight;
+            }
+            foreach ($weights as $weight) {
+                $variants[] = '1,14..32,' . $weight;
+            }
+            return ':ital,opsz,wght@' . implode(';', $variants);
+        }
+
+        if ($hasital) {
+            $variants = [];
+            foreach ($weights as $weight) {
+                $variants[] = '0,' . $weight;
+            }
+            foreach ($weights as $weight) {
+                $variants[] = '1,' . $weight;
+            }
+            return ':ital,wght@' . implode(';', $variants);
+        }
+
+        if ($hasopsz) {
+            $variants = [];
+            foreach ($weights as $weight) {
+                $variants[] = '14..32,' . $weight;
+            }
+            return ':opsz,wght@' . implode(';', $variants);
+        }
+
+        return ':wght@' . implode(';', $weights);
     }
 
     /**

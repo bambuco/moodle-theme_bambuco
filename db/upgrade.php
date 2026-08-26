@@ -81,5 +81,15 @@ function xmldb_theme_bambuco_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2025011005.05, 'theme', 'bambuco');
     }
 
+    if ($oldversion < 2025011005.07) {
+        // Initialize new setting to avoid upgrade settings redirect loops.
+        if (get_config('theme_bambuco', 'fontaxes') === false) {
+            set_config('fontaxes', '', 'theme_bambuco');
+        }
+
+        // Savepoint reached.
+        upgrade_plugin_savepoint(true, 2025011005.07, 'theme', 'bambuco');
+    }
+
     return true;
 }

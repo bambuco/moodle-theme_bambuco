@@ -30,7 +30,7 @@ defined('MOODLE_INTERNAL') || die();
 $plugin->component = 'theme_bambuco';
 
 // This is the version of the plugin.
-$plugin->version = 2025011005.05;
+$plugin->version = 2025011006;
 
 // This is the named version.
 $plugin->release = '4.5.06';

@@ -124,12 +124,25 @@ $string['editingsubtheme'] = 'Editando subtema <b>{$a}</b>.';
 $string['eventsubtheme_created'] = 'Subtema creado';
 $string['eventsubtheme_deleted'] = 'Subtema eliminado';
 $string['eventsubtheme_updated'] = 'Subtema actualizado';
+$string['fontaxes'] = 'Variantes de Google Fonts';
+$string['fontaxes_desc'] = 'Seleccione los ejes/anchos que se incluirán en la importación de Google Fonts para la fuente principal y las fuentes adicionales.';
+$string['fontaxis_ital'] = 'Itálica (ital)';
+$string['fontaxis_opsz'] = 'Optical size (opsz)';
 $string['fontfamily'] = 'Familia de la fuente';
 $string['fontfamily_desc'] = 'Fuente de Google que se utilizará en el sitio.
 Ver más en <a href="https://fonts.google.com/" target="_blank">Google Fonts</a>.
 Para símbolos, visite: <a href="https://fonts.google.com/noto/specimen/Noto+Sans+Symbols+2/glyphs?query=Noto+Sans+Symbols+2" target="_blank">Noto Sans Symbols 2 - Glyphs</a>.';
 $string['fontfamily_handwriting'] = ' (escritura a mano)';
 $string['fontfamily_icons'] = '(iconos)';
+$string['fontweight_black'] = 'Negra (900)';
+$string['fontweight_bold'] = 'Negrita (700)';
+$string['fontweight_extrabold'] = 'Extra negrita (800)';
+$string['fontweight_extralight'] = 'Extra ligera (200)';
+$string['fontweight_light'] = 'Ligera (300)';
+$string['fontweight_medium'] = 'Media (500)';
+$string['fontweight_regular'] = 'Regular (400)';
+$string['fontweight_semibold'] = 'Seminegrita (600)';
+$string['fontweight_thin'] = 'Fina (100)';
 $string['generalsettings'] = 'Configuración general';
 $string['loginbackgroundimage'] = 'Imagen de fondo';
 $string['loginbackgroundimage_desc'] = 'La imagen que se mostrará como fondo para la página de inicio de sesión.';

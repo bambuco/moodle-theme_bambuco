@@ -124,12 +124,25 @@ $string['editingsubtheme'] = 'Editing subtheme <b>{$a}</b>.';
 $string['eventsubtheme_created'] = 'Subtheme created';
 $string['eventsubtheme_deleted'] = 'Subtheme deleted';
 $string['eventsubtheme_updated'] = 'Subtheme updated';
+$string['fontaxes'] = 'Google Fonts variants';
+$string['fontaxes_desc'] = 'Select the axes/weights to include in the Google Fonts import for the main font and additional fonts.';
+$string['fontaxis_ital'] = 'Italic (ital)';
+$string['fontaxis_opsz'] = 'Optical size (opsz)';
 $string['fontfamily'] = 'Font family';
 $string['fontfamily_desc'] = 'The Google font family to use for the site.
 View more in <a href="https://fonts.google.com/" target="_blank">Google Fonts</a>.
 For symbols visit: <a href="https://fonts.google.com/noto/specimen/Noto+Sans+Symbols+2/glyphs?query=Noto+Sans+Symbols+2" target="_blank">Noto Sans Symbols 2 - Glyphs</a>.';
 $string['fontfamily_handwriting'] = ' (handwriting)';
 $string['fontfamily_icons'] = ' (icons)';
+$string['fontweight_black'] = 'Black (900)';
+$string['fontweight_bold'] = 'Bold (700)';
+$string['fontweight_extrabold'] = 'ExtraBold (800)';
+$string['fontweight_extralight'] = 'ExtraLight (200)';
+$string['fontweight_light'] = 'Light (300)';
+$string['fontweight_medium'] = 'Medium (500)';
+$string['fontweight_regular'] = 'Regular (400)';
+$string['fontweight_semibold'] = 'SemiBold (600)';
+$string['fontweight_thin'] = 'Thin (100)';
 $string['generalsettings'] = 'General settings';
 $string['loginbackgroundimage'] = 'Login page background image';
 $string['loginbackgroundimage_desc'] = 'The image to display as a background for the login page.';
