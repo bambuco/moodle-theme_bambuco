@@ -256,7 +256,7 @@ function theme_styles_generate_and_store($theme, $rev, $themesubrev, $candidated
     $subrevfiles = glob("{$CFG->localcachedir}/theme/{$rev}/{$theme->name}/css/*.css");
     foreach ($subrevfiles as $subrevfile) {
         $cachedsubrev = [];
-        preg_match("/_([0-9]+)\.([0-9]+\.)?css$/", $subrevfile, $cachedsubrev);
+        preg_match('/^(?:all|all-rtl)_([0-9]+)(?:-nosvg)?(?:_[0-9]+)?\.css$/', basename($subrevfile), $cachedsubrev);
         $cachedsubrev = isset($cachedsubrev[1]) ? intval($cachedsubrev[1]) : 0;
         if ($cachedsubrev > 0 && $cachedsubrev < $themesubrev) {
             fulldelete($subrevfile);
