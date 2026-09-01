@@ -176,6 +176,17 @@ class hook_callbacks {
             return;
         }
 
+        // Captured here because some modules (e.g. SCORM skipview) redirect before the layout ever renders.
+        // Raw ids only (no DB lookups yet): $PAGE->cm isn't resolved at this point for the current request.
+        if (optional_param('inpopup', 0, PARAM_BOOL)) {
+            $SESSION->theme_bambuco_inpopup = (object) [
+                'expires' => time() + 5,
+                'id' => optional_param('id', 0, PARAM_INT),
+                'cm' => optional_param('cm', 0, PARAM_INT),
+                'a' => optional_param('a', 0, PARAM_INT),
+            ];
+        }
+
         $config = get_config('theme_bambuco');
 
         if ($PAGE->pagetype == 'login-index' && !empty($config->usealtcha)) {
