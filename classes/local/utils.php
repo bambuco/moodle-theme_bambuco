@@ -187,6 +187,34 @@ class utils {
     }
 
     /**
+     * Resolve the inpopup state, propagating it through internal module redirects (e.g. SCORM view -> player)
+     * that don't forward the original query param. The session flag is set earlier, in the after_config hook,
+     * since some modules redirect before this layout ever gets a chance to run.
+     *
+     * @return bool
+     */
+    public static function resolve_inpopup(): bool {
+        global $SESSION, $PAGE;
+
+        if (optional_param('inpopup', 0, PARAM_BOOL)) {
+            return true;
+        }
+
+        $flag = $SESSION->theme_bambuco_inpopup ?? null;
+        $cm = $PAGE->cm ?? null;
+
+        // Only inherit for the same activity the flag was captured for, never for pages without an activity context.
+        if ($flag && $cm && $flag->expires >= time() &&
+                ($cm->id == $flag->id || $cm->id == $flag->cm || $cm->instance == $flag->a)) {
+            // Single use: other tabs/pages won't inherit it once consumed.
+            unset($SESSION->theme_bambuco_inpopup);
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Get the course footer image.
      *
      * @param \stdClass $course Course object.

@@ -27,7 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 require_once($CFG->libdir . '/behat/lib.php');
 require_once($CFG->dirroot . '/course/lib.php');
 
-$inpopup = optional_param('inpopup', 0, PARAM_BOOL);
+$inpopup = \theme_bambuco\local\utils::resolve_inpopup();
 
 // Add block button in editing mode.
 $addblockbutton = $OUTPUT->addblockbutton();

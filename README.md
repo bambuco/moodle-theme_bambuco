@@ -17,6 +17,9 @@ Package tested in: moodle 4.5+.
 - **GIT:** https://github.com/bambuco/moodle-theme_bambuco
 
 ## IN VERSION ##
+2025011007:
+- Resolved inpopup before redirections
+
 2025011006:
 - Included secure layout with bottom blocks.
 - Require Altcha in guest login.
