@@ -1,0 +1,3 @@
+Default favicon:
+https://cdn.svgapi.com/vector/8091/book.svg
+License: Public domain & Creative Commons (no-attibution)
