@@ -204,8 +204,12 @@ class utils {
         $cm = $PAGE->cm ?? null;
 
         // Only inherit for the same activity the flag was captured for, never for pages without an activity context.
-        if ($flag && $cm && $flag->expires >= time() &&
-                ($cm->id == $flag->id || $cm->id == $flag->cm || $cm->instance == $flag->a)) {
+        if (
+            $flag &&
+            $cm &&
+            $flag->expires >= time() &&
+            ($cm->id == $flag->id || $cm->id == $flag->cm || $cm->instance == $flag->a)
+        ) {
             // Single use: other tabs/pages won't inherit it once consumed.
             unset($SESSION->theme_bambuco_inpopup);
             return true;
