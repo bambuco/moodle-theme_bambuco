@@ -425,6 +425,53 @@ body.pagelayout-login {
     color: var(--secondaryreverse) !important;
 }
 
+// Profile page
+#page-user-profile {
+    #page-header {
+        background: linear-gradient(to right, var(--secondary) 50%, var(--primary) 50%);
+        color: var(--secondaryreverse);
+        position: relative;
+        padding: 20px;
+        border-radius: $border-radius-lg;
+        margin-bottom: 20px;
+
+        a {
+            color: var(--secondaryreverse);
+
+            &:hover {
+                color: var(--secondaryreverse);
+                text-decoration: underline;
+            }
+        }
+
+        > .w-100 > div {
+            max-width: 50%;
+        }
+
+        .page-header-image {
+            position: absolute;
+            top: calc(50% - 50px);
+            left: calc(75% - 50px);
+
+            .userpicture,
+            .userinitials {
+                border: 5px solid var(--secondary);
+            }
+        }
+    }
+
+    section.node_category {
+        background-color: var(--primary);
+        color: var(--primaryreverse);
+        border-radius: $border-radius-lg;
+        border: none;
+
+        h3.lead {
+            font-size: 24px;
+        }
+    }
+}
+
 // Kamaleon
 @media (max-width: 512px) {
     #page-site-index {
