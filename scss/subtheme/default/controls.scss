@@ -6,7 +6,8 @@
 
 [data-control="bbco-contenthover"]::before {
     content: "\f05a";
-    font: normal normal normal 14px/1 FontAwesome;
+    font-family: var(--fa-style-family, "Font Awesome 6 Free");
+    font-weight: var(--fa-style, 900);
     text-rendering: auto;
     -webkit-font-smoothing: antialiased;
     font-size: 16px;
@@ -69,10 +70,19 @@
     margin: 0;
 }
 
+body.inpopup #region-main .activity-navigation {
+    display: none;
+}
+
 .modal.show .modal-dialog.bbco-modal-dialog {
     max-width: unset;
 }
 
 .modal.show .modal-dialog.bbco-modal-dialog .modal-body {
     padding: 0;
+}
+
+body.inpopup #region-main {
+    max-width: 1200px;
+    margin: auto;
 }

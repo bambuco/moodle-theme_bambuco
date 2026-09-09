@@ -35,6 +35,7 @@ class utils {
     const SUBTHEME_SETTINGS = [
         'preset',
         'backgroundimage',
+        'backgroundimage_mobile',
         'brandcolor',
         'fontfamily',
         'bbcoscsspre',
@@ -204,8 +205,12 @@ class utils {
         $cm = $PAGE->cm ?? null;
 
         // Only inherit for the same activity the flag was captured for, never for pages without an activity context.
-        if ($flag && $cm && $flag->expires >= time() &&
-                ($cm->id == $flag->id || $cm->id == $flag->cm || $cm->instance == $flag->a)) {
+        if (
+            $flag &&
+            $cm &&
+            $flag->expires >= time() &&
+            ($cm->id == $flag->id || $cm->id == $flag->cm || $cm->instance == $flag->a)
+        ) {
             // Single use: other tabs/pages won't inherit it once consumed.
             unset($SESSION->theme_bambuco_inpopup);
             return true;
@@ -483,10 +488,21 @@ class utils {
         $config = get_config('theme_bambuco');
         $altcha = new \AltchaOrg\Altcha\Altcha($SESSION->bambuco_altcha[$target]);
 
+        // Set the valid time for the challenge and the maximum random number.
+        // For signup, it is always 5 minutes. For other targets, it can be configured in the theme settings.
+        // The maximum random number is set to 500000 for more security in signup.
+        if ($target == 'signup') {
+            $validtime = '5M';
+            $maxnumber = 500000;
+        } else {
+            $validtime = $config->altchavalidtime;
+            $maxnumber = (int)$config->altchalevel;
+        }
+
         // Create a new challenge.
         $options = new \AltchaOrg\Altcha\ChallengeOptions(
-            maxNumber: (int)$config->altchalevel, // The maximum random number.
-            expires: (new \DateTimeImmutable())->add(new \DateInterval('PT' . $config->altchavalidtime)),
+            maxNumber: $maxnumber, // The maximum random number.
+            expires: (new \DateTimeImmutable())->add(new \DateInterval('PT' . $validtime)),
         );
 
         $strings = [
@@ -503,7 +519,7 @@ class utils {
         $challenge = $altcha->createChallenge($options);
         $params = (object)[
             'name' => 'bbcoaltcha',
-            'maxnumber' => (int)$config->altchalevel,
+            'maxnumber' => $maxnumber,
             'challengejson' => json_encode($challenge),
             'strings' => json_encode($strings),
         ];

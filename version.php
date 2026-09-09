@@ -30,10 +30,10 @@ defined('MOODLE_INTERNAL') || die();
 $plugin->component = 'theme_bambuco';
 
 // This is the version of the plugin.
-$plugin->version = 2025111100.06;
+$plugin->version = 2025111101;
 
 // This is the named version.
-$plugin->release = '5.0.2';
+$plugin->release = '5.0.3';
 
 // This is a stable release.
 $plugin->maturity = MATURITY_RC;
@@ -45,4 +45,5 @@ $plugin->requires = 2025041403;
 $plugin->dependencies = [
     'theme_boost' => 2025041400,
 ];
-$plugin->supported = [500, 500];
+
+$plugin->supported = [500, 501];

@@ -57,6 +57,8 @@ $string['assetsurls_help'] = 'Use estas URLs públicas para referenciar archivos
 $string['assetsurls_open'] = 'Abrir';
 $string['backgroundimage'] = 'Imagen de fondo';
 $string['backgroundimage_desc'] = 'La imagen que se mostrará como fondo del sitio. La imagen de fondo que cargue aquí anulará la imagen de fondo en los archivos preestablecidos de su tema.';
+$string['backgroundimage_mobile'] = 'Imagen de fondo (móvil)';
+$string['backgroundimage_mobile_desc'] = 'La imagen que se mostrará como fondo del sitio para dispositivos móviles. La imagen de fondo que cargue aquí anulará la imagen de fondo en los archivos preestablecidos de su tema.';
 $string['bbcoscss'] = 'SCSS sin formato';
 $string['bbcoscss_desc'] = 'Utilice este campo para proporcionar código SCSS o CSS que se inyectará al final de la hoja de estilo.';
 $string['bbcoscsspre'] = 'SCSS inicial sin formato';
@@ -105,6 +107,7 @@ $string['coursemenu_desc'] = 'Utilice la estructura: capacidad|tipo|enlace|desti
 - Destino del enlace: _blank, _self u otra opción de destino ancla, también puede estar vacío.';
 $string['coursesheader'] = 'Encabezado de cursos';
 $string['coursesheader_basic'] = 'Básico';
+$string['coursesheader_column'] = 'Columna';
 $string['coursesheader_default'] = 'Predeterminado';
 $string['coursesheader_desc'] = 'El encabezado para mostrar en la página de cursos.';
 $string['coursesheader_none'] = 'Ninguno';

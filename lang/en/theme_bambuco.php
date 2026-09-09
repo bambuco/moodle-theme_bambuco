@@ -57,6 +57,8 @@ $string['assetsurls_help'] = 'Use these public URLs to reference files in the th
 $string['assetsurls_open'] = 'Open';
 $string['backgroundimage'] = 'Background image';
 $string['backgroundimage_desc'] = 'The image to display as a background of the site. The background image you upload here will override the background image in your theme preset files.';
+$string['backgroundimage_mobile'] = 'Background image (mobile)';
+$string['backgroundimage_mobile_desc'] = 'The image to display as a background of the site for mobile devices. The background image you upload here will override the background image in your theme preset files.';
 $string['bbcoscss'] = 'Raw SCSS';
 $string['bbcoscss_desc'] = 'Use this field to provide SCSS or CSS code which will be injected at the end of the style sheet.';
 $string['bbcoscsspre'] = 'Raw initial SCSS';
@@ -105,6 +107,7 @@ $string['coursemenu_desc'] = 'Use the structure: capability|type|link|target|lab
 - link target: _blank, _self or other anchor target option, can be empty too';
 $string['coursesheader'] = 'Courses header';
 $string['coursesheader_basic'] = 'Basic';
+$string['coursesheader_column'] = 'Column';
 $string['coursesheader_default'] = 'Default';
 $string['coursesheader_desc'] = 'The header to display in the courses page.';
 $string['coursesheader_none'] = 'None';

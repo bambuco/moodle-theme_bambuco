@@ -269,4 +269,19 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
         return $bodyattributes;
     }
+
+    /**
+     * Returns the moodle_url for the favicon.
+     *
+     * Falls back to pix/favicon.svg when core_admin | favicon is not set.
+     *
+     * @return \moodle_url The moodle_url for the favicon
+     */
+    public function favicon() {
+        if (!during_initial_install() && get_config('core_admin', 'favicon')) {
+            return parent::favicon();
+        }
+
+        return $this->image_url('favicon', 'theme_bambuco');
+    }
 }

@@ -36,11 +36,21 @@ function theme_bambuco_get_extra_scss($theme) {
     $keybgimage = utils::subthemekey('backgroundimage');
     $imageurl = $theme->setting_file_url($keybgimage, $keybgimage);
 
+    $keymobileimage = utils::subthemekey('backgroundimage_mobile');
+    $mobileimageurl = $theme->setting_file_url($keymobileimage, $keymobileimage);
+
     // Sets the background image, and its settings.
     if (!empty($imageurl)) {
         $content .= '@media (min-width: 768px) {';
         $content .= 'body { ';
         $content .= "background-image: url('$imageurl'); background-size: cover;";
+        $content .= ' } }';
+    }
+
+    if (!empty($mobileimageurl)) {
+        $content .= '@media (max-width: 768px) {';
+        $content .= 'body { ';
+        $content .= "background-image: url('$mobileimageurl'); background-size: cover;";
         $content .= ' } }';
     }
 
@@ -179,7 +189,7 @@ function theme_bambuco_get_main_scss_content($theme) {
     $filename = $theme->settings->$preset;
     $fs = get_file_storage();
 
-    $custompresents = ['abaco.scss', 'aprender.scss', 'fluido.scss'];
+    $custompresents = ['abaco.scss', 'aprender.scss', 'cundinamarca.scss', 'fluido.scss'];
     $context = context_system::instance();
     if ($filename == 'default.scss') {
         $scss .= file_get_contents($CFG->dirroot . '/theme/boost/scss/preset/default.scss');

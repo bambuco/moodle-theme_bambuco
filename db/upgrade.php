@@ -91,5 +91,15 @@ function xmldb_theme_bambuco_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2025111100.03, 'theme', 'bambuco');
     }
 
+    if ($oldversion < 2025111101) {
+        // Initialize new setting to avoid upgrade settings redirect loops.
+        if (get_config('theme_bambuco', 'backgroundimage_mobile') === false) {
+            set_config('backgroundimage_mobile', '', 'theme_bambuco');
+        }
+
+        // Savepoint reached.
+        upgrade_plugin_savepoint(true, 2025111101, 'theme', 'bambuco');
+    }
+
     return true;
 }

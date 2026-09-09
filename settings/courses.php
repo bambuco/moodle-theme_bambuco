@@ -46,6 +46,7 @@ if ($ADMIN->fulltree) {
         'default' => new lang_string('coursesheader_default', 'theme_bambuco'),
         'none' => new lang_string('coursesheader_none', 'theme_bambuco'),
         'basic' => new lang_string('coursesheader_basic', 'theme_bambuco'),
+        'column' => new lang_string('coursesheader_column', 'theme_bambuco'),
         'teacher' => new lang_string('coursesheader_teacher', 'theme_bambuco'),
     ];
 

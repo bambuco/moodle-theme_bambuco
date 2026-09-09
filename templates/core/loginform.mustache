@@ -119,7 +119,7 @@
             {{#identityproviders}}
                 <a class="btn login-identityprovider-btn w-100" href="{{url}}">
                     {{#iconurl}}
-                        <img src="{{iconurl}}" alt="" width="24" height="24"/>
+                        <img src="{{iconurl}}" alt="" width="24" height="24">
                     {{/iconurl}}
                     {{name}}
                 </a>
@@ -233,7 +233,7 @@
             {{#identityproviders}}
                 <a class="btn login-identityprovider-btn w-100" href="{{url}}">
                     {{#iconurl}}
-                        <img src="{{iconurl}}" alt="" width="24" height="24"/>
+                        <img src="{{iconurl}}" alt="" width="24" height="24">
                     {{/iconurl}}
                     {{name}}
                 </a>
@@ -243,14 +243,25 @@
 {{/toexternal}}
     {{#canloginasguest}}
         <div class="login-divider"></div>
-        <div class="someallowguest">
-            <h2 class="login-heading">{{#str}}someallowguest{{/str}}</h2>
-            <form action="{{loginurl}}" method="post" id="guestlogin">
-                <input type="hidden" name="logintoken" value="{{logintoken}}">
-                <input type="hidden" name="username" value="guest">
-                <input type="hidden" name="password" value="guest">
-                <button class="btn btn-secondary" type="submit" id="loginguestbtn">{{#str}}loginguest{{/str}}</button>
-            </form>
+        <div class="guestauth loginmode-box">
+            <div class="someallowguest">
+                <h2 class="login-heading showmore" data-target=".guestauth .login-form">
+                    {{#str}} loginguest {{/str}}
+                    <i class="fa fa-sort-down icon-showform"></i>
+                </h2>
+                <form class="login-form showmore-transition notshowmore" action="{{loginurl}}" method="post" id="guestlogin">
+                    <p>{{#str}} someallowguest {{/str}}</p>
+                    <input type="hidden" name="logintoken" value="{{logintoken}}">
+                    <input type="hidden" name="username" value="guest">
+                    <input type="hidden" name="password" value="guest">
+                    {{#altchawidget}}
+                        {{>theme_bambuco/altchawidget}}
+                    {{/altchawidget}}
+                    <div class="login-form-submit mb-3">
+                        <button class="btn btn-secondary" type="submit" id="loginguestbtn">{{#str}}loginguest{{/str}}</button>
+                    </div>
+                </form>
+            </div>
         </div>
     {{/canloginasguest}}
     {{#hasinstructions}}
@@ -337,7 +348,6 @@
         {{/canloginasguest}}
     });
 
-    {{#toexternal}}
     require(['jquery'], function($) {
         $('.showmore').on('click', function () {
             var $control = $(this);
@@ -345,5 +355,4 @@
             $target.toggleClass('notshowmore');
         });
     });
-    {{/toexternal}}
 {{/js}}

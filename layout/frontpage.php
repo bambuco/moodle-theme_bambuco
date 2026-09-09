@@ -27,102 +27,118 @@ defined('MOODLE_INTERNAL') || die();
 require_once($CFG->libdir . '/behat/lib.php');
 require_once($CFG->dirroot . '/course/lib.php');
 
-// Add block button in editing mode.
-$addblockbutton = $OUTPUT->addblockbutton();
+$inpopup = \theme_bambuco\local\utils::resolve_inpopup();
+$sitename = format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]);
 
-if (isloggedin()) {
-    $courseindexopen = (get_user_preferences('drawer-open-index', true) == true);
-    $blockdraweropen = (get_user_preferences('drawer-open-block') == true);
+if ($inpopup) {
+    $extraclasses = ['inpopup'];
+
+    $templatecontext = [
+        'sitename' => $sitename,
+        'output' => $OUTPUT,
+        'bodyattributes' => $OUTPUT->body_attributes($extraclasses),
+    ];
+
+    echo $OUTPUT->render_from_template('theme_boost/columns1', $templatecontext);
 } else {
-    $courseindexopen = false;
-    $blockdraweropen = false;
-}
+    // Add block button in editing mode.
+    $addblockbutton = $OUTPUT->addblockbutton();
 
-if (defined('BEHAT_SITE_RUNNING') && get_user_preferences('behat_keep_drawer_closed') != 1) {
-    $blockdraweropen = true;
-}
-
-$extraclasses = ['uses-drawers'];
-if ($courseindexopen) {
-    $extraclasses[] = 'drawer-open-index';
-}
-
-$blockshtml = $OUTPUT->blocks('side-pre');
-$hasblocks = (strpos($blockshtml, 'data-block=') !== false || !empty($addblockbutton));
-if (!$hasblocks) {
-    $blockdraweropen = false;
-}
-
-$blocksabovehtml = $OUTPUT->blocks('above');
-$hasblocksabove = strpos($blocksabovehtml, 'data-block=') !== false;
-
-$blockstophtml = $OUTPUT->blocks('top');
-$hasblockstop = strpos($blockstophtml, 'data-block=') !== false;
-
-$blocksbottomhtml = $OUTPUT->blocks('bottom');
-$hasblocksbottom = strpos($blocksbottomhtml, 'data-block=') !== false;
-
-$blockscontenthtml = $OUTPUT->blocks('intocontent');
-$hasblockscontent = strpos($blockscontenthtml, 'data-block=') !== false;
-
-$courseindex = core_course_drawer();
-if (!$courseindex) {
-    $courseindexopen = false;
-}
-
-$bodyattributes = $OUTPUT->body_attributes($extraclasses);
-$forceblockdraweropen = $OUTPUT->firstview_fakeblocks();
-
-$secondarynavigation = false;
-$overflow = '';
-if ($PAGE->has_secondary_navigation()) {
-    $tablistnav = $PAGE->has_tablist_secondary_navigation();
-    $moremenu = new \core\navigation\output\more_menu($PAGE->secondarynav, 'nav-tabs', true, $tablistnav);
-    $secondarynavigation = $moremenu->export_for_template($OUTPUT);
-    $overflowdata = $PAGE->secondarynav->get_overflow_menu_data();
-    if (!is_null($overflowdata)) {
-        $overflow = $overflowdata->export_for_template($OUTPUT);
+    if (isloggedin()) {
+        $courseindexopen = (get_user_preferences('drawer-open-index', true) == true);
+        $blockdraweropen = (get_user_preferences('drawer-open-block') == true);
+    } else {
+        $courseindexopen = false;
+        $blockdraweropen = false;
     }
+
+    if (defined('BEHAT_SITE_RUNNING') && get_user_preferences('behat_keep_drawer_closed') != 1) {
+        $blockdraweropen = true;
+    }
+
+    $extraclasses = ['uses-drawers'];
+    if ($courseindexopen) {
+        $extraclasses[] = 'drawer-open-index';
+    }
+
+    $blockshtml = $OUTPUT->blocks('side-pre');
+    $hasblocks = (strpos($blockshtml, 'data-block=') !== false || !empty($addblockbutton));
+    if (!$hasblocks) {
+        $blockdraweropen = false;
+    }
+
+    $blocksabovehtml = $OUTPUT->blocks('above');
+    $hasblocksabove = strpos($blocksabovehtml, 'data-block=') !== false;
+
+    $blockstophtml = $OUTPUT->blocks('top');
+    $hasblockstop = strpos($blockstophtml, 'data-block=') !== false;
+
+    $blocksbottomhtml = $OUTPUT->blocks('bottom');
+    $hasblocksbottom = strpos($blocksbottomhtml, 'data-block=') !== false;
+
+    $blockscontenthtml = $OUTPUT->blocks('intocontent');
+    $hasblockscontent = strpos($blockscontenthtml, 'data-block=') !== false;
+
+    $courseindex = core_course_drawer();
+    if (!$courseindex) {
+        $courseindexopen = false;
+    }
+
+    $bodyattributes = $OUTPUT->body_attributes($extraclasses);
+    $forceblockdraweropen = $OUTPUT->firstview_fakeblocks();
+
+    $secondarynavigation = false;
+    $overflow = '';
+    if ($PAGE->has_secondary_navigation()) {
+        $tablistnav = $PAGE->has_tablist_secondary_navigation();
+        $moremenu = new \core\navigation\output\more_menu($PAGE->secondarynav, 'nav-tabs', true, $tablistnav);
+        $secondarynavigation = $moremenu->export_for_template($OUTPUT);
+        $overflowdata = $PAGE->secondarynav->get_overflow_menu_data();
+        if (!is_null($overflowdata)) {
+            $overflow = $overflowdata->export_for_template($OUTPUT);
+        }
+    }
+
+    $primary = new \theme_bambuco\navigation\primary($PAGE);
+    $renderer = $PAGE->get_renderer('core');
+    $primarymenu = $primary->export_for_template($renderer);
+    $buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_actions() && !$PAGE->has_secondary_navigation();
+    // If the settings menu will be included in the header then don't add it here.
+    $regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settings_menu() : false;
+
+    $header = $PAGE->activityheader;
+    $headercontent = $header->export_for_template($renderer);
+
+    $templatecontext = [
+        'sitename' => $sitename,
+        'output' => $OUTPUT,
+        'sidepreblocks' => $blockshtml,
+        'hasblocks' => $hasblocks,
+        'blocksabove' => $blocksabovehtml,
+        'hasblocksabove' => $hasblocksabove,
+        'blockstop' => $blockstophtml,
+        'hasblockstop' => $hasblockstop,
+        'blocksbottom' => $blocksbottomhtml,
+        'hasblocksbottom' => $hasblocksbottom,
+        'blockscontent' => $blockscontenthtml,
+        'hasblockscontent' => $hasblockscontent,
+        'bodyattributes' => $bodyattributes,
+        'courseindexopen' => $courseindexopen,
+        'blockdraweropen' => $blockdraweropen,
+        'courseindex' => $courseindex,
+        'primarymoremenu' => $primarymenu['moremenu'],
+        'secondarymoremenu' => $secondarynavigation ?: false,
+        'mobileprimarynav' => $primarymenu['mobileprimarynav'],
+        'usermenu' => $primarymenu['user'],
+        'langmenu' => $primarymenu['lang'],
+        'forceblockdraweropen' => $forceblockdraweropen,
+        'regionmainsettingsmenu' => $regionmainsettingsmenu,
+        'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
+        'overflow' => $overflow,
+        'headercontent' => $headercontent,
+        'addblockbutton' => $addblockbutton,
+    ];
+
+    echo $OUTPUT->render_from_template('theme_bambuco/frontpage', $templatecontext);
+    $PAGE->requires->js_call_amd('theme_bambuco/controls', 'init');
 }
-
-$primary = new \theme_bambuco\navigation\primary($PAGE);
-$renderer = $PAGE->get_renderer('core');
-$primarymenu = $primary->export_for_template($renderer);
-$buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_actions() && !$PAGE->has_secondary_navigation();
-// If the settings menu will be included in the header then don't add it here.
-$regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settings_menu() : false;
-
-$header = $PAGE->activityheader;
-$headercontent = $header->export_for_template($renderer);
-
-$templatecontext = [
-    'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
-    'output' => $OUTPUT,
-    'sidepreblocks' => $blockshtml,
-    'hasblocks' => $hasblocks,
-    'blocksabove' => $blocksabovehtml,
-    'hasblocksabove' => $hasblocksabove,
-    'blockstop' => $blockstophtml,
-    'hasblockstop' => $hasblockstop,
-    'blocksbottom' => $blocksbottomhtml,
-    'hasblocksbottom' => $hasblocksbottom,
-    'blockscontent' => $blockscontenthtml,
-    'hasblockscontent' => $hasblockscontent,
-    'bodyattributes' => $bodyattributes,
-    'courseindexopen' => $courseindexopen,
-    'blockdraweropen' => $blockdraweropen,
-    'courseindex' => $courseindex,
-    'primarymoremenu' => $primarymenu['moremenu'],
-    'secondarymoremenu' => $secondarynavigation ?: false,
-    'mobileprimarynav' => $primarymenu['mobileprimarynav'],
-    'usermenu' => $primarymenu['user'],
-    'langmenu' => $primarymenu['lang'],
-    'forceblockdraweropen' => $forceblockdraweropen,
-    'regionmainsettingsmenu' => $regionmainsettingsmenu,
-    'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
-    'overflow' => $overflow,
-    'headercontent' => $headercontent,
-    'addblockbutton' => $addblockbutton,
-];
-
-echo $OUTPUT->render_from_template('theme_bambuco/frontpage', $templatecontext);

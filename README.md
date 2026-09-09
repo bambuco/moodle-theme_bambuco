@@ -1,6 +1,8 @@
 # THEME BambuCo #
 
-Package tested in: moodle 4.5+.
+[![camp](https://camp-registry.org/badge/theme_bambuco.svg)](https://camp-registry.org/plugin/theme_bambuco.html)
+
+Package tested in: moodle 5.1+.
 
 ## QUICK INSTALL ##
 
@@ -12,11 +14,24 @@ Package tested in: moodle 4.5+.
     $> git checkout v5
 ```
 
+Or install from [CAMP](https://camp-registry.org/plugin/theme_bambuco.html) (Tier 2+) once a verified release is published.
+Note: CAMP ZIPs do not include git submodule contents; Bootswatch must be committed in the tagged tree for skins to ship in that artifact.
+
 ## ABOUT ##
 - **Developed by:** David Herney - david dot herney at bambuco dot co
 - **GIT:** https://github.com/bambuco/moodle-theme_bambuco
+- **CAMP:** https://camp-registry.org/plugin/theme_bambuco.html
 
 ## IN VERSION ##
+2025111101:
+- Course header type: Column.
+- Mobile background image setting (including subthemes).
+- Default theme favicon.
+- New preset Cundinamarca.
+- Open in modal fixes (target, URL, title) and inpopup on frontpage/login.
+- Guest login showmore with ALTCHA; stricter signup captcha.
+- Preset updates (Aprender, Fluido) and CAMP registry.
+
 2025111100:
 - Included secure layout with bottom blocks.
 
