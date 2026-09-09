@@ -35,6 +35,7 @@ class utils {
     const SUBTHEME_SETTINGS = [
         'preset',
         'backgroundimage',
+        'backgroundimage_mobile',
         'brandcolor',
         'fontfamily',
         'bbcoscsspre',
