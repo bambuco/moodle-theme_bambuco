@@ -41,14 +41,14 @@ function theme_bambuco_get_extra_scss($theme) {
 
     // Sets the background image, and its settings.
     if (!empty($imageurl)) {
-        $content .= '@media (min-width: 768px) {';
+        $content .= '@media (min-width: 512px) {';
         $content .= 'body { ';
         $content .= "background-image: url('$imageurl'); background-size: cover;";
         $content .= ' } }';
     }
 
     if (!empty($mobileimageurl)) {
-        $content .= '@media (max-width: 768px) {';
+        $content .= '@media (max-width: 512px) {';
         $content .= 'body { ';
         $content .= "background-image: url('$mobileimageurl'); background-size: cover;";
         $content .= ' } }';
