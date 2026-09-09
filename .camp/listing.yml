@@ -1,0 +1,28 @@
+# Schema: https://camp-registry.org/schema/listing.schema.json
+name: BambuCo theme
+summary: A modern, highly customisable Boost-based theme with local ALTCHA, skins, login options, and course layout controls.
+description: |
+  BambuCo is a Moodle theme based on Boost. It adds local presets, optional
+  Bootswatch skins, login and guest-access customisation (including ALTCHA),
+  course header and width options, extra block regions, and site assets.
+
+  Skins use the Bootswatch library under `skin/bootswatch`. For distribution
+  ZIPs (including CAMP releases), that library must be present as committed
+  files — git submodules are not included in `git archive` artifacts.
+labels:
+- fully-free
+- donation-supported
+- commercial-support-available
+category: theme
+screenshots:
+  - path: .camp/screenshots/overview.png
+    caption: A home with BambuCo theme
+  - path: .camp/screenshots/login_altcha.png
+    caption: A login page with ALTCHA enabled
+  - path: .camp/screenshots/bootswatch_skins.png
+    caption: Available Bootswatch skins
+  - path: .camp/screenshots/multitheme.png
+    caption: Multi theme settings - Subthemes
+links:
+  docs: https://github.com/bambuco/moodle-theme_bambuco#readme
+  issues: https://github.com/bambuco/moodle-theme_bambuco/issues

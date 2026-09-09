@@ -57,30 +57,28 @@
 <div class="container-fluid">
     <div class="row">
         {{#subthemes}}
-		    <div class="col-md-3">
-                <div class="card bg-default">
-                    <h5 class="card-header">
-                        {{name}}
-                    </h5>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">{{idnumber}}</li>
-                        <li class="list-group-item">
-                            {{#pix}} i/link {{/pix}}
-                            {{#homeurl}}<a href="{{fullhomeurl}}">{{fullhomeurl}}</a>{{/homeurl}}
-                        </li>
-                    </ul>
-                    <div class="card-footer">
-                        <div class="btn-group" role="group">
-                            <a href="{{{baseurl}}}/admin/category.php?category=theme_bambuco&bbst={{id}}" class="btn btn-info">
-                                {{#pix}} i/grading {{/pix}} {{#str}} customizesubtheme, theme_bambuco {{/str}}
-                            </a>
-                            <a href="{{{baseurl}}}/theme/bambuco/subtheme_edit.php?id={{id}}" class="btn btn-secondary">
-                                {{#pix}} i/edit {{/pix}} {{#str}} edit {{/str}}
-                            </a>
-                            <a href="{{{baseurl}}}/theme/bambuco/subthemes.php?delete={{id}}&sesskey={{sesskey}}" class="btn btn-danger">
-                                {{#pix}} i/delete {{/pix}} {{#str}} delete {{/str}}
-                            </a>
-                        </div>
+            <div class="card bg-default">
+                <h5 class="card-header">
+                    {{name}}
+                </h5>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">{{idnumber}}</li>
+                    <li class="list-group-item">
+                        {{#pix}} i/link {{/pix}}
+                        {{#homeurl}}<a href="{{fullhomeurl}}">{{fullhomeurl}}</a>{{/homeurl}}
+                    </li>
+                </ul>
+                <div class="card-footer">
+                    <div class="btn-group" role="group">
+                        <a href="{{{baseurl}}}/admin/category.php?category=theme_bambuco&bbst={{id}}" class="btn btn-info">
+                            {{#pix}} i/grading {{/pix}} {{#str}} customizesubtheme, theme_bambuco {{/str}}
+                        </a>
+                        <a href="{{{baseurl}}}/theme/bambuco/subtheme_edit.php?id={{id}}" class="btn btn-secondary">
+                            {{#pix}} i/edit {{/pix}} {{#str}} edit {{/str}}
+                        </a>
+                        <a href="{{{baseurl}}}/theme/bambuco/subthemes.php?delete={{id}}&sesskey={{sesskey}}" class="btn btn-danger">
+                            {{#pix}} i/delete {{/pix}} {{#str}} delete {{/str}}
+                        </a>
                     </div>
                 </div>
             </div>

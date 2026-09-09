@@ -1,0 +1,18 @@
+# Recommended caller of the maintained reusable workflow.
+# See https://github.com/camp-registry/camp-workflows
+# Publishing to camp: git tag v4.5.08 && git push --tags
+#
+# Before tagging: ensure skin/bootswatch contents are committed in the tree
+# (not only as a git submodule). CAMP builds use git archive; submodules
+# are empty in the distribution ZIP.
+name: Publish release to camp
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch: {}
+permissions:
+  contents: read
+  id-token: write
+jobs:
+  camp:
+    uses: camp-registry/camp-workflows/.github/workflows/release.yml@v1

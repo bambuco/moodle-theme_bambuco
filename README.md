@@ -1,5 +1,7 @@
 # THEME BambuCo #
 
+[![camp](https://camp-registry.org/badge/theme_bambuco.svg)](https://camp-registry.org/plugin/theme_bambuco.html)
+
 Package tested in: moodle 4.5+.
 
 ## QUICK INSTALL ##
@@ -12,11 +14,18 @@ Package tested in: moodle 4.5+.
     $> git checkout v5
 ```
 
+Or install from [CAMP](https://camp-registry.org/plugin/theme_bambuco.html) (Tier 2+) once a verified release is published.
+Note: CAMP ZIPs do not include git submodule contents; Bootswatch must be committed in the tagged tree for skins to ship in that artifact.
+
 ## ABOUT ##
 - **Developed by:** David Herney - david dot herney at bambuco dot co
 - **GIT:** https://github.com/bambuco/moodle-theme_bambuco
+- **CAMP:** https://camp-registry.org/plugin/theme_bambuco.html
 
 ## IN VERSION ##
+2025011008:
+- Mobile background image setting.
+
 2025011007:
 - Resolved inpopup before redirections
 

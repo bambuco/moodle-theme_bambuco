@@ -103,6 +103,15 @@ if ($ADMIN->fulltree) {
         $page->add($setting);
     }
 
+    if (utils::iscustomizable_subtheme('backgroundimage_mobile', $subtheme)) {
+        $name = 'theme_bambuco/backgroundimage_mobile' . $subthemekey;
+        $title = get_string('backgroundimage_mobile', 'theme_bambuco');
+        $description = get_string('backgroundimage_mobile_desc', 'theme_bambuco');
+        $setting = new admin_setting_configstoredfile($name, $title, $description, 'backgroundimage_mobile' . $subthemekey);
+        $setting->set_updatedcallback('theme_reset_all_caches');
+        $page->add($setting);
+    }
+
     if (utils::iscustomizable_subtheme('brandcolor', $subtheme)) {
         // We use an empty default value because the default colour should come from the preset.
         $name = 'theme_bambuco/brandcolor' . $subthemekey;

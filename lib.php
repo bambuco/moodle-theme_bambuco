@@ -36,11 +36,21 @@ function theme_bambuco_get_extra_scss($theme) {
     $keybgimage = utils::subthemekey('backgroundimage');
     $imageurl = $theme->setting_file_url($keybgimage, $keybgimage);
 
+    $keymobileimage = utils::subthemekey('backgroundimage_mobile');
+    $mobileimageurl = $theme->setting_file_url($keymobileimage, $keymobileimage);
+
     // Sets the background image, and its settings.
     if (!empty($imageurl)) {
         $content .= '@media (min-width: 768px) {';
         $content .= 'body { ';
         $content .= "background-image: url('$imageurl'); background-size: cover;";
+        $content .= ' } }';
+    }
+
+    if (!empty($mobileimageurl)) {
+        $content .= '@media (max-width: 768px) {';
+        $content .= 'body { ';
+        $content .= "background-image: url('$mobileimageurl'); background-size: cover;";
         $content .= ' } }';
     }
 
