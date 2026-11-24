@@ -1,0 +1,68 @@
+// Classic login card. Boost removed these rules in the two-column redesign
+// (MDL-87546). They sit before each preset's own login CSS, so Fluido,
+// Aprender, Cundinamarca and Ábaco keep overriding width, background and buttons.
+// .login-container is shared with the two-column page, so that layout is cleared
+// just below. Preset rules loaded after this file still restyle the classic form.
+
+.login-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.login-container {
+    background-color: var(--#{$prefix}white);
+    padding: 3rem;
+    box-shadow: $box-shadow;
+    margin-bottom: 2rem;
+    border-radius: $border-radius;
+
+    @include media-breakpoint-up(md) {
+        width: 500px !important; // stylelint-disable-line declaration-no-important
+    }
+
+    .login-logo {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1rem;
+    }
+
+    h1.login-heading {
+        font-size: $h2-font-size;
+    }
+
+    h2.login-heading {
+        font-size: $h4-font-size;
+    }
+
+    .login-divider {
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+        border-top: $border-width solid $border-color;
+    }
+}
+
+// Same specificity as Boost's full-width button rule, but only the classic form.
+// Preset rules that follow can still restyle these buttons.
+.login-wrapper .login-identityprovider-btn {
+    width: auto;
+    border: $border-width solid $border-color;
+}
+
+// The card above also matches the two-column .login-container. Clear it there
+// before the preset rules, which keep styling the classic form.
+.login-layout-right .login-container {
+    background-color: transparent;
+    padding: 0;
+    box-shadow: none;
+    margin-bottom: 0;
+    border-radius: 0;
+    width: auto !important; // stylelint-disable-line declaration-no-important
+}
+
+.pagelayout-login #page {
+    margin: initial;
+    background-color: transparent;
+    background-image: linear-gradient(90deg, var(--#{$prefix}gray-100), var(--#{$prefix}gray-300));
+}

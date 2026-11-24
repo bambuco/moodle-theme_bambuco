@@ -39,6 +39,17 @@
 
     {{{ output.standard_top_of_body_html }}}
 
+    {{#columns}}
+    <div id="page" class="mt-0">
+        {{> core/login_layout }}
+        {{#hasmorecontent}}
+        <div id="loginmorecontent">
+            {{{loginmorecontent}}}
+        </div>
+        {{/hasmorecontent}}
+    </div>
+    {{/columns}}
+    {{^columns}}
     <div id="page" class="container-fluid pt-5 mt-0">
         <div id="page-content" class="row">
             <div id="region-main-box" class="col-12">
@@ -89,6 +100,7 @@
         {{/hasmorecontent}}
 
     </div>
+    {{/columns}}
     {{> theme_boost/footer }}
 </div>
 

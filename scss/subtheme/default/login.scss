@@ -41,3 +41,12 @@
     border-top: 1px solid #dee2e6;
     margin-top: 20px;
 }
+
+// The classic card resets #page before the preset rules. Put the two-column
+// page back to the Boost full-height panel when that layout is in use.
+.pagelayout-login:has(.login-layout-left) #page {
+    margin: 0;
+    min-height: 100vh;
+    background-color: var(--#{$prefix}white);
+    background-image: none;
+}

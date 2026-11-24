@@ -101,16 +101,28 @@
 
 <div class="alerts">
     {{#error}}
-        <div class="alert alert-danger" id="loginerrormessage" role="alert">{{error}}</div>
+        <div class="alert alert-danger" id="loginerrormessage" role="alert">
+            {{#errortitle}}<strong class="d-block mb-1">{{errortitle}}</strong>{{/errortitle}}
+            {{error}}
+        </div>
     {{/error}}
     {{#info}}
         <div class="alert alert-info" id="logininfomessage" role="status">{{info}}</div>
     {{/info}}
     {{#cansignup}}
-        <a href="{{signupurl}}" class="sr-only">{{#str}} tocreatenewaccount {{/str}}</a>
+        <a href="{{signupurl}}" class="visually-hidden">{{#str}} tocreatenewaccount {{/str}}</a>
     {{/cansignup}}
 
 <div>{{{ output.supportemail }}}</div>
+
+{{#hasoauth2client}}
+    <h2 class="login-heading">{{#str}}oauth2:confirmscopes:clientaccesstitle, moodle, {
+        "clientname": {{#quote}}{{client.name}}{{/quote}},
+        "clientdescription": {{#quote}}{{client.description}}{{/quote}},
+        "sitename": {{#quote}}{{sitename}}{{/quote}}
+    }{{/str}}</h2>
+    {{> core/oauth2/client_description}}
+{{/hasoauth2client}}
 
 {{#toexternal}}
     {{#hasidentityproviders}}
@@ -188,7 +200,7 @@
             <script>document.getElementById('anchor').value = location.hash;</script>
             <input type="hidden" name="logintoken" value="{{logintoken}}">
             <div class="login-form-username mb-3">
-                <label for="username" class="sr-only">
+                <label for="username" class="visually-hidden">
                     {{^canloginbyemail}}
                         {{#str}} username {{/str}}
                     {{/canloginbyemail}}
@@ -204,7 +216,7 @@
                     !}}autocomplete="username">
             </div>
             <div class="login-form-password mb-3">
-                <label for="password" class="sr-only">{{#str}} password {{/str}}</label>
+                <label for="password" class="visually-hidden">{{#str}} password {{/str}}</label>
                 <input type="password" name="password" id="password" value="" {{!
                     !}}class="form-control form-control-lg" {{!
                     !}}placeholder="{{#cleanstr}}password{{/cleanstr}}" {{!

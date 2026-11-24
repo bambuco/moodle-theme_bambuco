@@ -39,15 +39,16 @@
     <div class="card-body p-3">
 
         {{! Block header }}
-        {{#showtitle}}
-            <h3 id="instance-{{blockinstanceid}}-header" class="h5 card-title d-inline">{{{title}}}</h3>
-        {{/showtitle}}
-
-        {{#hascontrols}}
-            <div class="block-controls float-end header">
-                {{{controls}}}
-            </div>
-        {{/hascontrols}}
+        <div class="block-header d-flex">
+            {{#showtitle}}
+                <h3 id="instance-{{blockinstanceid}}-header" class="h5 card-title">{{{title}}}</h3>
+            {{/showtitle}}
+            {{#hascontrols}}
+                <div class="block-controls header ms-auto">
+                    {{{controls}}}
+                </div>
+            {{/hascontrols}}
+        </div>
 
         <div class="card-text content mt-3">
             {{{content}}}
@@ -62,5 +63,5 @@
 
 {{! Block Skip Link Target }}
 {{#showskiplink}}
-  <span id="sb-{{skipid}}"></span>
+  <span id="sb-{{skipid}}" tabindex="-1"></span>
 {{/showskiplink}}

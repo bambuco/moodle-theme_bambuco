@@ -39,6 +39,12 @@ if ($url) {
     $url = $url->out(false);
 }
 
+$columns = get_config('theme_bambuco', 'loginpagelayout') === 'columns';
+$leftinstructions = null;
+if ($columns && !empty($CFG->auth_instructions)) {
+    $leftinstructions = format_text($CFG->auth_instructions, FORMAT_MOODLE, ['context' => context_system::instance()]);
+}
+
 $templatecontext = [
     'sitename' => format_string($SITE->fullname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
     'output' => $OUTPUT,
@@ -48,6 +54,8 @@ $templatecontext = [
     'logourl' => $url,
     'wwwroot' => (string)(new moodle_url('/')),
     'gotohome' => !$CFG->forcelogin || $PAGE->pagetype != 'login-index',
+    'columns' => $columns,
+    'leftinstructions' => $leftinstructions,
 ];
 
 echo $OUTPUT->render_from_template('theme_bambuco/login', $templatecontext);

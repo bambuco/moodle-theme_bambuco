@@ -2,7 +2,7 @@
 
 [![camp](https://camp-registry.org/badge/theme_bambuco.svg)](https://camp-registry.org/plugin/theme_bambuco.html)
 
-Package tested in: moodle 5.1+.
+Package tested in: moodle 5.3.
 
 ## QUICK INSTALL ##
 
@@ -16,6 +16,12 @@ Or install from [CAMP](https://camp-registry.org/plugin/theme_bambuco.html) (Tie
 - **CAMP:** https://camp-registry.org/plugin/theme_bambuco.html
 
 ## IN VERSION ##
+2026112400:
+- Moodle 5.3: course index drawer controls, secondary and tertiary navigation, and drawer toggles aligned with Boost.
+- Noto Sans is the default typeface when no other font is configured.
+- Boost colour modes. Preset brand colours stay; Bootswatch skins are unchanged and can override Bootstrap surfaces in dark mode.
+- Login page layout setting: traditional BambuCo page or Boost two-column page.
+
 2025111102:
 - Include skins in theme.
 

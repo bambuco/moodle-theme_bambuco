@@ -55,9 +55,14 @@ function theme_bambuco_get_extra_scss($theme) {
     }
 
     // Sets the login background image.
+    // Two-column pages paint the Boost left panel; the traditional page paints #page.
     $loginbackgroundimageurl = $theme->setting_file_url('loginbackgroundimage', 'loginbackgroundimage');
     if (!empty($loginbackgroundimageurl)) {
-        $content .= 'body.pagelayout-login #page { ';
+        $loginpagelayout = get_config('theme_bambuco', 'loginpagelayout');
+        $logintarget = ($loginpagelayout === 'columns') ?
+            'body.pagelayout-login #page .login-layout-left' :
+            'body.pagelayout-login #page';
+        $content .= $logintarget . ' { ';
         $content .= "background-image: url('$loginbackgroundimageurl'); background-size: cover;";
         $content .= ' }';
     }
@@ -194,6 +199,10 @@ function theme_bambuco_get_main_scss_content($theme) {
     if ($filename == 'default.scss') {
         $scss .= file_get_contents($CFG->dirroot . '/theme/boost/scss/preset/default.scss');
     } else if ($filename == 'plain.scss') {
+        // File plain.scss does not import the design system or the Noto Sans stack.
+        $scss .= "@import \"design-system\";\n";
+        $scss .= "@import \"moodle/font-stack\";\n";
+        $scss .= "@import \"moodle/fonts\";\n";
         $scss .= file_get_contents($CFG->dirroot . '/theme/boost/scss/preset/plain.scss');
     } else if (in_array($filename, $custompresents)) {
         $scss .= file_get_contents($CFG->dirroot . '/theme/bambuco/scss/preset/' . $filename);
@@ -202,6 +211,17 @@ function theme_bambuco_get_main_scss_content($theme) {
     } else {
         // Safety fallback - maybe new installs etc.
         $scss .= file_get_contents($CFG->dirroot . '/theme/boost/scss/preset/default.scss');
+    }
+
+    // Brand presets already import this before their own login rules.
+    // Default, plain and uploaded presets need the same card after Moodle's CSS.
+    if (strpos($scss, 'subtheme/default/login-classic') === false) {
+        $injected = "@import \"moodle\";\n@import \"subtheme/default/login-classic\";";
+        $count = 0;
+        $scss = preg_replace('/@import\s+"moodle"\s*;/', $injected, $scss, 1, $count);
+        if (!$count) {
+            $scss .= "\n@import \"subtheme/default/login-classic\";\n";
+        }
     }
 
     $scss .= file_get_contents($CFG->dirroot . '/theme/bambuco/scss/subtheme/default/include.scss');

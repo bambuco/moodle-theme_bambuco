@@ -99,6 +99,19 @@ if ($ADMIN->fulltree) {
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
+    // Page layout: the traditional BambuCo page, or Boost's two-column page.
+    // This is separate from loginformlayout, which only orders the form fields.
+    $options = [
+        'traditional' => new lang_string('loginpagelayout_traditional', 'theme_bambuco'),
+        'columns' => new lang_string('loginpagelayout_columns', 'theme_bambuco'),
+    ];
+    $name = 'theme_bambuco/loginpagelayout';
+    $title = new lang_string('loginpagelayout', 'theme_bambuco');
+    $description = new lang_string('loginpagelayout_desc', 'theme_bambuco');
+    $setting = new admin_setting_configselect($name, $title, $description, 'traditional', $options);
+    $setting->set_updatedcallback('theme_reset_all_caches');
+    $page->add($setting);
+
     $name = 'theme_bambuco/loginmorecontent';
     $title = new lang_string('loginmorecontent', 'theme_bambuco');
     $description = new lang_string('loginmorecontent_desc', 'theme_bambuco');

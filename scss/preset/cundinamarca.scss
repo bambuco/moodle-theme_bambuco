@@ -41,8 +41,8 @@ $table-accent-bg: rgba($black, .03) !default;
 // Options
 $enable-responsive-font-sizes: true !default;
 
-// Body
-$body-color:    $gray-900 !default;
+// Body. Height is set before importing Moodle so drawer offsets use it.
+$navbar-height: 100px !default;
 $main-inner-max-width: 1100px !default;
 
 // Fonts
@@ -80,7 +80,15 @@ $custom-control-indicator-size: 1.25rem;
 
 $input-btn-focus-color: rgba($primary, .75) !default;
 
-$input-border-color: $gray-500 !default;
+// Prefix for colour-mode custom properties. Must be set before Bootstrap.
+$prefix: bs- !default;
+
+$input-border-color: var(--#{$prefix}gray-500) !default;
+$form-check-input-border: var(--#{$prefix}border-width) solid var(--#{$prefix}gray-500) !default;
+
+// Cards follow the colour mode. See theme_boost/scss/moodle/dark.scss.
+$card-bg: var(--#{$prefix}white) !default;
+$card-border-color: var(--#{$prefix}gray-200) !default;
 
 $dropdown-link-hover-color: $white;
 $dropdown-link-hover-bg: $primary;
@@ -128,23 +136,31 @@ $spacers: (
     --bglight: #edf5ff;
 }
 
+// Import the design system and Noto Sans before Bootstrap.
+@import "design-system";
+@import "moodle/font-stack";
+@import "moodle/fonts";
+
 // Import FontAwesome.
 @import "fontawesome";
 
 // Import All of Bootstrap
 @import "bootstrap";
 
+// Language-specific font stacks must come after Bootstrap.
+@import "moodle/font-stack-lang";
+
 // Import Core moodle CSS
 @import "moodle";
 
-$navbar-height: 100px !default;
+// Classic login card, before this preset's own login rules.
+@import "subtheme/default/login-classic";
 
 // Preset CSS
 
 body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    color: #545454;
 }
 
 // Rounded user pictures
