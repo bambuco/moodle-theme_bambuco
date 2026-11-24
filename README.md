@@ -16,6 +16,9 @@ Or install from [CAMP](https://camp-registry.org/plugin/theme_bambuco.html) (Tie
 - **CAMP:** https://camp-registry.org/plugin/theme_bambuco.html
 
 ## IN VERSION ##
+2025111102:
+- Include skins in theme.
+
 2025111101:
 - Course header type: Column.
 - Mobile background image setting (including subthemes).
