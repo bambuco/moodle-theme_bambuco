@@ -4,13 +4,12 @@
     <location>skin/bootswatch</location>
     <name>Bootswatch</name>
     <description>Free themes for Bootstrap.</description>
-    <version>4.6.2</version>
+    <version>5.3.8</version>
     <license>MIT</license>
     <repository>https://github.com/thomaspark/bootswatch</repository>
     <copyrights>
       <copyright>2014-2023 Thomas Park</copyright>
     </copyrights>
-    <customised/>
   </library>
   <library>
     <location>thirdparty/altcha/altcha.min.js</location>

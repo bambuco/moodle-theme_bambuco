@@ -6,16 +6,9 @@ Package tested in: moodle 5.1+.
 
 ## QUICK INSTALL ##
 
-1. Download zip package, extract the bambuco folder and upload this folder into theme/.
-2. For skins feature, go to bambuco/skin and add the project https://github.com/thomaspark/bootswatch or execute into bootswatch folder:
-```
-    $> git submodule update --init
-    $> cd skin/bootswatch
-    $> git checkout v5
-```
+Download zip package, extract the bambuco folder and upload this folder into theme/.
 
 Or install from [CAMP](https://camp-registry.org/plugin/theme_bambuco.html) (Tier 2+) once a verified release is published.
-Note: CAMP ZIPs do not include git submodule contents; Bootswatch must be committed in the tagged tree for skins to ship in that artifact.
 
 ## ABOUT ##
 - **Developed by:** David Herney - david dot herney at bambuco dot co

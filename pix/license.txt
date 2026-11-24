@@ -1,0 +1,3 @@
+Default favicon:
+https://www.svgrepo.com/svg/547912/education-textbook
+License: CC0 License
